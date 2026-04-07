@@ -1,32 +1,51 @@
 import React from 'react';
 import { Search, MapPin, Sparkles, Star, Clock } from 'lucide-react';
 
-// Thành phần Card cho phần Trending
-const TrendingCard = ({ name, type, address, time }) => (
-  <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div className="relative h-48 bg-gray-200">
-      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500" className="w-full h-full object-cover" alt={name} />
-      <div className="absolute top-3 right-3 flex gap-2">
-        <span className="bg-yellow-400 text-[10px] font-bold px-2 py-1 rounded">Trending</span>
-        <span className="bg-gray-100 text-[10px] font-bold px-2 py-1 rounded text-gray-500">$$</span>
-      </div>
-    </div>
-    <div className="p-4">
-      <div className="flex justify-between items-start">
-        <h3 className="font-bold text-gray-800">{name}</h3>
-        <div className="flex items-center text-sm font-medium">
-          <Star className="w-3 h-3 text-yellow-400 fill-current mr-1" /> 0.0
+const restaurants = [
+  { id: 1, name: "Phở Hòa", category: "Phở", address: "260C Pasteur", time: "06:00 - 22:00", rating: "0.0", isTrending: false },
+  { id: 2, name: "Bánh Mì Huỳnh Hoa", category: "Bánh Mì", address: "26 Lê Thị Riêng", time: "14:00 - 23:00", rating: "0.0", isTrending: true },
+  { id: 3, name: "Cơm Tấm Ba Ghiền", category: "Cơm Tấm", address: "84 Đặng Văn Ngữ", time: "07:00 - 21:00", rating: "0.0", isTrending: false },
+  { id: 4, name: "Hủ Tiếu Nam Vang Thành Đạt", category: "Hủ Tiếu", address: "34 Cô Bắc", time: "00:00 - 23:59", rating: "0.0", isTrending: true },
+  { id: 5, name: "Ốc Đào", category: "Hải Sản/Ốc", address: "212B/D28 Nguyễn Trãi", time: "10:00 - 22:00", rating: "0.0", isTrending: true },
+  { id: 6, name: "Secret Garden", category: "Món Việt", address: "158 Pasteur", time: "11:00 - 22:00", rating: "0.0", isTrending: true },
+  { id: 7, name: "Pizza 4P's Ben Thanh", category: "Pizza", address: "8 Thu Khoa Huan", time: "11:00 - 22:30", rating: "0.0", isTrending: false },
+  { id: 8, name: "Gong Cha Tea", category: "Bubble Tea", address: "123 Nguyen Hue", time: "09:00 - 22:00", rating: "0.0", isTrending: false },
+  { id: 9, name: "Bún Bò Huế Út Hưng", category: "Bún Bò", address: "6C Tú Xương", time: "06:00 - 21:00", rating: "0.0", isTrending: false },
+  { id: 10, name: "Bún Chả 145", category: "Bún Chả", address: "145 Bùi Viện", time: "11:30 - 20:00", rating: "0.0", isTrending: false },
+  { id: 11, name: "The Workshop Coffee", category: "Cà phê", address: "27 Ngô Đức Kế", time: "08:00 - 21:00", rating: "0.0", isTrending: false }
+];
+
+const PlaceCard = ({ place, showTrendingBadge }) => (
+  <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition cursor-pointer group flex flex-col">
+    <div className="h-44 bg-gray-100 card-img-placeholder relative">
+      <img src={`https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80`} alt={place.name} className="w-full h-full object-cover" />
+      {showTrendingBadge && (
+        <div className="absolute top-3 right-3 flex gap-2">
+          <span className="bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-1 rounded">Trending</span>
+          <span className="bg-white text-gray-800 text-[10px] font-bold px-2 py-1 rounded shadow-sm">$$</span>
         </div>
+      )}
+    </div>
+    <div className="p-4 flex-1 flex flex-col">
+      <div className="flex justify-between items-start mb-1">
+        <h3 className="font-bold text-[15px] text-gray-900 group-hover:text-brand transition line-clamp-1 mr-2">{place.name}</h3>
+        <span className="flex items-center text-xs font-bold text-gray-600 bg-gray-50 px-1.5 py-0.5 rounded">
+          <Star className="w-3 h-3 text-yellow-400 mr-1" /> {place.rating}
+        </span>
       </div>
-      <p className="text-gray-500 text-xs mt-1">{type} • {address}</p>
-      <div className="flex items-center mt-3 text-gray-400 text-[11px] border-t border-gray-50 pt-3">
-        <Clock className="w-3 h-3 mr-1" /> {time}
+      <p className="text-[13px] text-gray-500 mb-3 truncate">{place.category} • {place.address}</p>
+      <div className="mt-auto flex items-center gap-1.5 text-[12px] text-gray-400">
+        <Clock className="w-3.5 h-3.5" />
+        <span>{place.time}</span>
       </div>
     </div>
   </div>
 );
 
 function App() {
+  const trendingPlaces = restaurants.filter(r => r.isTrending).slice(0, 4);
+  const allPlacesOrder = [1, 2, 3, 7, 8, 4, 9, 5, 10, 11, 6];
+
   return (
     <div className="min-h-screen">
       {/* NAVBAR */}
@@ -80,11 +99,21 @@ function App() {
           <span className="text-brand font-bold cursor-pointer hover:underline text-sm">View All</span>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <TrendingCard name="Bánh Mì Huỳnh Hoa" type="Bánh Mì" address="26 Lê Thị Riêng" time="14:00 - 23:00" />
-          <TrendingCard name="Hủ Tiếu Thành Đạt" type="Hủ Tiếu" address="34 Cô Bắc" time="00:00 - 23:59" />
-          <TrendingCard name="Ốc Đào" type="Hải Sản" address="212B Nguyễn Trãi" time="10:00 - 22:00" />
-          <TrendingCard name="Secret Garden" type="Món Việt" address="158 Pasteur" time="11:00 - 22:00" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {trendingPlaces.map(p => (
+            <PlaceCard key={p.id} place={p} showTrendingBadge />
+          ))}
+        </div>
+
+        {/* ALL PLACES */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">All Places</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {allPlacesOrder.map(id => {
+            const place = restaurants.find(r => r.id === id);
+            return place ? <PlaceCard key={place.id} place={place} showTrendingBadge={false} /> : null;
+          })}
         </div>
       </main>
     </div>
