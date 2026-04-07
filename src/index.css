@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  /* Khai báo màu cam thương hiệu tại đây */
+  --color-brand: #FF5733; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #FDFCFB;
+}
