@@ -220,6 +220,87 @@ button {
   background: #fff4ee;
 }
 
+.inline-alert-success {
+  border-color: #cfe9d7;
+  background: #eefaf1;
+  color: #23623a;
+}
+
+.auth-shell {
+  min-height: calc(100vh - 2rem);
+  display: grid;
+  place-items: center;
+  padding: 1rem 0 2rem;
+}
+
+.auth-card {
+  width: min(460px, 100%);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.auth-header {
+  text-align: center;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.auth-logo {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-brand) 0%, #ff7b3d 100%);
+  box-shadow: 0 18px 35px rgba(255, 91, 46, 0.24);
+}
+
+.auth-header p {
+  color: var(--color-muted);
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.auth-form .control-field {
+  min-width: 0;
+}
+
+.auth-submit {
+  width: 100%;
+}
+
+.auth-error {
+  padding: 0.8rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid #f8c8c8;
+  background: var(--color-danger-soft);
+  color: #a12a2a;
+}
+
+.auth-support-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.auth-footer {
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.auth-footer a {
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
 .hero-block {
   text-align: center;
   padding: 3rem 1.5rem 2.3rem;

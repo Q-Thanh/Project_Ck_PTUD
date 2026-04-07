@@ -1,5 +1,6 @@
 ﻿import { ArrowRight, LogOut, MapPin, Search, ShieldCheck, Sparkles, Star } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { UserRound } from "lucide-react";
 import { homePlaces } from "../data/mockData";
 import { useAuth } from "../context/useAuth";
 
@@ -35,13 +36,14 @@ function PlaceCard({ place, showTrendingBadge }) {
 }
 
 export function HomePage() {
-  const { isAdmin, loginAsAdmin, logout } = useAuth();
+  const { session, isAdmin, isAuthenticated, loginAsAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const trendingPlaces = homePlaces.filter((item) => item.isTrending).slice(0, 4);
   const orderedPlaces = [...homePlaces].sort((a, b) => Number(b.isTrending) - Number(a.isTrending));
 
+  const authMessage = location.state?.authMessage;
   const deniedPath = location.state?.deniedPath;
 
   const handleStartAdminSession = () => {
@@ -68,6 +70,31 @@ export function HomePage() {
           </nav>
 
           <div className="top-nav-actions">
+            {!isAuthenticated && (
+              <>
+                <Link to="/login" className="ghost-btn">
+                  <UserRound size={16} />
+                  <span>Dang nhap</span>
+                </Link>
+                <Link to="/register" className="brand-btn-secondary">
+                  <span>Dang ky</span>
+                </Link>
+              </>
+            )}
+
+            {isAuthenticated && !isAdmin && (
+              <>
+                <span className="status-pill">
+                  <UserRound size={14} />
+                  <span>{session.displayName}</span>
+                </span>
+                <button type="button" className="ghost-btn" onClick={logout}>
+                  <LogOut size={16} />
+                  <span>Dang xuat</span>
+                </button>
+              </>
+            )}
+
             {!isAdmin && (
               <button type="button" className="brand-btn" onClick={handleStartAdminSession}>
                 <ShieldCheck size={16} />
@@ -89,6 +116,12 @@ export function HomePage() {
             )}
           </div>
         </header>
+
+        {authMessage && (
+          <div className="surface-card inline-alert inline-alert-success" role="status">
+            {authMessage}
+          </div>
+        )}
 
         {deniedPath && (
           <div className="surface-card inline-alert" role="status">
