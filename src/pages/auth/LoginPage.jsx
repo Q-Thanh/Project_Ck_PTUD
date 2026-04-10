@@ -29,10 +29,12 @@ export function LoginPage() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => { // Thêm chữ async
     event.preventDefault();
 
-    const result = login(formState);
+    // Thêm chữ await để chờ Backend trả kết quả
+    const result = await login(formState); 
+    
     if (!result.ok) {
       setErrorMessage(result.message);
       return;
@@ -40,7 +42,7 @@ export function LoginPage() {
 
     navigate("/", {
       replace: true,
-      state: { authMessage: `Chao mung ${result.session.displayName} quay tro lai.` },
+      state: { authMessage: `Chào mừng ${result.session.displayName} quay trở lại.` },
     });
   };
 
