@@ -31,15 +31,16 @@ export function RegisterPage() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => { // Thêm chữ async
     event.preventDefault();
 
     if (formState.password !== formState.confirmPassword) {
-      setErrorMessage("Mat khau xac nhan khong khop.");
+      setErrorMessage("Mật khẩu xác nhận không khớp.");
       return;
     }
 
-    const result = register({
+    // Thêm chữ await
+    const result = await register({
       displayName: formState.displayName,
       email: formState.email,
       password: formState.password,
@@ -52,7 +53,7 @@ export function RegisterPage() {
 
     navigate("/", {
       replace: true,
-      state: { authMessage: `Tai khoan ${result.session.displayName} da san sang.` },
+      state: { authMessage: `Tài khoản ${result.session.displayName} đã sẵn sàng.` },
     });
   };
 
