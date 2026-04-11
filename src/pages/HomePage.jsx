@@ -1,5 +1,5 @@
-﻿import { ArrowRight, LogOut, MapPin, Search, ShieldCheck, Sparkles, Star } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ArrowRight, LogOut, MapPin, Search, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { UserRound } from "lucide-react";
 import { homePlaces } from "../data/mockData";
 import { useAuth } from "../context/useAuth";
@@ -27,7 +27,7 @@ function PlaceCard({ place, showTrendingBadge }) {
           </span>
         </div>
         <p className="muted-text">
-          {place.category} • {place.address}
+          {place.category} � {place.address}
         </p>
         <p className="muted-text">Mo cua: {place.time}</p>
       </div>
@@ -36,8 +36,7 @@ function PlaceCard({ place, showTrendingBadge }) {
 }
 
 export function HomePage() {
-  const { session, isAdmin, isAuthenticated, loginAsAdmin, logout } = useAuth();
-  const navigate = useNavigate();
+  const { session, isAdmin, isAuthenticated, logout } = useAuth();
   const location = useLocation();
 
   const trendingPlaces = homePlaces.filter((item) => item.isTrending).slice(0, 4);
@@ -45,11 +44,6 @@ export function HomePage() {
 
   const authMessage = location.state?.authMessage;
   const deniedPath = location.state?.deniedPath;
-
-  const handleStartAdminSession = () => {
-    loginAsAdmin();
-    navigate("/admin");
-  };
 
   return (
     <div className="page-wrap">
@@ -95,13 +89,6 @@ export function HomePage() {
               </>
             )}
 
-            {!isAdmin && (
-              <button type="button" className="brand-btn" onClick={handleStartAdminSession}>
-                <ShieldCheck size={16} />
-                <span>Bat Admin Demo</span>
-              </button>
-            )}
-
             {isAdmin && (
               <>
                 <Link to="/admin" className="brand-btn">
@@ -125,7 +112,7 @@ export function HomePage() {
 
         {deniedPath && (
           <div className="surface-card inline-alert" role="status">
-            Duong dan <strong>{deniedPath}</strong> can quyen admin. Ban co the bat "Admin Demo" de vao.
+            Duong dan <strong>{deniedPath}</strong> can quyen admin. Vui long dang nhap tai khoan admin tai trang dang nhap.
           </div>
         )}
 
@@ -187,4 +174,3 @@ export function HomePage() {
     </div>
   );
 }
-

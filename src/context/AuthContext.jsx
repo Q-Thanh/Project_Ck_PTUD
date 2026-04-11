@@ -9,13 +9,15 @@ const AUTH_API_BASE = import.meta.env.VITE_AUTH_API_BASE ?? "http://localhost:30
 const DEFAULT_FALLBACK_ACCOUNTS = [
   {
     id: 1,
-    displayName: "Admin Local",
+    username: "admin",
+    displayName: "Admin",
     email: "admin@foodfinder.local",
-    password: "admin123",
+    password: "admin",
     role: "admin",
   },
   {
     id: 2,
+    username: "user",
     displayName: "Demo User",
     email: "user@foodfinder.local",
     password: "user123",
@@ -29,6 +31,12 @@ function createGuestSession() {
 
 function normalizeEmail(email) {
   return String(email ?? "")
+    .trim()
+    .toLowerCase();
+}
+
+function normalizeIdentifier(identifier) {
+  return String(identifier ?? "")
     .trim()
     .toLowerCase();
 }
@@ -73,6 +81,28 @@ function readStoredAccounts() {
   }
 }
 
+function normalizeAccount(account, index) {
+  const normalizedEmail = normalizeEmail(account?.email);
+  const normalizedUsername = normalizeIdentifier(account?.username || normalizedEmail.split("@")[0] || "");
+
+  return {
+    id: Number(account?.id) || index + 1,
+    displayName: String(account?.displayName || account?.name || "Nguoi dung"),
+    email: normalizedEmail,
+    username: normalizedUsername,
+    password: String(account?.password || ""),
+    role: account?.role === "admin" ? "admin" : "user",
+  };
+}
+
+function ensureSystemAccounts(accounts) {
+  const normalizedAccounts = Array.isArray(accounts) ? accounts.map(normalizeAccount) : [];
+  const nonAdminAccounts = normalizedAccounts.filter((account) => account.role !== "admin");
+
+  const fixedAdminAccount = { ...DEFAULT_FALLBACK_ACCOUNTS[0] };
+  return [fixedAdminAccount, ...nonAdminAccounts];
+}
+
 function createSessionFromPayload(payload, defaultRole = "user") {
   const role = ["guest", "user", "admin"].includes(payload?.role) ? payload.role : defaultRole;
 
@@ -85,7 +115,7 @@ function createSessionFromPayload(payload, defaultRole = "user") {
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(readStoredSession);
-  const [accounts, setAccounts] = useState(readStoredAccounts);
+  const [accounts, setAccounts] = useState(() => ensureSystemAccounts(readStoredAccounts()));
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -105,20 +135,22 @@ export function AuthProvider({ children }) {
       isAuthenticated: session.role !== "guest",
       isAdmin: session.role === "admin",
 
-      loginAsAdmin: () => {
-        setSession({ role: "admin", displayName: "Admin Demo", email: "admin-demo@foodfinder.local" });
-      },
+      login: async ({ identifier, email, password }) => {
+        const normalizedIdentifier = normalizeIdentifier(identifier || email);
 
-      login: async ({ email, password }) => {
-        const normalizedEmail = normalizeEmail(email);
-
-        if (!normalizedEmail || !password) {
-          return { ok: false, message: "Vui long nhap day du email va mat khau." };
+        if (!normalizedIdentifier || !password) {
+          return { ok: false, message: "Vui long nhap day du tai khoan (hoac email) va mat khau." };
         }
+
+        const apiPayload = {
+          identifier: normalizedIdentifier,
+          password,
+          email: normalizedIdentifier,
+        };
 
         const apiResponse = await requestJson(`${AUTH_API_BASE}/login`, {
           method: "POST",
-          body: JSON.stringify({ email: normalizedEmail, password }),
+          body: JSON.stringify(apiPayload),
         });
 
         if (apiResponse.ok && apiResponse.data) {
@@ -137,7 +169,10 @@ export function AuthProvider({ children }) {
         }
 
         const fallbackAccount = accounts.find(
-          (account) => normalizeEmail(account.email) === normalizedEmail && account.password === password,
+          (account) =>
+            account.password === password &&
+            (normalizeIdentifier(account.username) === normalizedIdentifier ||
+              normalizeEmail(account.email) === normalizedIdentifier),
         );
 
         if (!fallbackAccount) {
@@ -158,9 +193,18 @@ export function AuthProvider({ children }) {
       register: async ({ displayName, email, password }) => {
         const normalizedDisplayName = String(displayName ?? "").trim();
         const normalizedEmail = normalizeEmail(email);
+        const derivedUsername = normalizeIdentifier(normalizedEmail.split("@")[0] || "");
 
         if (!normalizedDisplayName || !normalizedEmail || !password) {
           return { ok: false, message: "Vui long dien day du thong tin." };
+        }
+
+        if (
+          normalizedEmail === "admin" ||
+          normalizedEmail === "admin@foodfinder.local" ||
+          derivedUsername === "admin"
+        ) {
+          return { ok: false, message: "Tai khoan admin la tai khoan he thong, khong the dang ky." };
         }
 
         const apiResponse = await requestJson(`${AUTH_API_BASE}/register`, {
@@ -192,11 +236,12 @@ export function AuthProvider({ children }) {
           id: Math.max(0, ...accounts.map((account) => Number(account.id) || 0)) + 1,
           displayName: normalizedDisplayName,
           email: normalizedEmail,
+          username: derivedUsername || `user${Date.now()}`,
           password,
           role: "user",
         };
 
-        setAccounts((current) => [...current, fallbackAccount]);
+        setAccounts((current) => ensureSystemAccounts([...current, fallbackAccount]));
 
         const nextSession = createSessionFromPayload(fallbackAccount, "user");
         setSession(nextSession);
