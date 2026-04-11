@@ -3,98 +3,192 @@
     id: 1,
     name: "Pho Hoa Pasteur",
     category: "Pho",
+    area: "District 1",
     address: "260C Pasteur",
     time: "06:00 - 22:00",
     rating: 4.6,
+    reviewCount: 1250,
     priceLevel: "$$",
+    distance: 1.2,
     isTrending: false,
     image:
       "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Nguyen A", comment: "Pho ngon, gia re!", rating: 5 },
+      { user: "Tran B", comment: "Dich vu tot, se quay lai.", rating: 4 }
+    ]
   },
   {
     id: 2,
     name: "Banh Mi Huynh Hoa",
     category: "Banh mi",
+    area: "District 3",
     address: "26 Le Thi Rieng",
     time: "14:00 - 23:00",
     rating: 4.8,
+    reviewCount: 890,
     priceLevel: "$$",
+    distance: 2.5,
     isTrending: true,
     image:
       "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Le C", comment: "Banh mi tuyet voi!", rating: 5 },
+      { user: "Pham D", comment: "Gia hop ly, chat luong cao.", rating: 5 }
+    ]
   },
   {
     id: 3,
     name: "Com Tam Ba Ghien",
     category: "Com tam",
+    area: "District 1",
     address: "84 Dang Van Ngu",
     time: "07:00 - 21:00",
     rating: 4.5,
+    reviewCount: 2100,
     priceLevel: "$$",
+    distance: 0.8,
     isTrending: false,
     image:
       "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Ho E", comment: "Com tam ngon, phu hop gia dinh.", rating: 4 },
+      { user: "Vo F", comment: "Luon day, nhung doi lau.", rating: 4 }
+    ]
   },
   {
     id: 4,
     name: "Hu Tieu Thanh Dat",
     category: "Hu tieu",
+    area: "District 1",
     address: "34 Co Bac",
     time: "00:00 - 23:59",
     rating: 4.7,
+    reviewCount: 1450,
     priceLevel: "$$",
+    distance: 1.5,
     isTrending: true,
     image:
       "https://images.unsplash.com/photo-1569058242567-93de6f36f8eb?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Dinh G", comment: "Hu tieu muot, nuoc dung ngon.", rating: 5 },
+      { user: "Bui H", comment: "Mo 24h, rat tien loi.", rating: 4 }
+    ]
   },
   {
     id: 5,
     name: "Oc Dao",
     category: "Seafood",
+    area: "District 5",
     address: "212B Nguyen Trai",
     time: "10:00 - 22:00",
     rating: 4.6,
+    reviewCount: 980,
     priceLevel: "$$$",
+    distance: 3.2,
     isTrending: true,
     image:
       "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Nguyen I", comment: "Hai san tuoi ngon, gia cao nhung xung dang.", rating: 5 },
+      { user: "Tran J", comment: "Khong gian thoai mai.", rating: 4 }
+    ]
   },
   {
     id: 6,
     name: "Secret Garden",
     category: "Vietnamese",
+    area: "District 1",
     address: "158 Pasteur",
     time: "11:00 - 22:00",
     rating: 4.6,
+    reviewCount: 750,
     priceLevel: "$$$",
+    distance: 1.0,
     isTrending: true,
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Le K", comment: "Am thuc Viet Nam tinh te.", rating: 5 },
+      { user: "Pham L", comment: "Gia cao, nhung trai nghiem tot.", rating: 4 }
+    ]
   },
   {
     id: 7,
     name: "Pizza 4P's Ben Thanh",
     category: "Pizza",
+    area: "District 1",
     address: "8 Thu Khoa Huan",
     time: "11:00 - 22:30",
     rating: 4.7,
+    reviewCount: 1200,
     priceLevel: "$$$",
+    distance: 2.0,
     isTrending: false,
     image:
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Ho M", comment: "Pizza ngon, nhu o nuoc ngoai.", rating: 5 },
+      { user: "Vo N", comment: "Dich vu nhanh.", rating: 4 }
+    ]
   },
   {
     id: 8,
     name: "The Workshop",
     category: "Coffee",
+    area: "District 1",
     address: "27 Ngo Duc Ke",
     time: "08:00 - 21:00",
     rating: 4.4,
+    reviewCount: 650,
     priceLevel: "$$",
+    distance: 1.8,
     isTrending: false,
     image:
       "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Dinh O", comment: "Ca phe ngon, khong gian lam viec tot.", rating: 4 },
+      { user: "Bui P", comment: "Gia phai chiu.", rating: 4 }
+    ]
   },
+  {
+    id: 9,
+    name: "Bun Bo Hue Huong Giang",
+    category: "Bun bo",
+    area: "District 3",
+    address: "45 Nguyen Thien Thuat",
+    time: "06:00 - 20:00",
+    rating: 4.5,
+    reviewCount: 1100,
+    priceLevel: "$$",
+    distance: 2.8,
+    isTrending: false,
+    image:
+      "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Nguyen Q", comment: "Bun bo cay vua phai.", rating: 5 },
+      { user: "Tran R", comment: "Nguyen lieu tuoi.", rating: 4 }
+    ]
+  },
+  {
+    id: 10,
+    name: "Mi Quang Ba Mua",
+    category: "Mi quang",
+    area: "District 5",
+    address: "178 Tran Hung Dao",
+    time: "07:00 - 21:00",
+    rating: 4.7,
+    reviewCount: 950,
+    priceLevel: "$$",
+    distance: 3.5,
+    isTrending: true,
+    image:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?auto=format&fit=crop&w=1200&q=80",
+    reviews: [
+      { user: "Le S", comment: "Mi quang dac trung Da Nang.", rating: 5 },
+      { user: "Pham T", comment: "Gia re, chat luong tot.", rating: 4 }
+    ]
+  }
 ];
 
 export const initialPosts = [

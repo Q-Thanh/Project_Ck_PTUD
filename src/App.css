@@ -40,3 +40,233 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Filter styles */
+.hero-search {
+  width: min(860px, 100%);
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.15rem 1.4rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(156, 163, 175, 0.2);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.hero-search svg {
+  color: #9ca3af;
+}
+
+.hero-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #111827;
+  font-size: 1rem;
+}
+
+.hero-search input::placeholder {
+  color: #9ca3af;
+}
+
+.filters-section {
+  width: min(760px, 100%);
+  margin: 0 auto 1.5rem;
+  padding: 0.75rem 0.95rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 145px;
+  max-width: 175px;
+}
+
+.filter-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #6b7280;
+  letter-spacing: 0.02em;
+}
+
+.filter-input,
+.filter-select {
+  height: 38px;
+  padding: 0 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  color: #111827;
+  background: #fff;
+}
+
+.filter-select {
+  appearance: none;
+  background: #fff;
+}
+
+.hero-actions {
+  margin-top: 0.9rem;
+}
+
+.recommendation-card {
+  padding: 1rem;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.recommendation-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.recommendation-info h3 {
+  margin-bottom: 0.5rem;
+}
+
+.recommendation-reasons {
+  margin-top: 1rem;
+}
+
+.recommendation-reasons h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.recommendation-reasons ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.recommendation-reasons li {
+  margin-bottom: 0.35rem;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.recommendation-info button {
+  margin-top: 1rem;
+}
+
+.place-reviews {
+  margin-top: 0.5rem;
+}
+
+.place-reviews .small {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.place-image-wrap {
+  position: relative;
+  cursor: pointer;
+}
+
+.place-image-wrap:hover .place-image {
+  transform: scale(1.02);
+}
+
+.place-image {
+  transition: transform 180ms ease;
+}
+
+.place-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 50;
+}
+
+.place-modal {
+  width: min(760px, 100%);
+  background: #ffffff;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 38px 90px rgba(15, 23, 42, 0.18);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.modal-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-body {
+  padding: 1.4rem 1.5rem 1.75rem;
+}
+
+.modal-body h2 {
+  margin-bottom: 0.75rem;
+}
+
+.modal-body .place-row {
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.modal-reviews {
+  margin-top: 1.25rem;
+}
+
+.modal-reviews h3 {
+  margin-bottom: 0.75rem;
+}
+
+.review-item {
+  margin-bottom: 0.75rem;
+}
+
+.review-comment {
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.review-user {
+  font-size: 0.82rem;
+  color: #6b7280;
+}
