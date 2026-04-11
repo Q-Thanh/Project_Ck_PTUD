@@ -40,9 +40,12 @@ export function LoginPage() {
       return;
     }
 
-    navigate("/", {
+    const nextPath = result.session.role === "admin" ? "/admin" : "/";
+    navigate(nextPath, {
       replace: true,
-      state: { authMessage: `Chào mừng ${result.session.displayName} quay trở lại.` },
+      state: {
+        authMessage: `Chao mung ${result.session.displayName} quay tro lai (${result.source || "api"}).`,
+      },
     });
   };
 

@@ -1,6 +1,12 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react";
-import { CheckCircle2, CircleX, RefreshCw, Save, Search } from "lucide-react";
-import { approvePost, listPosts, rejectPost, updatePost } from "../../services/adminService";
+import { CheckCircle2, CircleX, RefreshCw, Save, Search, Tags } from "lucide-react";
+import {
+  approvePost,
+  attachTagsToPost,
+  listPosts,
+  rejectPost,
+  updatePost,
+} from "../../services/adminService";
 
 const STATUS_OPTIONS = [
   { value: "all", label: "Tat ca" },
@@ -26,6 +32,7 @@ export function AdminPostsPage() {
   const [busyId, setBusyId] = useState(null);
   const [posts, setPosts] = useState([]);
   const [draftNotes, setDraftNotes] = useState({});
+  const [draftTags, setDraftTags] = useState({});
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
@@ -37,6 +44,16 @@ export function AdminPostsPage() {
       data.forEach((post) => {
         if (!(post.id in next)) {
           next[post.id] = post.violationNotes || "";
+        }
+      });
+      return next;
+    });
+
+    setDraftTags((previous) => {
+      const next = { ...previous };
+      data.forEach((post) => {
+        if (!(post.id in next)) {
+          next[post.id] = (post.tags || []).join(", ");
         }
       });
       return next;
@@ -70,7 +87,9 @@ export function AdminPostsPage() {
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
         <h2>Quan ly bai dang</h2>
-        <p className="muted-text">Duyet, tu choi va chinh sua ghi chu vi pham cho bai cong dong.</p>
+        <p className="muted-text">
+          Duyet, tu choi, cap nhat vi pham, gan tag va theo doi moderation history.
+        </p>
       </section>
 
       <section className="surface-card filter-row">
@@ -79,7 +98,7 @@ export function AdminPostsPage() {
           <input
             type="search"
             value={filters.query}
-            placeholder="Tim theo tieu de hoac tac gia"
+            placeholder="Tim theo tieu de, tac gia, noi dung"
             onChange={(event) => setFilters((prev) => ({ ...prev, query: event.target.value }))}
           />
         </label>
@@ -126,6 +145,45 @@ export function AdminPostsPage() {
                 </div>
                 <span className={`status-pill status-pill-${post.status}`}>{post.status}</span>
               </div>
+
+              <p className="muted-text">{post.content}</p>
+
+              <div className="tag-list">
+                {(post.tags || []).map((tag) => (
+                  <span key={`${post.id}-${tag}`} className="tag-chip">
+                    #{tag}
+                  </span>
+                ))}
+                {!(post.tags || []).length && <span className="muted-text">Chua co tag</span>}
+              </div>
+
+              <label className="control-field">
+                <span>Tag bai dang (tach boi dau phay)</span>
+                <div className="inline-row">
+                  <input
+                    value={draftTags[post.id] ?? ""}
+                    onChange={(event) =>
+                      setDraftTags((prev) => ({
+                        ...prev,
+                        [post.id]: event.target.value,
+                      }))
+                    }
+                    placeholder="vd: an-dem, quan-1"
+                  />
+
+                  <button
+                    type="button"
+                    className="ghost-btn"
+                    disabled={busyId === post.id}
+                    onClick={() =>
+                      runAction(post.id, () => attachTagsToPost(post.id, draftTags[post.id] || ""))
+                    }
+                  >
+                    <Tags size={15} />
+                    <span>Gan tag</span>
+                  </button>
+                </div>
+              </label>
 
               <label className="control-field">
                 <span>Ghi chu quan tri / vi pham</span>
@@ -180,6 +238,22 @@ export function AdminPostsPage() {
                   <Save size={15} />
                   <span>Luu ghi chu</span>
                 </button>
+              </div>
+
+              <div className="history-list">
+                <p className="muted-text strong-label">Moderation history:</p>
+                {(post.moderationHistory || [])
+                  .slice()
+                  .reverse()
+                  .slice(0, 4)
+                  .map((entry) => (
+                    <div key={entry.id} className="history-item">
+                      <strong>{entry.action}</strong>
+                      <span>{entry.by}</span>
+                      <span>{formatDate(entry.at)}</span>
+                      <span>{entry.note}</span>
+                    </div>
+                  ))}
               </div>
             </article>
           ))}

@@ -1,6 +1,6 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react";
-import { Ban, Lock, RefreshCw, Search, ShieldCheck } from "lucide-react";
-import { listUsers, updateUserStatus } from "../../services/adminService";
+import { AlertTriangle, Ban, Lock, RefreshCw, Search, ShieldCheck } from "lucide-react";
+import { listUserRiskSignals, listUsers, updateUserStatus } from "../../services/adminService";
 
 const STATUS_FILTERS = [
   { value: "all", label: "Tat ca" },
@@ -20,16 +20,24 @@ function formatDate(dateValue) {
   });
 }
 
+function riskTier(score) {
+  if (score >= 80) return "high";
+  if (score >= 50) return "medium";
+  return "low";
+}
+
 export function AdminUsersPage() {
   const [filters, setFilters] = useState({ query: "", status: "all" });
   const [users, setUsers] = useState([]);
+  const [riskSignals, setRiskSignals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState(null);
 
   const loadUsers = useCallback(async () => {
     setLoading(true);
-    const data = await listUsers(filters);
-    setUsers(data);
+    const [usersData, riskData] = await Promise.all([listUsers(filters), listUserRiskSignals(6)]);
+    setUsers(usersData);
+    setRiskSignals(riskData);
     setLoading(false);
   }, [filters]);
 
@@ -58,7 +66,31 @@ export function AdminUsersPage() {
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
         <h2>Quan ly nguoi dung</h2>
-        <p className="muted-text">Theo doi tai khoan va cap nhat trang thai active / locked / banned.</p>
+        <p className="muted-text">
+          Theo doi tai khoan, cap nhat trang thai va giam sat cac tin hieu hanh vi bat thuong.
+        </p>
+      </section>
+
+      <section className="surface-card table-card">
+        <div className="table-head">
+          <h3>
+            <AlertTriangle size={16} />
+            <span>Nguoi dung co rui ro cao</span>
+          </h3>
+        </div>
+
+        <div className="simple-list">
+          {riskSignals.map((signal) => (
+            <div key={signal.userId} className="simple-list-row risk-row">
+              <div>
+                <strong>{signal.name}</strong>
+                <p className="muted-text">{signal.lastAction}</p>
+              </div>
+              <span className={`risk-pill risk-pill-${riskTier(signal.riskScore)}`}>{signal.riskScore}/100</span>
+            </div>
+          ))}
+          {!riskSignals.length && <p className="muted-text">Khong co canh bao rui ro.</p>}
+        </div>
       </section>
 
       <section className="surface-card filter-row">
@@ -114,6 +146,20 @@ export function AdminUsersPage() {
                   <p className="muted-text">Lan hoat dong gan nhat: {formatDate(user.lastActive)}</p>
                 </div>
                 <span className={`status-pill status-pill-${user.status}`}>{user.status}</span>
+              </div>
+
+              <div className="inline-row">
+                <span className={`risk-pill risk-pill-${riskTier(user.riskScore)}`}>Risk: {user.riskScore}/100</span>
+                <span className="muted-text">Hanh dong gan nhat: {user.lastAction}</span>
+              </div>
+
+              <div className="tag-list">
+                {(user.abnormalFlags || []).map((flag) => (
+                  <span key={`${user.id}-${flag}`} className="tag-chip tag-chip-warning">
+                    {flag}
+                  </span>
+                ))}
+                {!(user.abnormalFlags || []).length && <span className="muted-text">Khong co co bat thuong</span>}
               </div>
 
               <div className="moderation-actions">
