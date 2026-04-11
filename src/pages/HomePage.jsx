@@ -5,12 +5,11 @@ import { homePlaces } from "../data/mockData";
 import { useAuth } from "../context/useAuth";
 import { useState } from "react";
 
-function PlaceCard({ place, showTrendingBadge, onImageClick }) {
+function PlaceCard({ place, showTrendingBadge }) {
   return (
     <article className="surface-card place-card">
       <div className="place-image-wrap" onClick={() => onImageClick(place)}>
         <img src={place.image} alt={place.name} className="place-image" />
-
         {showTrendingBadge && (
           <div className="place-badges">
             <span className="highlight-badge">Trending</span>
@@ -28,19 +27,38 @@ function PlaceCard({ place, showTrendingBadge, onImageClick }) {
           </span>
         </div>
         <p className="muted-text">
-          {place.category} • {place.area} • {place.distance}km
+          {place.category} • {place.address}
         </p>
         <p className="muted-text">Mo cua: {place.time}</p>
-        <div className="place-reviews">
-          <p className="muted-text">Nhận xét gần đây:</p>
-          {place.reviews.slice(0, 1).map((review, index) => (
-            <p key={index} className="muted-text small">"{review.comment}" - {review.user}</p>
-          ))}
-        </div>
       </div>
     </article>
   );
 }
+// Hàm này lấy vị trí hiện tại của người dùng và gửi lên backend để lấy danh sách quán ăn gần đó trong bán kính 5km.
+const handleGetNearby = () => {
+  if (!navigator.geolocation) {
+    alert("Trình duyệt của bạn không hỗ trợ định vị.");
+    return;
+  }
+
+  // Bắt đầu lấy tọa độ
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
+      console.log("Tọa độ của bạn:", latitude, longitude);
+
+      // Gửi tọa độ này lên Backend để lấy danh sách quán ăn trong bán kính 5km
+      const response = await fetch(`http://localhost:3000/restaurants/nearby?lat=${latitude}&lng=${longitude}&radius=5`);
+      const data = await response.json();
+      
+      // Sau đó cập nhật danh sách quán ăn lên giao diện
+      // setRestaurants(data); 
+    },
+    (error) => {
+      alert("Không thể lấy vị trí. Vui lòng kiểm tra quyền truy cập vị trí.");
+    }
+  );
+};
 
 export function HomePage() {
   const { session, isAdmin, isAuthenticated, loginAsAdmin, logout } = useAuth();
