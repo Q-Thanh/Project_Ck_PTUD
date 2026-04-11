@@ -7,6 +7,8 @@ import { LoginPage } from "../pages/auth/LoginPage";
 import { RegisterPage } from "../pages/auth/RegisterPage";
 import { AdminOverviewPage } from "../pages/admin/AdminOverviewPage";
 import { AdminRestaurantsPage } from "../pages/admin/AdminRestaurantsPage";
+import { AdminPostsPage } from "../pages/admin/AdminPostsPage";
+import { AdminUsersPage } from "../pages/admin/AdminUsersPage";
 import { AdminGuard } from "./AdminGuard";
 
 export function AppRouter() {
@@ -27,6 +29,8 @@ export function AppRouter() {
         <Route index element={<Navigate to="overview" replace />} />
         <Route path="overview" element={<AdminOverviewPage />} />
         <Route path="restaurants" element={<AdminRestaurantsPage />} />
+        <Route path="posts" element={<AdminPostsPage />} />
+        <Route path="users" element={<AdminUsersPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

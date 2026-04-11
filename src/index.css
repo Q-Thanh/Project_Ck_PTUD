@@ -283,6 +283,22 @@ button {
   color: #a12a2a;
 }
 
+.auth-info {
+  padding: 0.8rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid #cfe9d7;
+  background: #eefaf1;
+  color: #1f5132;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.auth-info-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 .auth-support-row {
   display: flex;
   align-items: center;

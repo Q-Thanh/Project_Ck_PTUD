@@ -13,8 +13,13 @@ const EMPTY_FORM = {
   name: "",
   area: "Quan 1",
   category: "Vietnamese",
-  priceLevel: "$$",
+  priceLevel: "",
   views: 0,
+  rating: 0,
+  totalReviews: 0,
+  time: "",
+  address: "",
+  image: "",
   hidden: false,
   tags: "",
 };
@@ -77,6 +82,11 @@ export function AdminRestaurantsPage() {
       category: restaurant.category,
       priceLevel: restaurant.priceLevel,
       views: restaurant.views,
+      rating: restaurant.rating,
+      totalReviews: restaurant.totalReviews,
+      time: restaurant.time,
+      address: restaurant.address,
+      image: restaurant.image,
       hidden: restaurant.hidden,
       tags: (restaurant.tags || []).join(", "),
     });
@@ -94,18 +104,18 @@ export function AdminRestaurantsPage() {
       return;
     }
 
+    const payload = {
+      ...form,
+      views: Number(form.views) || 0,
+      rating: Number(form.rating) || 0,
+      totalReviews: Number(form.totalReviews) || 0,
+      tags: form.tags,
+    };
+
     if (editingId) {
-      await updateRestaurant(editingId, {
-        ...form,
-        views: Number(form.views) || 0,
-        tags: form.tags,
-      });
+      await updateRestaurant(editingId, payload);
     } else {
-      await createRestaurant({
-        ...form,
-        views: Number(form.views) || 0,
-        tags: form.tags,
-      });
+      await createRestaurant(payload);
     }
 
     resetForm();
@@ -138,7 +148,9 @@ export function AdminRestaurantsPage() {
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
         <h2>Quan ly quan an</h2>
-        <p className="muted-text">Them, sua, an hien, gan tag va dong bo du lieu quan an tu nguon goc.</p>
+        <p className="muted-text">
+          Them, sua, an hien, cap nhat hinh anh/thong tin va dong bo du lieu quan an tu source data3.
+        </p>
       </section>
 
       <section className="surface-card sync-banner">
@@ -166,7 +178,7 @@ export function AdminRestaurantsPage() {
           <input
             type="search"
             value={filters.query}
-            placeholder="Tim theo ten quan / loai mon / tag"
+            placeholder="Tim theo ten quan / dia chi / loai mon / tag"
             onChange={(event) => setFilters((prev) => ({ ...prev, query: event.target.value }))}
           />
         </label>
@@ -239,21 +251,18 @@ export function AdminRestaurantsPage() {
             <input
               value={form.category}
               onChange={(event) => setForm((prev) => ({ ...prev, category: event.target.value }))}
-              placeholder="VD: Pho"
+              placeholder="VD: Nha hang Viet"
               required
             />
           </label>
 
           <label className="control-field">
             <span>Muc gia</span>
-            <select
+            <input
               value={form.priceLevel}
               onChange={(event) => setForm((prev) => ({ ...prev, priceLevel: event.target.value }))}
-            >
-              <option value="$">$</option>
-              <option value="$$">$$</option>
-              <option value="$$$">$$$</option>
-            </select>
+              placeholder="VD: 200.000 - 300.000 d/nguoi"
+            />
           </label>
 
           <label className="control-field">
@@ -263,6 +272,55 @@ export function AdminRestaurantsPage() {
               min={0}
               value={form.views}
               onChange={(event) => setForm((prev) => ({ ...prev, views: event.target.value }))}
+            />
+          </label>
+
+          <label className="control-field">
+            <span>Rating</span>
+            <input
+              type="number"
+              min={0}
+              max={5}
+              step="0.1"
+              value={form.rating}
+              onChange={(event) => setForm((prev) => ({ ...prev, rating: event.target.value }))}
+            />
+          </label>
+
+          <label className="control-field">
+            <span>Tong reviews</span>
+            <input
+              type="number"
+              min={0}
+              value={form.totalReviews}
+              onChange={(event) => setForm((prev) => ({ ...prev, totalReviews: event.target.value }))}
+            />
+          </label>
+
+          <label className="control-field">
+            <span>Gio mo cua</span>
+            <input
+              value={form.time}
+              onChange={(event) => setForm((prev) => ({ ...prev, time: event.target.value }))}
+              placeholder="VD: Dang mo cua"
+            />
+          </label>
+
+          <label className="control-field">
+            <span>Dia chi</span>
+            <input
+              value={form.address}
+              onChange={(event) => setForm((prev) => ({ ...prev, address: event.target.value }))}
+              placeholder="Nhap dia chi"
+            />
+          </label>
+
+          <label className="control-field">
+            <span>URL hinh anh</span>
+            <input
+              value={form.image}
+              onChange={(event) => setForm((prev) => ({ ...prev, image: event.target.value }))}
+              placeholder="https://..."
             />
           </label>
 
@@ -309,6 +367,21 @@ export function AdminRestaurantsPage() {
                 </span>
               </div>
 
+              {restaurant.image && (
+                <img
+                  src={restaurant.image}
+                  alt={restaurant.name}
+                  className="place-image"
+                  style={{ width: "100%", maxHeight: "180px", objectFit: "cover", borderRadius: "12px" }}
+                />
+              )}
+
+              <p className="muted-text">Dia chi: {restaurant.address || "Chua cap nhat"}</p>
+              <p className="muted-text">
+                Gio mo: {restaurant.time || "Chua cap nhat"} • Rating: {Number(restaurant.rating || 0).toFixed(1)} • Reviews: {Number(
+                  restaurant.totalReviews || 0,
+                ).toLocaleString("vi-VN")}
+              </p>
               <p className="muted-text">Luot xem: {restaurant.views.toLocaleString("vi-VN")}</p>
               <p className="muted-text">
                 Sync: {restaurant.sourceSyncStatus} • {formatDate(restaurant.lastSyncedAt)}

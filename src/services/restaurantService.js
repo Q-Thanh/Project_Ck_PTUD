@@ -1,97 +1,97 @@
-import { homePlaces, initialPosts } from "../data/mockData";
-import data1 from "../../data/data1.json";
-import data2 from "../../data/data2.json";
+﻿import data3 from "../../data/data3.json";
+import {
+  createRelatedPostsFromData,
+  createReviewsForRestaurant,
+  homePlaces,
+} from "../data/data2Runtime";
 
 function wait(ms = 300) {
-  return new Promise((res) => setTimeout(res, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function fetchRestaurantById(id) {
-  await wait(300);
-  // Prefer data2.json
-  const byData2 = Array.isArray(data2) ? data2.find((p) => String(p.id) === String(id)) : null;
-  if (byData2) {
-    return {
-      id: byData2.id,
-      name: byData2.name,
-      address: byData2.location?.address || "",
-      time: byData2.operatingHours?.status || "",
-      rating: byData2.rating || 0,
-      images: byData2.imageUrl ? [byData2.imageUrl] : [],
-      reviews: byData2.reviews || [],
-      priceLevel: byData2.priceLevel || "",
-      coords: byData2.coords || { lat: 10.776889, lng: 106.700806 },
-    };
-  }
+function mapData3Restaurant(item) {
+  if (!item) return null;
 
-  const r = homePlaces.find((p) => String(p.id) === String(id));
-  if (!r) return null;
   return {
-    ...r,
-    coords: { lat: 10.776889, lng: 106.700806 },
-    images: [r.image, r.image, r.image],
-    reviews: [],
+    id: String(item.id),
+    name: item.name || "",
+    category: item.category || "",
+    address: item.location?.address || "",
+    time: item.operatingHours?.status || "",
+    rating: Number(item.rating || 0),
+    reviewCount: Number(item.totalReviews || 0),
+    priceLevel: item.priceLevel || "",
+    image: item.imageUrl || "",
+    images: item.imageUrl ? [item.imageUrl] : [],
+    reviews: item.reviews || [],
+    coords: item.coords || { lat: 10.776889, lng: 106.700806 },
   };
 }
 
-export async function fetchRestaurants({ query, area, category, coords } = {}) {
-  await wait(300);
-  // Prefer real data1.json when available
-  let items = [];
-  if (Array.isArray(data2) && data2.length) {
-    items = data2.map((r) => ({
-      id: r.id,
-      name: r.name,
-      category: r.category || "",
-      address: r.location?.address || "",
-      time: r.operatingHours?.status || "",
-      rating: r.rating || 0,
-      priceLevel: r.priceLevel || "",
-      image: r.imageUrl || r.photo || (homePlaces.find((h) => h.name === r.name)?.image) || "",
-      reviews: r.reviews || [],
-    }));
-  } else if (Array.isArray(data1) && data1.length) {
-    items = data1.map((r) => ({
-      id: r.id,
-      name: r.name,
-      category: r.category || "",
-      address: r.location?.address || "",
-      time: r.operatingHours?.status || "",
-      rating: r.rating || 0,
-      priceLevel: r.priceLevel || "",
-      image: r.photo || r.image || (homePlaces.find((h) => h.name === r.name)?.image) || "",
-      reviews: r.reviews || [],
-    }));
-  } else {
-    items = [...homePlaces];
+export async function fetchRestaurantById(id) {
+  await wait(250);
+
+  const fromData3 = Array.isArray(data3)
+    ? data3.find((restaurant) => String(restaurant.id) === String(id))
+    : null;
+
+  if (fromData3) {
+    return mapData3Restaurant(fromData3);
   }
+
+  const fallback = homePlaces.find((place) => String(place.id) === String(id));
+  if (!fallback) return null;
+
+  return {
+    ...fallback,
+    images: fallback.images?.length ? fallback.images : fallback.image ? [fallback.image] : [],
+    reviews: fallback.reviews || [],
+    coords: fallback.coords || { lat: 10.776889, lng: 106.700806 },
+  };
+}
+
+export async function fetchRestaurants({ query, area, category } = {}) {
+  await wait(250);
+
+  let items = [...homePlaces];
+
   if (query) {
-    const q = query.toLowerCase();
-    items = items.filter((p) => p.name.toLowerCase().includes(q));
+    const normalizedQuery = String(query).trim().toLowerCase();
+    items = items.filter(
+      (place) =>
+        place.name.toLowerCase().includes(normalizedQuery) ||
+        place.category.toLowerCase().includes(normalizedQuery) ||
+        place.address.toLowerCase().includes(normalizedQuery),
+    );
   }
-  if (area) items = items.filter((p) => (p.area || "").toLowerCase().includes(area.toLowerCase()));
-  if (category) items = items.filter((p) => p.category.toLowerCase() === category.toLowerCase());
-  // if coords provided, return items (frontend may filter by distance)
+
+  if (area) {
+    const normalizedArea = String(area).trim().toLowerCase();
+    items = items.filter((place) => String(place.area || "").toLowerCase().includes(normalizedArea));
+  }
+
+  if (category) {
+    const normalizedCategory = String(category).trim().toLowerCase();
+    items = items.filter((place) => String(place.category || "").toLowerCase().includes(normalizedCategory));
+  }
+
   return items;
 }
 
 export async function fetchRestaurantsByRating(minRating = 4.0) {
-  await wait(300);
-  return homePlaces.filter((p) => Number(p.rating) > Number(minRating));
+  await wait(250);
+  return homePlaces.filter((place) => Number(place.rating) >= Number(minRating));
 }
 
 export async function fetchReviews(restaurantId) {
-  await wait(200);
-  // mock reviews
-  return [
-    { id: 1, author: "An", rating: 5, text: "Ngon, gia hop ly" },
-    { id: 2, author: "Binh", rating: 4, text: "Phuc vu tot" },
-    { id: 3, author: "Chi", rating: 4, text: "Rat tot" },
-  ];
+  await wait(180);
+  return createReviewsForRestaurant(restaurantId, 5);
 }
 
-export async function fetchRelatedPosts(restaurantId) {
+export async function fetchRelatedPosts() {
   await wait(200);
-  // return some mock posts
-  return initialPosts.slice(0, 3).map((p) => ({ ...p, excerpt: p.title }));
+  return createRelatedPostsFromData(3).map((post) => ({
+    ...post,
+    excerpt: post.excerpt || post.title,
+  }));
 }

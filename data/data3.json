@@ -1,0 +1,1996 @@
+[
+  {
+    "id": "bom_kitchen_001",
+    "name": "BỜM - Kitchen & Wine Bar",
+    "category": "Nhà hàng / Fine Dining",
+    "rating": 4.7,
+    "totalReviews": 780,
+    "priceLevel": "Trên 1.000.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEJGbxhpVTcsw6L2Jwrp6U2qmcfgW4B2QMOWjWN4chB8PATHaXdQDQofM95FtZz2vE_BHk4lMuchJNZrsOiqn5uW6og24Y6P6HiWo3M_giRxQbQzMeOBOTwbQFoL_4MAW4Zzfo=w408-h271-k-no",
+    "location": {
+      "address": "24 Nguyễn Thị Nghĩa, Bến Thành, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "QMCV+6F Bến Thành, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "bomkitchen.com",
+      "phone": "+84 823 999 980"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "23:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Chỗ ngồi ngoài trời",
+        "Giao hàng gián tiếp",
+        "Giao hàng",
+        "Đồ ăn mang đi",
+        "Ăn tại chỗ"
+      ],
+      "highlights": [
+        "Cà phê ngon",
+        "Chỗ ngồi trên sân thượng",
+        "Món tráng miệng ngon",
+        "Nhạc sống",
+        "Nhiều rượu vang ngon",
+        "Rượu cốc tai ngon",
+        "Thể thao"
+      ],
+      "offerings": [
+        "Bia",
+        "Cà phê",
+        "Các món chay",
+        "Các món thuần chay",
+        "Có giờ giảm giá đặc biệt",
+        "Đồ ăn cho người theo đạo Hồi",
+        "Đồ uống vào giờ vàng",
+        "Phần ăn nhỏ",
+        "Rượu",
+        "Rượu cốc tai",
+        "Rượu mạnh",
+        "Rượu vang"
+      ],
+      "diningOptions": [
+        "Bữa sáng",
+        "Bữa trưa",
+        "Bữa tối",
+        "Dịch vụ ăn uống",
+        "Món tráng miệng",
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "accessibility": {
+        "supported": [
+          "Chỗ đỗ xe cho xe lăn",
+          "Chỗ ngồi cho xe lăn"
+        ],
+        "unsupported": [
+          "Lối vào cho xe lăn",
+          "Vòng trợ thính"
+        ]
+      },
+      "amenities": [
+        "Nhà vệ sinh",
+        "Nhà vệ sinh cho cả hai giới",
+        "Quầy bar tại chỗ",
+        "Wi-Fi",
+        "Wi-Fi miễn phí"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Cao cấp",
+        "Lãng mạn",
+        "Yên tĩnh"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Dành cho gia đình",
+        "Du khách",
+        "Nhóm"
+      ],
+      "planning": [
+        "Nên đặt chỗ ăn tối trước",
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Chỗ đỗ xe trong khuôn viên",
+        "Dịch vụ đỗ xe",
+        "Đỗ xe miễn phí trên đường"
+      ],
+      "children": [
+        "Ghế cao cho bé",
+        "Phù hợp cho trẻ em",
+        "Thực đơn dành cho trẻ em"
+      ]
+    },
+    "menuHighlights": [
+      "Mì Ý Tôm Rim",
+      "Tuna Tataki",
+      "Duck Spring Rolls",
+      "Mackerel Tomato",
+      "Ocean Medley",
+      "Bò tái kiểu Pháp",
+      "Cá ngừ áp chảo lòng đào"
+    ],
+    "reviews": [
+      {
+        "author": "Duong Le",
+        "badge": "Local Guide",
+        "rating": 4,
+        "timeAgo": "2 tháng trước",
+        "content": "Trải nghiệm của mình ở quán chỉ bình thường, không có gì đặc sắc lắm. Nhân viên service bình thường, có bác bảo vệ thì cực xuất sắc chăm lo cho khách. Món ngon nhất trên bàn là món khai vị cà chua sống. Ngoài ra các món khác rất thường...",
+        "subRatings": {
+          "food": 3,
+          "service": 4,
+          "atmosphere": 3
+        }
+      },
+      {
+        "author": "Nguyễn Quốc Thắng “Winn Nguyễn”",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian bar hiện đại, ánh sáng ấm và khá “chill”, phù hợp hẹn hò hoặc gặp gỡ bạn bè. Món ăn trình bày đẹp, vị ổn và cân bằng – đặc biệt cá ngừ áp chảo lòng đào rất đáng thử.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Uyên Lê Thị Tú",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Đúng là quán đạt Michelin đồ ăn xứng giá tiền cũng như phục vụ. Phục vụ rất dễ thương, vui vẻ và chuyên nghiệp.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "den_dau_thao_dien_001",
+    "name": "Đèn Dầu Thảo Điền",
+    "category": "Quán bar cocktail",
+    "rating": 4.6,
+    "totalReviews": 160,
+    "priceLevel": "400.000 - 500.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEfq_8cdFT18cy8O7ZBe_qzNsQe6dqZcQBtC1CVwVHI4KnHXlad27775y7jkC2fGw18BPxDI6hdx31YauaIWxVpGUATjG41LZG9Ah5wv1U0BdFvTKLLB8M4oBPI0jHQdXr7uW5in1-hBfY-=w408-h272-k-no",
+    "location": {
+      "address": "19C Ngô Quang Huy, Thảo Điền, An Khánh, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "RP3M+P7 An Khánh, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "phone": "+84 902 941 127"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "0:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Chỗ ngồi ngoài trời",
+        "Đồ ăn mang đi",
+        "Ăn tại chỗ"
+      ],
+      "unsupportedServices": [
+        "Giao hàng"
+      ],
+      "highlights": [
+        "Nhiều bia ngon",
+        "Nhiều rượu vang ngon",
+        "Rượu cốc tai ngon"
+      ],
+      "offerings": [
+        "Bia",
+        "Đồ uống vào giờ vàng",
+        "Rượu",
+        "Rượu cốc tai",
+        "Rượu mạnh",
+        "Rượu vang",
+        "Thực phẩm"
+      ],
+      "diningOptions": [
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "amenities": [
+        "Nhà vệ sinh"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Sành điệu"
+      ],
+      "crowd": [
+        "Nhóm"
+      ],
+      "planning": [
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Bãi đỗ xe miễn phí",
+        "Nhiều chỗ đỗ xe"
+      ]
+    },
+    "menuHighlights": [
+      "Bánh tiêu phá lấu",
+      "Cánh gà đèn dầu",
+      "Tré",
+      "Hoành thánh",
+      "Lẩu"
+    ],
+    "reviews": [
+      {
+        "author": "Minh Châu",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Theo cá nhân mình các món ăn đậm nét Việt Nam từ món tré đến các món khác đều rất ok, riêng món tôm mình thấy hơi đậm vị thôi, đặc biệt là bánh tiêu phá lấu hương vị quen thuộc như hồi nhỏ mình được ăn.",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Phuong Anh Nguyen Le",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian hẹn hò lãng mạn đáng để thử. Mỗi món mỗi vị rất khác biệt đầu bếp rất chỉn chu trong từng món. Cocktail ngon.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Thuong Phan",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "4 tháng trước",
+        "content": "Mình có trải nghiệm ở đây khá là tốt, không gian quán decor kiểu ấm cúng chill chil tạo cảm giác thoải mái thân thuộc... Món nào cũng ngon với giá cả hợp lý. Must try “cánh gà đèn dầu”.",
+        "subRatings": {
+          "food": 5,
+          "service": 3,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "mr_saigon_001",
+    "name": "Mr.Saigon - Mì Ý, Salad Sài Gòn - Lê Lai",
+    "category": "Nhà hàng Phương Tây",
+    "rating": 4.8,
+    "totalReviews": 1945,
+    "priceLevel": "1.099.000 đ (Combo Honeymoon)",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweokJEEj1cXeV-VAOCCLEbi5x84O8zM1J-FKmv8Zdu8h4QWM5OlInc9e7b6eahYnxyCQ6rjBa5GwDyLWLB0C7BP-ZkmDjQPDUzzoQREVQJ-6TK4enuZHvz5Qq4JQXCJorA3mABew=w408-h306-k-no",
+    "location": {
+      "address": "75 Đ. Lê Lai, Phường 3, Hạnh Thông, Hồ Chí Minh, Việt Nam",
+      "plusCode": "RM9M+F2 Hạnh Thông, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "mrsaigon.vn",
+      "phone": "+84 941 878 875"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "22:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng gián tiếp",
+        "Giao hàng"
+      ],
+      "highlights": [
+        "Món tráng miệng ngon",
+        "Nhiều rượu vang ngon"
+      ],
+      "offerings": [
+        "Ăn thoả thích",
+        "Bia",
+        "Cà phê",
+        "Các món chay",
+        "Có giờ giảm giá đặc biệt",
+        "Đồ ăn khuya",
+        "Đồ uống vào giờ vàng",
+        "Món ăn từ nguyên liệu hữu cơ",
+        "Nhà hàng thức ăn nhanh",
+        "Phần ăn nhỏ",
+        "Rượu",
+        "Rượu mạnh",
+        "Rượu vang"
+      ],
+      "diningOptions": [
+        "Bữa sáng",
+        "Bữa nửa buổi",
+        "Bữa trưa",
+        "Bữa tối",
+        "Dịch vụ ăn uống",
+        "Món tráng miệng",
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "accessibility": {
+        "supported": [
+          "Chỗ ngồi cho xe lăn",
+          "Lối vào cho xe lăn",
+          "Nhà vệ sinh cho xe lăn"
+        ]
+      },
+      "amenities": [
+        "Nhà vệ sinh",
+        "Wi-Fi",
+        "Wi-Fi miễn phí"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Cao cấp",
+        "Lãng mạn",
+        "Thông thường"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Dành cho gia đình",
+        "Nhóm",
+        "Nơi an toàn cho người chuyển giới",
+        "Sinh viên"
+      ],
+      "planning": [
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Bãi đỗ xe miễn phí",
+        "Nhiều chỗ đỗ xe"
+      ],
+      "children": [
+        "Phù hợp cho trẻ em",
+        "Thực đơn dành cho trẻ em"
+      ]
+    },
+    "menuHighlights": [
+      "Bò Lúc Lắc",
+      "Panna Cotta Dâu",
+      "Kem",
+      "Cheesy Garlic Butter Seafood Pasta",
+      "Pan-Seared Sockeye Alaska Salmon",
+      "Fuji Striploin (200g)",
+      "Seasonal Fruit & Burrata Salad"
+    ],
+    "reviews": [
+      {
+        "author": "Hoàng Lương",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Mình vừa có buổi hẹn hò tại nhà hàng và thật sự rất ấn tượng. Không gian decor kiểu châu Âu sang trọng nhưng vẫn ấm cúng... Món ăn chuẩn vị Âu, steak mềm, sốt đậm đà, pasta thơm béo vừa phải, plating đẹp mắt.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Cúc Nguyễn",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian riêng tư yên tĩnh cho các cặp đôi muốn làm sinh nhật, anni , mọi người nên trải nghiệm ở đây nha. Đồ ăn cũng ngon nè.",
+        "subRatings": null
+      }
+    ]
+  },
+  {
+    "id": "fenice_cuisine_bar_001",
+    "name": "Fenice - Cuisine & Bar",
+    "category": "Nhà hàng",
+    "rating": 4.5,
+    "totalReviews": 143,
+    "priceLevel": "900.000 - 1.000.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweo4nk21_I5_du0-k4MxTIYs1lyitRrXHTZbLK2kWEl-ki0x5p5yJfcAD-lkDp0G5wcdHpsHUPphQttYnCEl5eIpWdLoIdxHxet7T3uQrFQ7z8_NkNL1ukjQy0YzyDzzcY9REAomJujP57-C=w408-h288-k-no",
+    "location": {
+      "address": "688/46 Đ. Lê Đức Thọ, Phường 15, An Hội Đông, Hồ Chí Minh 71414, Việt Nam",
+      "plusCode": "RMWC+WV An Hội Đông, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "facebook.com",
+      "phone": "+84 818 198 998"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "Mở cả ngày"
+    },
+    "features": {
+      "serviceOptions": [
+        "Chỗ ngồi ngoài trời",
+        "Ăn tại chỗ"
+      ],
+      "highlights": [
+        "Cà phê ngon",
+        "Món tráng miệng ngon",
+        "Nhiều bia ngon",
+        "Nhiều rượu vang ngon",
+        "Rượu cốc tai ngon"
+      ],
+      "offerings": [
+        "Bia",
+        "Cà phê",
+        "Đồ uống vào giờ vàng",
+        "Phần ăn nhỏ",
+        "Rượu",
+        "Rượu cốc tai",
+        "Rượu mạnh",
+        "Rượu vang"
+      ],
+      "diningOptions": [
+        "Bữa tối",
+        "Dịch vụ ăn uống",
+        "Món tráng miệng",
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "accessibility": {
+        "supported": [
+          "Nhà vệ sinh cho xe lăn"
+        ]
+      },
+      "amenities": [
+        "Nhà vệ sinh",
+        "Quầy bar tại chỗ"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Lãng mạn",
+        "Sành điệu",
+        "Rất yên tĩnh"
+      ],
+      "crowd": [
+        "Du khách",
+        "Nhóm"
+      ],
+      "planning": [
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Bãi đỗ xe miễn phí",
+        "Nhiều chỗ đỗ xe",
+        "Dịch vụ đỗ xe"
+      ],
+      "children": [
+        "Phù hợp cho trẻ em",
+        "Thực đơn dành cho trẻ em"
+      ]
+    },
+    "menuHighlights": [
+      "Bò nướng nước mắm",
+      "Má heo nướng sốt Thái",
+      "Cá hồi áp chảo",
+      "Gà cuộn măng tây",
+      "Bò Mỹ nướng",
+      "Tôm nướng",
+      "Bạch tuộc nướng"
+    ],
+    "reviews": [
+      {
+        "author": "Bao Tran Nguyen",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Chỗ này mấy ní phải nên đi nha, hẹn hò đẹp, sinh nhật ok... Từ cách phục vụ đến món ăn đều rất ok nha (đồ ăn 1 món rất nhìu ăn rất ngon). Tới cái toilet mà còn sang xịn mịn là đủ hỉu.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "02 suqii",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "5 tháng trước",
+        "content": "Nhân viên phục vụ tận tình, chụp hình dùm mình luôn, mà nhiệt tình lắm. Nước ngon, đồ ăn ổn, không gian quầy bar lên hình xuất sắc luôn❤️",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Huy Tran",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Dịch vụ rất tốt, nhân viên rất là tốt, nhiệt tình (có bé Vi rất dễ thương luôn, chụp ảnh xịn và rất có tâm ❤️❤️❤️)",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "mach_saigon_001",
+    "name": "Mạch Saigon",
+    "category": "Nhà hàng",
+    "rating": 4.5,
+    "totalReviews": 458,
+    "priceLevel": "400.000 - 500.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepgEuqpHYwcuJv2tS78sfOSafh4o809DIrEgzXsKHr92qc7ej8BN_9OXSKC9zFW-XGqvQh2oghlCvP7CFxS6MMfxjwNalppAg4dhhl4ZLnB-zR1L4yGwGvGU3D0tNNTbrXv2qGU=w408-h272-k-no",
+    "location": {
+      "address": "75/1 Mai Thị Lựu, Ward, Tân Định, Hồ Chí Minh, Việt Nam",
+      "plusCode": "QMRX+Q4 Tân Định, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "facebook.com",
+      "phone": "+84 707 074 882"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "2:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ"
+      ],
+      "diningOptions": [
+        "Bữa tối"
+      ],
+      "crowd": [
+        "Nhóm đông người",
+        "2 người",
+        "3 đến 4 người"
+      ],
+      "planning": [
+        "Nên đặt bàn trước"
+      ]
+    },
+    "menuHighlights": [
+      "Mạch Scotch Egg",
+      "Pork Skirt Steak with Pepper Fish Sauce",
+      "Mạch Sangria",
+      "Mơ Muối (Plum Candy Apricot)",
+      "Mạch Negroni",
+      "Trà Đào Cam Sả"
+    ],
+    "reviews": [
+      {
+        "author": "Nguyễn Kim Yến",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Không gian: 2 tầng rộng rãi, có thể đi nhóm đông người. Có chỗ chụp ảnh, decor rất xinh. Nên đặt bàn trước. Phục vụ rất nice, take care khách tốt... ấn tượng nhất ở mạch là nhạc rất hay.",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Too",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Về thức ăn thì khá rẻ, yuzu sorbet ở đây ngon... Tóm lại là đồ ăn ổn, quán tối quá nên không hợp gu mk, xem menu hơi khó tại tối. Thái độ các bạn nv tốt.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 4
+        }
+      },
+      {
+        "author": "Mun Mèo",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Đồ ăn thiên về món việt biến tấu khá ngon. Không gian hơi ồn, thấy có decor cho lễ cho khách 2ng. Nhân viên nhanh nhẹn, lịch sự. Đặc biệt là bác bảo vệ dễ thương, nhiệt tình.",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "matsuri_landmark81_001",
+    "name": "Matsuri Japanese Restaurant - Vincom Center Landmark 81",
+    "category": "Nhà hàng Nhật Bản",
+    "rating": 4.9,
+    "totalReviews": 797,
+    "priceLevel": "Từ 128.000 đ",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweplY4TsaGmqt4HjeLyAZ2DD1dF40dnDRs9sWCpbDz9HWouC_CRF1RZcDQjVBzdH8EFh0QzULmGtEZvbhbVlop_2Uv5H3nlv17gEWtrhOFBrCBC5q0kOuNJk8tKT7VRjzYJTHJR3n3KMQ2FS=w408-h510-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqcB6KoOSoiMAouA_VCuyXW9jvdc4su3wBDyahdwvpxtHwgLSZdS2bLXY5MC8MfC1a6qTEiAPkL8v4tTz2neS92Aj6ZfIs-qKF8THT_0QFp5hSafCU9IIVCx2l1TKZdPBye-Eo8C9tOUlF3=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweot6JST55Rx-IIK2kySPJ3vNFv4fgweS45yvhhf4yy0Qhk19t8eN5cRKgozFYFx7uHBS_DIfzqU-zQKQ8_x3AOEnmHHTO1XObsX8VmUy1nXX8silxTHG6HTC2PkqvnLOsgDID-9-L57NDXL=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "Vincom Center Landmark, 81 772 Điện Biên Phủ, Vinhomes Tân Cảng, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam",
+      "plusCode": "QPWC+2J Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "matsurirestaurant.com.vn",
+      "phone": "+84 938 761 969"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 10:30 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Lãng mạn"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Tự nhận là do phụ nữ sở hữu"
+      ],
+      "planning": [
+        "Địa điểm hẹn hò & tổ chức sinh nhật lãng mạn cho cặp đôi và gia đình"
+      ]
+    },
+    "menuHighlights": [
+      "Riverview Lunch Set",
+      "Okonomiyaki",
+      "Bạch quả"
+    ],
+    "reviews": [
+      {
+        "author": "Oanh Thái Thị Kiều",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Đồ ăn ngon , vừa vị, món nào must try là phải nên thử nha mn ơi. Nhân viên nhiệt tình ,dễ thương.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Nghi Nguyen",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Quán ăn ngon trang trí đẹp nhìn ấm cúng. Anh chị nhân viên lịch sự.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Giáp Trần Huy",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Các món đều ngon. Riêng món bạch quả ăn lần đầu thấy vị giống hạt dẻ nhưng nhân sẽ đắng như tim sen.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "forest_therapy_001",
+    "name": "Forest Therapy - Cocktails & Modern Asian Cuisine",
+    "category": "Cocktails & Modern Asian Cuisine",
+    "rating": 4.9,
+    "totalReviews": 1139,
+    "priceLevel": "600.000 - 700.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwep_nuqmQsLz13PXzxFJOxMFc8F-kCbXxwjfoc59oqDYEqtNM-GUOnFrnr4pOOdvpVxebxclnWh1F8kb_H0PhXjLO-PahDh-bEqJXleD84qar-tvDN6mZNvDrvcwaPGOa00MPC0=w408-h255-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepIABNEIhTqscSQB2u2aE9bRVGdCyD4KN6UGsGjdZ986weX_5dfi6eLSgNzIt7828hfZQgAW1KGc8uhHyFpdT0BAYOu7snbt1Twu9VTg1Ii6pCHGO7FUAvjA8nEKEDEXRpM_19tgMzGrqMO=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoNA4JKyD_iBRhYdvdtbm5d3NwMiDwmfL1xUTVME6f2aCJDMbO6_IJD-gwp3OfQol9Gc9730rrhomMLDS9nEv5lBzDI9N164XXVRasU7qJKIbhdvIVFv9tDikkhOSrzWVvT2E25lQ=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "76 Nguyễn Thái Bình, Phường Nguyễn Thái Bình, Bến Thành, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "QM9X+GJ Bến Thành, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "foresttherapy.vn",
+      "phone": "+84 347 676 709"
+    },
+    "operatingHours": {
+      "status": "Bị đóng vĩnh viễn"
+    },
+    "features": {
+      "highlights": [
+        "Nhân viên nhiệt tình",
+        "Món ăn lên nhanh",
+        "Quán decor nhiều cây xanh",
+        "Nhạc nhẹ hay"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Tự nhận là do phụ nữ sở hữu"
+      ],
+      "atmosphere": [
+        "Dễ chịu",
+        "Ấm áp",
+        "Yên tĩnh",
+        "Phù hợp cho các cặp đôi và dịp kỷ niệm"
+      ]
+    },
+    "menuHighlights": [
+      "Beef Steak Phở-ever",
+      "Hàu",
+      "Thịt nướng xâu",
+      "Karaage",
+      "Cocktail"
+    ],
+    "reviews": [
+      {
+        "author": "Thanh",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Quán ruột của mình 🥹 Rất rất rcm mn gọi Beef Steak Phở-ever ở đây vì sốt rất ngon rất phở còn thịt thì rất mềm luôn á. Cocktail ngon, side dish ngon, thật sự là ngon từ khai vị tới tráng miệng.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Philip Tram",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Went on a date with wifey to try this place out, not too bad, food was decent. Service was great. Was a bit pricey but a good place to take a date.",
+        "subRatings": {
+          "food": 4,
+          "service": 4,
+          "atmosphere": 4
+        }
+      },
+      {
+        "author": "Mia Le",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "7 tháng trước",
+        "content": "Had such a lovely evening here for our date night. The food was delicious and looked amazing. The staff were so friendly and really made us feel at ease. I loved the calm, warm atmosphere.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "apero_bistro_001",
+    "name": "Apero Bistro & Bar",
+    "category": "Nhà hàng",
+    "rating": 4.6,
+    "totalReviews": 247,
+    "priceLevel": "400.000 - 800.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq_7xCoyrUsRD3qqNeZwwAb8u1aKwKBAJ04KCBjW4tIgBnTbGT1UnNv3g5Oc9i6jTBtH5yfmtgG5aG_6luM1W0xbbMi8bOh1RPJQk_zMCCCD8AS6yhFPYtwigi6zfuw6Uh8AtQc=w408-h305-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqFvNP7KSZBkR6A1N-rpt34TMLYH2KrUQThOpdMU91wvc2Gf6GlodCVOHx4BUccaArkk8fY1yeHFTHbd2cvq8sfVmi94ijUmEGZVdEQPDHqgmBhsMSSzQsrUAFAeb0z26imbpZe1tUKNCbG=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepbde6dMGdJyxoGRntO1E0NRfB_3Hj-QgSFIgt4CciHUVDaLDg-v-WtITnhSNEWfklEXqMXZkUDH_0FG6J-0GTMEeTWJlaRmzs5tkpdYein3PRUE56wM4abOq5zpiFRcDC8mWaPM2ku-Ptb=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "45 Nguyễn Duy Hiệu, Thảo Điền, An Khánh, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "RP3P+7V An Khánh, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "campsite.bio",
+      "phone": "+84 906 324 045"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 11:30 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng"
+      ],
+      "atmosphere": [
+        "Yên tĩnh",
+        "Rộng rãi",
+        "Cozy",
+        "Sang trọng"
+      ],
+      "parking": [
+        "Nhiều điểm đỗ xe",
+        "Bãi đỗ xe miễn phí",
+        "Gara đỗ xe miễn phí"
+      ]
+    },
+    "menuHighlights": [
+      "Pici Pesto",
+      "Carbonara Pasta",
+      "Tiramisu",
+      "Spaghetti Alle Vongole",
+      "Spicy Vodka with Chicken",
+      "Gà Karaage",
+      "Steak"
+    ],
+    "reviews": [
+      {
+        "author": "Sunny",
+        "badge": "Local Guide",
+        "rating": 4,
+        "timeAgo": "2 tháng trước",
+        "content": "One of my favorite places in town for pasta. At times, I do feel like the pasta might not be fully handmade, but honestly, it’s still very delicious and well-balanced in flavor...",
+        "subRatings": {
+          "food": 4,
+          "service": 3,
+          "atmosphere": 4
+        }
+      },
+      {
+        "author": "Anh Phuong",
+        "badge": "Local Guide",
+        "rating": 4,
+        "timeAgo": "3 tháng trước",
+        "content": "Let's say the Spicy Vodka was indeed the star of the meal! Was recommended to try it and definitely was not disappointed 😋 Creamy & spicy...",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Trần Lê Duy Khang",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian yên tĩnh, rộng rãi, cozy và sang hơn trọng hơn mình tưởng. Là quán hiếm hoi có tầng hầm để đậu ô tô ở khi Thảo Điền...",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "ens_kitchen_001",
+    "name": "Én’s Kitchen- Italian Cuisine & more",
+    "category": "Nhà hàng ý",
+    "rating": 4.8,
+    "totalReviews": 230,
+    "priceLevel": "200.000 - 300.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoSZGtPlZRPv6r6WRXD35nwgXL8W3nGLJyFghMos66jhflSZxN-TAeO82ZjITr5JIyCVv6jptC6hvXlCcO0mWm3cKSqvvVB35J45EQ9atjZcLoW6LNMjd73ZeQ_fg1DyuKwyiU-mO36rdQ=w408-h544-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqGYZimvrpkm84uTUg59vHPX-5b3sIslOvNHOmd-sFX5nu2q5p3_8fnxhK68xJo1J162aiafSrPZg9IpEpsxnm_EMeNfad8TD8RoljrQQQR5kqx-Mt0GOp_Tf4pQHZQpybpfgfUj43eMv8=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqwSOzogVAJ0BbJ2JW4XqIELOvqF-4gc-ALnlLGB_8ZkY-QFyuZ00rixYTv7ThglDXFaRKhaKAXWK5lm02nUOfuMEehkNk-pbYWxgJFSZDg8kQVV5a39k4MKypDRzNGsljU6UOgblw4We5_=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "109/11 Nguyễn Bỉnh Khiêm, Đa Kao, Tân Định, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "QMRX+HV Tân Định, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "giaodoan.vn",
+      "phone": "+84 865 359 880"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 10:30 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Giao hàng gián tiếp"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Tự nhận là do phụ nữ sở hữu"
+      ],
+      "parking": [
+        "Nhiều điểm đỗ xe",
+        "Bãi đỗ xe miễn phí",
+        "Đậu xe máy trước quán"
+      ]
+    },
+    "menuHighlights": [
+      "Pizza 4 cheese",
+      "Pizza nấm",
+      "Pasta hải sản",
+      "Pasta nghêu",
+      "Salad burata trái cây",
+      "Truffle Pizza",
+      "Smoked Salmon Pizza",
+      "Five Formaggi Pizza",
+      "Ravioli al Tartufo",
+      "De Parma Burrata",
+      "Pesto Pasta",
+      "Carbonara",
+      "Focaccia with olive oil & balsamic & salsa"
+    ],
+    "reviews": [
+      {
+        "author": "Khiet Tam Nguyen Thuy",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian quán nhỏ xinh, decor đẹp nên góc nào chụp cũng ok. Đồ ăn ngon, nhất là pizza 4 cheese và nấm (quên chụp mất rồi) ăn rất hợp vị. Bánh mềm dai dễ ăn không ngán. 2 món Pasta hải sản và pasta nghêu ăn vị kiểu phương Tây dễ ăn và rất ngon... Tổng thể các món đều 10/10. Không gian 10/10. Dịch vụ 10/10.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Am I XNhi?",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Trước đây mình hay đặt Én's về văn phòng ăn trưa, nên thấy Én's khai trương quán mình cũng sắp xếp đi ăn. Quán nằm trong con hẻm nhỏ yên tĩnh... Về thức ăn, cả nhóm mình đều tấm tắc khen ngon... Nhưng đến hiện tại thì pizza ở Én's hợp gu mình nhất.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Bảo Trân Ngô",
+        "badge": "Local Guide",
+        "rating": 4,
+        "timeAgo": "1 tháng trước",
+        "content": "Basic options for italian food. Portion is fit for 1 person/dish. Fresh and good ingredients, nicely seasoned. Carbonara was a little bit salty. They also have free appetizer: focaccia with olive oil & balsamic & salsa. Nice simple decorated space.",
+        "subRatings": {
+          "food": 4,
+          "service": 4,
+          "atmosphere": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "smiths_kitchen_bar_001",
+    "name": "Smith's Kitchen & Bar",
+    "category": "Nhà hàng",
+    "rating": 4.9,
+    "totalReviews": 732,
+    "priceLevel": "400.000 - 800.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqvFpIka-ptqCf6dFKrf3qW_MBdwhYK6xaZvDQtpJ6XVAtzHhRGeoSeUuj_YgBE2ttn3UJEgd495qF8E_9_Q7gSWDqTmWOkB9_oAeiIi-Aoc1cZRAmBY4GS0mmxADm1aRD99IQ=w408-h272-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerHItb03MJzKiCwD0kWo5ur9ReceaFyzPuLr8zLRDU7B1jacXPHCi8Q6xWfJWfWai35_h_AezJ1WBMI19tgeWYzX3nigs7j9IKatI5N9S_mbMANOOLLyrkF_xLq7J2bOdMWuYakd3rczLzY=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqmCKIZfLlfi8JLf-9XanJBYu3iaVDE-XOa4ng89RH9aM2_cT9SDTMjIa33mlnJCnjQUKqNPKSYlsq44qlQM1CKreF57ItusMNbzldIQ-ErnAKYWP1DEd1TTolZjZEfYSS8ArdabP3e-UE=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "14 Lê Lai, Bến Thành, Hồ Chí Minh 70000, Việt Nam",
+      "plusCode": "QMCW+PW Bến Thành, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "silverlandhotels.com",
+      "phone": "+84 906 882 657"
+    },
+    "operatingHours": {
+      "status": "Sắp đóng cửa",
+      "closingTime": "23:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ"
+      ],
+      "unsupportedServices": [
+        "Giao hàng"
+      ],
+      "atmosphere": [
+        "View nhìn ra Bitexco",
+        "Chill",
+        "Yên tĩnh",
+        "Thơ mộng",
+        "Sống ảo"
+      ],
+      "amenities": [
+        "Hồ bơi",
+        "Biểu diễn âm nhạc",
+        "Quầy bar"
+      ],
+      "parking": [
+        "Nhiều điểm đỗ xe",
+        "Có nhân viên đỗ xe",
+        "Gara đỗ xe miễn phí"
+      ],
+      "seatingTypes": [
+        "Khu vực ăn uống trong nhà",
+        "Sân hiên/sân thượng ngoài trời",
+        "Chỗ ngồi ở quầy",
+        "Khu vực quầy bar",
+        "Chỗ ngồi trong buồng"
+      ]
+    },
+    "menuHighlights": [
+      "Mì Ý Cua sốt cam",
+      "Nọng heo Iberico",
+      "Salad tôm",
+      "Cơm lam",
+      "Panna cotta",
+      "Bánh Quesadilla",
+      "Charcuterie",
+      "Cocktail"
+    ],
+    "reviews": [
+      {
+        "author": "Huỳnh Ngọc",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Nhà hàng nằm trên tầng 12 của khách sạn Silverland, vị trí khá dễ tìm... Không gian nhà hàng đẹp, có view kính nhìn thẳng ra tòa nhà Bitexco và khu vực chợ Bến Thành... Đồ ăn ngon, chấm khoảng 9/10.",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Ryuu Nguyen",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "5 tháng trước",
+        "content": "Hôm nay mình dùng bữa tối tại nhà hàng và ấn tượng đầu tiên là có nhân viên đỗ xe giúp mình nè... Món mình đặc biệt thích là Mì Ý Cua sốt cam (10/10) thiệt không biết chê ở đâu...",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Lorraine Cauldwell",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Chose this hotel for a meal for my husband’s birthday as we are staying in another of the hotel chain. Fantastic from the off... Amazing views of the city from the rooftop bar. Would 100% recommend.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "noire_001",
+    "name": "NOIRE",
+    "category": "Nhà hàng",
+    "rating": 4.7,
+    "totalReviews": 461,
+    "priceLevel": "300.000 - 700.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq_lVykzen2VgMWQxRD2_mDfKIwbopIGxUJfLa_Z5s-uyDNXb_6Se9i0Qd4wxqcHn_V_o8Sw48jnr6YW2jPj1JIBYl8FwmVR7fyPQ6QZ9cHeG49CNGPbm6hD_B5mKdN6-nDLeW-pItQZafy=w408-h272-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwep_CKI498P7XXlQ19DD2yXtJf54ep64qpuPTMfBp8X41yjD56iL9Fp9ttEBJRvNBS9ojqqkCjnhM5v6ConsJrzSnXNnIDwqIqUwIIbDwWfxZ1QrpwtslFQZiXdebGtYZgN4FG99YvCGHh5b=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepadwwPWX0sUrR22Eb4g_pZDnnIG2e8Ao5hVrbuKiApxBTLkarorj5ulxA41V-9JE6N8ZS2rA-M0ul8mY9C4E3B7Bk1x6p11tES0NrNqlO6U-eJ5TdFAa4yd_Yw8nA8kMZ7ccK8nP_JYELX=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "1Bis Phạm Ngọc Thạch, Sài Gòn, Hồ Chí Minh 70000, Việt Nam",
+      "plusCode": "QMJW+HR Sài Gòn, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "bit.ly",
+      "phone": "+84 916 160 699"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 7:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi"
+      ],
+      "atmosphere": [
+        "Yên tĩnh, dễ trò chuyện",
+        "Sang trọng",
+        "Chill"
+      ],
+      "amenities": [
+        "Hai phòng VIP"
+      ],
+      "seatingTypes": [
+        "Khu vực ăn uống trong nhà",
+        "Khu vực quầy bar",
+        "Sân hiên/sân thượng ngoài trời"
+      ],
+      "planning": [
+        "Phù hợp tổ chức sự kiện",
+        "Họp mặt quan trọng",
+        "Lady Night"
+      ]
+    },
+    "menuHighlights": [
+      "Cocktail",
+      "Seared salmon",
+      "Steak",
+      "Lamb rack",
+      "Cà phê đá",
+      "Bánh sừng bò"
+    ],
+    "reviews": [
+      {
+        "author": "Min Min",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "I had a great experience at NOIRE, where the food quality, presentation, and atmosphere all came together beautifully... Overall, NOIRE offers great food, elegant presentation, a calm atmosphere, and a spacious, well-designed environment.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Emma Nguyễn",
+        "badge": "Local Guide",
+        "rating": 3,
+        "timeAgo": "1 tháng trước",
+        "content": "Quán rộng, không gian cây xanh bên ngoài và bố trí không gian dễ thương bên trong, toilét quá hôi, không để ý khái vệ sinh vào những ngày lễ Tết. Ngày thường chắc sẽ OK hơn.",
+        "subRatings": {
+          "food": 3,
+          "service": 3,
+          "atmosphere": 3
+        }
+      },
+      {
+        "author": "VŨ NGUYỄN MINH TRÍ (Daniel)",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "4 tháng trước",
+        "content": "NOIRE Coffee – góc xanh mướt giữa trung tâm Sài Gòn, nhìn cái biết liền “điểm hẹn mới” của hội mê cà phê – mê sống ảo. Không gian chia làm ngoài trời và máy lạnh... Điểm cộng nữa là cách bày trí rất “Art Deco” pha chút Pháp.",
+        "subRatings": null
+      }
+    ]
+  },
+  {
+    "id": "glamisque_fusion_001",
+    "name": "GLAMISQUE - Fusion Dining",
+    "category": "Nhà hàng",
+    "rating": 4.8,
+    "totalReviews": 514,
+    "priceLevel": "500.000 - 600.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweowoUVM2rzojJtDqfRqiI-ivC3mMS07dRa9sRuQRLuB4wwGzVuwF6_bWNgd7FIl0R5ozG3B_RVQVOCXPaSG0YTruWaFbTi3UqXOxKyLOqdwqJ8LpanBI9uKnAebvaJPrNSoUWoB=w408-h306-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepCfAgso_ONxSmwZaEDylNSO4G6qWfXNzq5numP7Mv5rJyQI11cmE9yk44AtN3DmjJM5jrA0NaOcQVRUuMxfCBZmugaUzdnTD3zB6lV1MdMq8x-qLVHMQTKHJe_upCXHXPIOXiLNtpts2Zx=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweozxd7yFHnM9ZScrX-5Qr8haIltcuK0CfL3IB35IHirM9ckasc2nNcgzsgioEXEkBK6FJdFIrC-cZRNDqA-CGqH2kM544tSyldtzPz8W4PepluiLOgvflKPSB4hzT01mvsNDbppT04EC6Gn=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "59 - 59B Nguyễn Hữu Cầu, Tân Định, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "QMRR+7C Tân Định, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "glamisque.vn",
+      "phone": "+84 901 498 485"
+    },
+    "operatingHours": {
+      "status": "Sắp đóng cửa",
+      "closingTime": "23:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Nhận hàng ở lề đường",
+        "Giao hàng"
+      ],
+      "atmosphere": [
+        "Lãng mạn",
+        "Ấm cúng",
+        "Thoáng",
+        "Riêng tư",
+        "Hợp vibe",
+        "Yên tĩnh, dễ trò chuyện"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+"
+      ],
+      "planning": [
+        "Hẹn hò",
+        "Tổ chức sinh nhật",
+        "Acoustic nhạc sống"
+      ],
+      "seatingTypes": [
+        "Khu vực ăn uống trong nhà",
+        "Khu vực quầy bar"
+      ]
+    },
+    "menuHighlights": [
+      "Risotto",
+      "Soup chicken stock",
+      "Mojito vani dâu",
+      "Banquet set",
+      "Cocktail signature"
+    ],
+    "reviews": [
+      {
+        "author": "Bảo Ngọc",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Người yêu tổ chức sinh nhật cho mình tại Glamisque. Mọi thứ quá là okelaa. Các bạn nhân viên cực kì dễ thương, chu đáo, nhiệt tình... Đồ ăn hợp khẩu vị, không gian thoáng, riêng tư, vibe ấm cúng, lãng mạn.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Anh Cat Pham Ha",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Set đồ ăn ở đây thật sự rất vừa khẩu vị của 2 đứa mình... Phần cơm risotto ngon nhất nha, hạt cơm to dẻo, nước sốt đậm vị thấm vào từng hạt luôn. Hôm nay tụi mình đi có acoustic nhạc sống nhẹ nhàng hợp vibe.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Cherry Nguyen",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Quán không gian lãng mạn vô cùng thích hợp cho các cặp đôi hẹn hò. Nhân viên dễ thương, nhiệt tình và chuyên nghiệp. Đồ ăn và đồ uống rât là ngon luôn. Sẽ quay lại một ngày gần nhất!",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "tram_ham_quan_3_001",
+    "name": "Trạm Hầm Quận 3",
+    "category": "Nhà hàng món nướng",
+    "rating": 4.9,
+    "totalReviews": 1180,
+    "priceLevel": "400.000 - 600.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepJLRUCUlJzL6_IJQVGL17XmCcYec115iRraaBlXwC0Wzb6yWDkR3a-4Ia-CLNqZXqjKPsoaPJu05oLctIuPxXj6Gg0R7Rn9fob9hUGRen9wsI-0lo22c9g_SOMdo4_m_Ils9o=w408-h272-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoevBpA0UTfgey-7GyJXvJkGiJav3TyZKel-Z5Zf7_XnuuA-c4BbBZl2wo91wmrGvNewAPnSexe6L3tOxBkqJr6AZp_lor2R81IHdlTHdkPCBiwVm5rnGenkAyfZBcckXSHsFZgfRLn6uaL=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwer0_A7uxORY2ADajB5m3Tb5VonkajzrSj90UmbEfmQdgMQQGFZAWb70aIr-z93gcyrd9kUVTctK0fbPQmIO70EITR4L7tKMbOEQBXuz_HTdTdhmAZ8xUg52DJC-vkNVOORHM2JAPBg6CDaN=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "540/17 Cách Mạng Tháng Tám, Phường 11, Nhiêu Lộc, Hồ Chí Minh, Việt Nam",
+      "plusCode": "QMP9+H2 Nhiêu Lộc, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "facebook.com"
+    },
+    "operatingHours": {
+      "status": "Sắp đóng cửa",
+      "closingTime": "23:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi"
+      ],
+      "atmosphere": [
+        "Phù hợp đi date",
+        "Sạch sẽ",
+        "Ồn ào ở mức vừa phải"
+      ],
+      "parking": [
+        "Nhiều điểm đỗ xe",
+        "Bãi đỗ xe miễn phí",
+        "Có nhân viên đỗ xe"
+      ]
+    },
+    "menuHighlights": [
+      "Kebab",
+      "Salad cá hồi",
+      "Khoai tây lắc phô mai",
+      "Bánh dessert"
+    ],
+    "reviews": [
+      {
+        "author": "Freshxxx",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Món ăn ở đây thật sự rất ngon, hương vị đậm đà và hợp khẩu vị. Nguyên liệu tươi, phần ăn nhiều, ăn rất đã. Không gian sạch sẽ, nhân viên nhiệt tình và thân thiện. Trải nghiệm rất tốt, đáng để quay lại nhiều lần",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Tram Nguyen Tran Thanh",
+        "badge": "Người dùng",
+        "rating": 2,
+        "timeAgo": "2 tháng trước",
+        "content": "Đồ ăn của quán vị khá ổn, nhưng giá mình vẫn thấy khá cao so với mặt bằng chung. NHƯNG đến gần cuối buổi ăn mình thấy 1 con chuột to chạy lianh quanh khu vực mình ăn... Rốt cuộc bản cũng đi vô luôn để khách ngồi đó với chuột luôn.",
+        "subRatings": null
+      },
+      {
+        "author": "Ngọc Mai Lê Nguyễn",
+        "badge": "Local Guide",
+        "rating": 3,
+        "timeAgo": "4 tháng trước",
+        "content": "*Mình đã được CSKH của Trạm Hầm hỗ trợ rất nhiệt tình... Đánh giá gốc: Nhân viên quán này bị gì á :))))) Kỳ vô cùng... Khách còn đang ăn, chưa xong nữa mà tự nhiên bưng cái bánh kêu “bánh nè chị”... Đồ ăn (mặn) thì bình thường, giá cao.",
+        "subRatings": {
+          "food": 3,
+          "service": 5,
+          "atmosphere": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "long_hou_steak_001",
+    "name": "Long Hou Steak House",
+    "category": "Nhà hàng bít tết",
+    "rating": 4.8,
+    "totalReviews": 516,
+    "priceLevel": "400.000 - 500.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepg5OQBvj5XKZkjxlPjWAqg_EtIZpvf6DuzB-w_f6TIz6Pr4nxBHzptTuOBreTCb-SBGjy_8C8IUivKFMlVpqT58XbK8XAUGW2zrMfLcFCVy-ALP25MRkqfTWqzFrvnYLdV1-4VbvIr4bjO=w408-h544-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqDSl2rfSedDzaWhLuY-haKieGRnycQzdrpxBnoKimilHXW2W24TNIBC_C3uONSOOPUaeS0qabvSEgqVyfZBcdduDFIYIJzPOjRYF3U8PuqchfAbaKLfqHBFBdkJdatX_vuNzplXwMFtUM9=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq5kZHE9VwHwtYmfS2HzlnlAeqJlaH6oTK2QRkUmA8JUn135Nxj2dm6ZAamBq1gMB_JGJ6mH1X8_eQxce7QReGn7yWdVXYVnpDlibMF4BOhM7oPdTOb9dqJ5J6BBMb4F2W3nowwzqenyt63=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "535 Nguyễn Tri Phương, Phường 8, Diên Hồng, Hồ Chí Minh 70000, Việt Nam",
+      "plusCode": "QM88+QV Diên Hồng, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "longhousteakhouse.com",
+      "phone": "+84 902 517 811"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "22:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi"
+      ],
+      "highlights": [
+        "Combo 2-3 người 599K",
+        "Combo 4-5 người 1199K",
+        "Tặng bánh mì và 4 món ăn kèm"
+      ],
+      "atmosphere": [
+        "Tinh tế",
+        "Sang trọng",
+        "Hẹn hò riêng tư",
+        "Thoải mái"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+"
+      ],
+      "planning": [
+        "Hẹn hò nhóm",
+        "Dùng bữa gia đình",
+        "Đặt bàn trước"
+      ]
+    },
+    "menuHighlights": [
+      "Flank Steak",
+      "Sườn heo",
+      "Cá hồi",
+      "Mì Ý",
+      "Panna cotta",
+      "Spaghetti",
+      "Súp bí",
+      "Bánh mì bơ tỏi",
+      "Pastel de nata"
+    ],
+    "reviews": [
+      {
+        "author": "Châu Nhỏ",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "4 tháng trước",
+        "content": "Tui ghé đây ăn mấy lần rồi. Các món ngon đúng chuẩn âu, mà giá thì rẻ bất ngờ luôn. Ưng lắm nha!",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "9326_ Vương Thị Tuyết Anh",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "4 tháng trước",
+        "content": "Các món ăn đều được sắp xếp khá đẹp mắt và được nhân viên đưa món rất kịp thời. Không quá nhanh và quá chậm. Nhân viên cũng dễ thương và nhiệt tình.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Nhã Thân",
+        "badge": "Local Guide",
+        "rating": 2,
+        "timeAgo": "8 tháng trước",
+        "content": "Vị trí đắc địa, dễ tìm. Không gian nhỏ nhưng bài trí khá tinh tế... Chất lượng món không thật sự ấn tượng như kỳ vọng. Thịt không mềm ngọt như mong đợi ở tầm giá này.",
+        "subRatings": {
+          "food": 2,
+          "service": 4,
+          "atmosphere": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "chiik_steak_pasta_001",
+    "name": "CHIIK Steak & Pasta Thảo Điền",
+    "category": "Nhà hàng",
+    "rating": 4.8,
+    "totalReviews": 1924,
+    "priceLevel": "400.000 - 500.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwer8KoVYY1fePSGp8oo9cGgDN_YzI-yUwfnJRvmxdXRDToDk5_fApqpksRs3yu65PN2J7nMQooAxjkxPa0RWvFazc18r7bpCnLHyQMv2aOIM2c3fC44pDr-Mn4ZUIPeQXTegTuI7=w408-h272-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwer07JeevzF1hPQxKkYeHTEjnnlOieH8se5n2DIqBA72LuHs3_bw2eoeICHymtNMmklPgwXY1JdJ7kUzSDDytA5uS3rSbB1MeDZlS3k6xtyflMB4-fxu1hqLtDuovw2W8bakl2UCz6X00qY=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwequA4xTUXCnQwGoqhHwJNnxe2FSXs5yOHD9B-QSiv4iSLCNlp44qYRP9X28BAlwPxn7rkOz0oNtgW1tWl1AELQcKue9huWkI6x0JNxa9kgPKgl3k9Fvo7u_CEZ1q5cRaUwLVMA2tq9Rub9k=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "07 Đ. Đỗ Quang, Thảo Điền, An Khánh, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "RP3H+6H An Khánh, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "chiiksteakpasta.com",
+      "phone": "+84 375 504 777"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 11:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng"
+      ],
+      "highlights": [
+        "Pasta Deal ONLY 199K Every Wednesday"
+      ],
+      "atmosphere": [
+        "Riêng tư",
+        "Lãng mạn",
+        "Ấm cúng",
+        "Yên tĩnh, dễ trò chuyện"
+      ],
+      "planning": [
+        "Có phòng riêng (private room)",
+        "Đặt bàn trước"
+      ]
+    },
+    "menuHighlights": [
+      "Mì Ý Cua Sốt Kem Rose",
+      "Salad Phô Mai Ricotta",
+      "Beef steak",
+      "Risotto",
+      "Cơm chiên kim chi",
+      "Cơm chiên",
+      "Khoai tây chiên kiểu Pháp"
+    ],
+    "reviews": [
+      {
+        "author": "Lita",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "A fusion restaurant that never disappoints. This time we made a reservation in advance since we were celebrating a friend’s birthday, and we got a fairly private room, which was really nice and comfortable. The food was great overall...",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Thanh Trúc Trần",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Mình có đặt bàn trước nên không cần chờ... Bạn nhân viên tư vấn nhiệt tình nên mình lựa được steak phù hợp với khẩu vị... Không gian nhỏ nhắn nhưng đèn chiếu theo từng bàn nên cảm giác vẫn rất riêng tư.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Thân Trọng Phương Nhã",
+        "badge": "Local Guide",
+        "rating": 2,
+        "timeAgo": "2 tháng trước",
+        "content": "Về Phục vụ: kém chuyên nghiệp... Order mà để khách phải kêu ơi ới nhiều lần... Dao muỗng nĩa nhà hàng không trình bày ra sẵn đàng hoàng... Về Món ăn: súp bắp với đồ chua, nạc vai bò thì ngon. Nhưng ai ngờ sốt rose, sợi mì với mì ý cua quán làm lạc quẻ...",
+        "subRatings": {
+          "food": 2,
+          "service": 1,
+          "atmosphere": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "le_monde_steak_001",
+    "name": "Le Monde Steak, Nguyễn Thị Minh Khai",
+    "category": "Nhà hàng Pháp",
+    "rating": 4.6,
+    "totalReviews": 1741,
+    "priceLevel": "200.000 - 300.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerevkoOjzyWCkB2PFeBpD31Xme3QvnSY822Hmp24qQCVvGxV4MKvKyjNX6ig6RjkugeYJZK6VxYWDrqHHcCtvN96mwUOtloH4oyAK6BQvSZ-wlwtkqoSgIpB-LwMTNGcoEYX_-A-w=w408-h306-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq3Fe-j7cHl33mHn-tMSNkwhkIEVAE65l_YcfZ1e19HAD-JAsGI9m0Vfd0-99-F4Dzeu_rHq7t784ipNxc0wQqZ8vlx7H20aBtSayLIw_oZLBusrNOrE_xir_zfbFpNudLEbzw0BGO2cDsD=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq-DfmFgsRUpYhkukIv1VdFe18hYVvhOQjB_Th3do40qQcDo78a5rgr9HotPg4LLR5biP55GQH6RKyFKnLceIh-LEcInW8msjA2f6UthbsuTZ_kNZ5lt_ljPQnL_BiOwUi_hX59J5VhbbU=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "11H Nguyễn Thị Minh Khai, Bến Nghé, Sài Gòn, Hồ Chí Minh, Việt Nam",
+      "plusCode": "QPP2+CG Sài Gòn, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "lemondesteak.vn",
+      "phone": "+84 343 325 286"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 10:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Châu Âu cổ điển pha hiện đại",
+        "Yên tĩnh, dễ trò chuyện"
+      ],
+      "parking": [
+        "Nhiều điểm đỗ xe",
+        "Bãi đỗ xe miễn phí"
+      ],
+      "planning": [
+        "Nên đặt chỗ trước"
+      ]
+    },
+    "menuHighlights": [
+      "Steak Diane",
+      "Steak and Mushroom Sauce",
+      "Salmon steak",
+      "Pasta Hải Sản",
+      "Soup Red Pumpkin",
+      "Soup Mushrooms",
+      "Panna Cotta",
+      "Crème brûlée",
+      "Bánh mì pate/bơ"
+    ],
+    "reviews": [
+      {
+        "author": "Delta Nu**",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "The restaurant has a warm, European-style charm... The steak here is consistently cooked to perfection, tender and juicy with a smoky flavor... Prices are very reasonable given the quality.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Tom daClassic",
+        "badge": "Người dùng",
+        "rating": 1,
+        "timeAgo": "1 tháng trước",
+        "content": "Ban đầu trong lúc đợi món nhà hàng serve mình bánh mì pate, mình có dặn bạn là ăn ít thôi vì pate dễ hỏng... Bạn mình ăn đúng có 1 miếng mà tối về trúng thực, nôn xanh mặt. Thật sự quá tệ.",
+        "subRatings": {
+          "food": 1,
+          "service": 1,
+          "atmosphere": 1
+        }
+      },
+      {
+        "author": "Hứa Vĩnh Khang",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "5 sao cho Le Monde Steak – nhà hàng steak theo phong cách Âu ăn chắc – trình bày đẹp – hương vị ổn định... Không gian của Le Monde Steak ấm cúng, decor kiểu châu Âu cổ điển pha hiện đại... Giá cả ở mức hợp lý so với chất lượng.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "calore_coffee_eatery_001",
+    "name": "Calóre Coffee & Eatery",
+    "category": "Nhà hàng châu Á",
+    "rating": 4.6,
+    "totalReviews": 358,
+    "priceLevel": "200.000 - 300.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerpT1hJUSu9kzNZzvoaLSUvjj1S6sDs3W7SqM-M_P6AbU8KTMkoAbnU1c9AjoNDH_D1EC-BjarwBvYB4JB_ZoXV6u5REagYOzmky8C_sCzF_actrc5w_abFLN_jXHddktPGjjm37LT0GZEL=w408-h408-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepGiBzbxc016s3tviHiUP7yHj7n2L7ppyCoDL_snUnVuLyVOUYVyUykFhxRUSdwcn-QPhzF4GMyzK4b7wQ8ZjyP4q_O95DW6OqlxFSPUeFxr4Kam9Jj2komzbq4LNxZksRsAnPnY1DgBr_c=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqWqvz2vGvDEAiJ8PdPy0cQwgiCSY58RLF7IA1GEs1u0Y6HcTGhO0tjiZhMbqUZXPjoAaRAew-QIhvADDVP7xD099W2CUqG0H8rmNYiWzjoTG0V3Tk6suMyynDcu7ulTsHD7lPUfgs25Z8=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "769/1 Cách Mạng Tháng Tám, Phường 6, Tân Hòa, Hồ Chí Minh, Việt Nam",
+      "plusCode": "QMQ6+2W Tân Hòa, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "facebook.com",
+      "phone": "+84 528 161 302"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 10:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi"
+      ],
+      "atmosphere": [
+        "Decor đẹp"
+      ],
+      "planning": [
+        "Nên đặt chỗ trước",
+        "Đặt bàn trang trí sinh nhật/kỷ niệm miễn phí"
+      ]
+    },
+    "menuHighlights": [
+      "Mì Ý cua",
+      "Beefsteak"
+    ],
+    "reviews": [
+      {
+        "author": "Ngọc Nguyễn",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "5 tháng trước",
+        "content": "Quán khá mới, lần đầu trải nghiệm nhưng đánh giá cao sự phục vụ và món ăn, giá cả siêu hợp lý... Các bạn cần tổ chức sinh nhật hay kỉ niệm cứ lên Facebook đặt bàn trang trí trước (miễn phí), đơn giản mà đẹp...",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Cẩm Vân",
+        "badge": "Người dùng",
+        "rating": 1,
+        "timeAgo": "4 tháng trước",
+        "content": "Trải nghiệm của mình thật sự rất TỆ. Các bạn nhân viên thấy nhưng không một ai ra hỗ trợ tụi mình... Tụi mình order xong thì phát hiện bạn order thiếu nước... Đồ ăn cũng tệ nốt, khẩu phần rất nhỏ và quá ít luôn.",
+        "subRatings": {
+          "food": 1,
+          "service": 1,
+          "atmosphere": 2
+        }
+      },
+      {
+        "author": "Long Thanh",
+        "badge": "Người dùng",
+        "rating": 1,
+        "timeAgo": "3 tháng trước",
+        "content": "Về đặt bàn: Mình đã đặt bàn trước với yêu cầu trang trí bảng và chọn bàn, tuy nhiên khi đến quán thì nhân viên xếp cho mình ngồi vào bàn trong góc... Về đồ ăn: Món được lên rất chậm... steak thì nguội như vừa được lấy từ tủ lạnh ra.",
+        "subRatings": {
+          "food": 1,
+          "service": 1,
+          "atmosphere": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "livannah_sips_bites_001",
+    "name": "Livannah - Sips & Bites Thảo Điền",
+    "category": "Nhà hàng",
+    "rating": 4.8,
+    "totalReviews": 363,
+    "priceLevel": "600.000 - 700.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerrkucUNNI-NucyMqIcPZFGSWJpKHEBiuTnx4-WMEUb1u0RuSVFkRVDoEaU-5EIhtslbyMGv7pAIl5xdNsvpVi9kqUVhVMUT7GmTG-sO_w2f_D2POYeygXQkfhHNh2erYWE0-no=w408-h272-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerEWrNtiOA44VkjNFnK-Hw0j16R2k_JhGh2k286yCry7K0nguot5u4pPY_x3KG_vy5Ovfje3c2s8XRNPts-2vg39UCDRxkKbfoI3kaWpBu4BpDo-8WGx3EzVo9hvo99a3AZrsrZO3GMJjQm=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepI8v8AxkDpZWipVQHweg7cyOrTNw-9UvyVZmaj9jWLZ4N8waWzwVfzMKoC_PWzXmHwwA0W_3rNsmvxU0hfF_7cGVzdqBQLDdLqG6u93-pSqKlVFD2d-Zj0_PgQ7-xB-Ne8LUBw2AKiZXLc=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "12 Nguyễn Ư Dĩ, Thảo Điền, An Khánh, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "RP4R+7V An Khánh, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "livannah.com",
+      "phone": "+84 28 3620 2269"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 11:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng gián tiếp"
+      ],
+      "atmosphere": [
+        "Thoáng mát",
+        "Sạch sẽ",
+        "Vibe Thảo Điền",
+        "Japanese fusion/Izakaya style"
+      ],
+      "parking": [
+        "Có nhân viên đỗ xe"
+      ],
+      "seatingTypes": [
+        "Khu vực ăn uống trong nhà",
+        "Khu vực quầy bar",
+        "Sân hiên/sân thượng ngoài trời",
+        "Chỗ ngồi ở quầy"
+      ],
+      "planning": [
+        "Late-night drinks spot",
+        "Đi date",
+        "Tụ tập bạn bè"
+      ]
+    },
+    "menuHighlights": [
+      "Tacos",
+      "Tuna tacos",
+      "Salmon tacos",
+      "Skewers",
+      "Cambodian beef skewer",
+      "Chicken thigh skewer",
+      "Shiitake skewer",
+      "Maki prawn",
+      "Maki salmon",
+      "Baked camembert",
+      "Yakitori"
+    ],
+    "reviews": [
+      {
+        "author": "Tấn Tấn",
+        "badge": "Local Guide",
+        "rating": 3,
+        "timeAgo": "1 tháng trước",
+        "content": "Overall, everything was good, but not in a way that justifies the price. Most of these dishes can easily be found at other izakayas for less... I’d say this place works better as a late-night drinks spot.",
+        "subRatings": {
+          "food": 2,
+          "service": 3,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Nam Phuong",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Đi ăn theo review trên TikTok nhưng mà kết quả vượt ngoài sức mong đợi. Đồ ăn ngon, siêu ngon... Nhất là món Tacos nó ngon điên ấy. Nhân viên hỗ trợ bọn mình rất nhiệt tình luôn, siêu thân thiện...",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Khang Vo",
+        "badge": "Người dùng",
+        "rating": 2,
+        "timeAgo": "3 tháng trước",
+        "content": "Mình đến ăn dịp noel... Từ khâu bếp tới khâu phục vụ đều ko ổn, khi có sự cố thì nhân viên tụ lại cãi với nhau ko ai nhận trách nhiệm... Đò ăn thì lạnh tanh, mặn….kể cả đồ nướng cũng lạnh… Nói chung là đi ăn rất nhiều nơi trong Thảo Điền, thì đây là 1 trong những nơi tệ nhất tôi từng ghé.",
+        "subRatings": {
+          "food": 2,
+          "service": 2,
+          "atmosphere": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "chamie_steak_001",
+    "name": "Chamie Steak",
+    "category": "Nhà hàng",
+    "rating": 4.8,
+    "totalReviews": 1229,
+    "priceLevel": "200.000 - 500.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoPcPOXcJCw-NN1DTXpr6bfT01lS2V6IljArxiY-CrhaYkuqH-M10ZF5fim5QAKAMD_GqgASTIT8pIz_5o3zy7tyZgLvvHuIgGA602GYY9NRzFrTKOLUaYhd6c5JvzJpY80PvgIJQ=w408-h544-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepfQkt0UfuuRTJqzdjrEi93gJy0pfaM3TfvIt6Glv1Jp3pjTLyWSwVU4U3aWJ8aX46N08e_2kqkihSF7JWfqqwNuecrwM6_ss1vrm5MlmbR4Vm1j_Gg6ufVg8ibbrVjUQU4k1x-XFLR6z9O=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerjZBWolYvUT29_bthjejMk7XIBfG9Y18QbBC-o3_Dzw8pYo7RD7Bi5WGIqF2WDmMaqfmFFpDt6LHKy0aXKgJP-vZb0TkizzlNIa0DDwvgHKH7disIS0bivJj_uov664usRHv-xFJ9pg1gK=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "770B Sư Vạn Hạnh, Phường 12, Hòa Hưng, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "QMF9+6J Hòa Hưng, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "phone": "+84 968 244 423"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 10:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng gián tiếp"
+      ],
+      "atmosphere": [
+        "Sạch sẽ",
+        "Decor đẹp",
+        "Hiện đại",
+        "Gọn gàng",
+        "Yên tĩnh, dễ trò chuyện"
+      ],
+      "parking": [
+        "Nhiều điểm đỗ xe",
+        "Bãi đỗ xe miễn phí",
+        "Đỗ xe miễn phí trên đường",
+        "Gửi xe free"
+      ]
+    },
+    "menuHighlights": [
+      "Bò Steak 150g Sốt Phô Mai",
+      "Soup Bí Đỏ Hải Sản",
+      "Mỳ Ý Sốt Kem Hải Sản",
+      "Mì Ý Cua",
+      "Mì Ý Cá Hồi",
+      "Lườn Ngỗng",
+      "Ức Vịt Sốt Cam",
+      "Steak Bò 150g Sốt Tiêu"
+    ],
+    "reviews": [
+      {
+        "author": "Hoàng Văn",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Chamie Steak là quán khá dễ tìm, không gian sạch sẽ và decor đẹp, nhìn hiện đại và gọn gàng. Phù hợp đi ăn cùng bạn bè hoặc hẹn hò nhẹ nhàng. Đồ ăn giá rẻ so với mặt bằng chung steak... Các bạn nhân viên phục vụ lịch sự, nhiệt tình.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Linh Khánh",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Quán đồ Âu ổn, giá trung bình-rẻ và bình dân. Về đồ ăn: nhìn chung đều ổn, trang trí đẹp mắt. Ngon nhất với mình là súp bí đỏ bùi bùi béo thơm... Bàn mình được tặng 1 phần bánh mì chấm sốt bơ tỏi, khá ngon.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Lô Trần",
+        "badge": "Local Guide",
+        "rating": 4,
+        "timeAgo": "1 tháng trước",
+        "content": "Đồ ăn bình thường, nhân viên nhiệt tình nhất là b nam thu ngân rất dễ thương thân thiện, có bàn nhanh ko cần chờ hay đặt trước, service quas tốt rất hài lòng với các b nhân viên rất thân thiện.",
+        "subRatings": {
+          "food": 3,
+          "service": 5,
+          "atmosphere": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "yeshi_taiwanese_001",
+    "name": "Yeshi Taiwanese Kitchen",
+    "category": "Nhà hàng Đài Loan",
+    "rating": 4.6,
+    "totalReviews": 781,
+    "priceLevel": "200.000 - 300.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerxe2tE5dmZ11TltQ2blW-wuI4GXSot9-5odeYg_rO8et6iRH4YgEbF_ka-NNUdMMfVxjCh9zJw0uEG6SFWgO721gY1I9D7UhNUJ8ibLh-vvQkirG3qDj9fK0AU7qpT6DK3A57uqQ=w408-h306-k-no",
+    "menuImages": [
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqzvQExmzHXmaZHu_FUfP5C90tWYmBn500kGqILlAqscMy4jk9IQY9c5Uqk1npW1AwqqujrKf336TMBKv8lOVYOG2Kgy6Fo0FCyOWzyf6dtCEGvVD0nlfhOPWUthfLRmtYkj43fYO5194hy=w140-h140-p-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqy77cSPzbj5cpGaVG_RdzLlPPK0B2KxGrPaaY_MvqpQQHFQBE-WWvRNJ90QOcTIYeDWeCfBw_u2pIDY9xWKPz93SufxMzZsw8IZGZveOtI4BE9C3Tkbige1Di9OMdHmuBjtmcRU3UFxhIF=w140-h140-p-k-no"
+    ],
+    "location": {
+      "address": "1F 16 Thảo Điền, An Khánh, Hồ Chí Minh, Việt Nam",
+      "plusCode": "RP3Q+H3 An Khánh, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "yeshivietnam.com",
+      "phone": "+84 901 317 058"
+    },
+    "operatingHours": {
+      "status": "Đã đóng cửa",
+      "closingTime": "Mở cửa lúc 18:00 CN"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng"
+      ],
+      "atmosphere": [
+        "Tuyệt vời",
+        "Không ồn ào",
+        "Daily dining",
+        "Hẹn hò"
+      ],
+      "crowd": [
+        "Tự nhận là do phụ nữ sở hữu"
+      ]
+    },
+    "menuHighlights": [
+      "Bia Xí Muội",
+      "Mì Tương Mè",
+      "Cơm thịt kho",
+      "Nấm chiên mala",
+      "Burger gà tomyum",
+      "Sủi Cảo Tôm Thịt Chiên",
+      "Panacota vị olong miso cream"
+    ],
+    "reviews": [
+      {
+        "author": "Cường Hà",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Mọi thứ trong quán rất nice, mình có cơ hội thử 2 loại cocktail rất vui miệng và cũng như phần desert là panacota vị olong kèm với miso cream mặn nhẹ... Đặc biệt mình ấn tượng bởi cách phục vụ vô cùng duyên dáng đến từ bé staff Bảo Ngọc.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Thanh Hà Lê",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Cơm thịt kho và nấm chiên mala là hai món sẽ khiến mình quay lại :3 Burger gà tomyum xuất sắc nhất ở phần nhân gà, tuy nhiên pickles bị ngấu quá, nên giảm chua sẽ hài hoà hơn.",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 4
+        }
+      },
+      {
+        "author": "An Lê Thái",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "không gian tuyệt vời, k ồn ào , đồ ăn vừa miệng, lạ nhưng dễ ăn, với mình là ngon 💞 3 món và 2 nước chỉ 5xx quá rẻ cho 1 bữa ăn daily, hẹn hò",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  }
+]

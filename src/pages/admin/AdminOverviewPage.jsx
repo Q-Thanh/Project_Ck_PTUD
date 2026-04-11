@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { Eye, MapPinned, Star, Store } from "lucide-react";
+import { Eye, FileCheck2, MapPinned, ShieldAlert, Star, Store } from "lucide-react";
 import { getAdminStats } from "../../services/adminService";
 
 function formatNumber(value) {
@@ -35,9 +35,9 @@ export function AdminOverviewPage() {
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
-        <p className="admin-header-kicker">Thong ke nha hang tu data2.json</p>
+        <p className="admin-header-kicker">Thong ke nha hang tu data3.json</p>
         <h2>Tong quan he thong nha hang</h2>
-        <p className="muted-text">Admin duoc toi gian hoa: chi quan ly danh sach nha hang.</p>
+        <p className="muted-text">Bao gom thong ke moderation bai dang, nguoi dung va nha hang theo tuan.</p>
       </section>
 
       {loading && <div className="surface-card">Dang tai thong ke...</div>}
@@ -59,6 +59,22 @@ export function AdminOverviewPage() {
               </span>
               <p>Nha hang dang an</p>
               <h3>{formatNumber(stats.hiddenRestaurants)}</h3>
+            </article>
+
+            <article className="surface-card stat-card">
+              <span className="stat-icon">
+                <FileCheck2 size={18} />
+              </span>
+              <p>Bai dang cho duyet</p>
+              <h3>{formatNumber(stats.pendingPosts)}</h3>
+            </article>
+
+            <article className="surface-card stat-card">
+              <span className="stat-icon">
+                <ShieldAlert size={18} />
+              </span>
+              <p>Tai khoan bi han che</p>
+              <h3>{formatNumber(stats.restrictedUsers)}</h3>
             </article>
 
             <article className="surface-card stat-card">
@@ -140,6 +156,10 @@ export function AdminOverviewPage() {
                 <div className="simple-list-row">
                   <span>Tong views</span>
                   <strong>{formatNumber(stats.totalViews)}</strong>
+                </div>
+                <div className="simple-list-row">
+                  <span>Thong bao chua doc</span>
+                  <strong>{formatNumber(stats.unreadNotifications)}</strong>
                 </div>
                 <div className="simple-list-row">
                   <span>Week range</span>

@@ -3,7 +3,7 @@
 Ung dung goi y quan an gom:
 - Frontend: React + Vite
 - Backend mock: Node.js (`server/index.js`)
-- Du lieu runtime: `data/data2.json` (thong qua `src/data/data2Runtime.js`)
+- Du lieu runtime: `data/data3.json` (thong qua `src/data/data2Runtime.js`)
 
 `main` da duoc hop nhat theo yeu cau va tong hop cac nhanh:
 - `feature/admin-mvp-ui`
@@ -72,6 +72,7 @@ Tai khoan fallback he thong:
 Luu y:
 - Dang ky tai khoan admin moi bi chan.
 - Quyen admin yeu cau dang nhap bang tai khoan admin (khong con demo bypass).
+- Muon dung chuc nang admin, bat buoc dang nhap dung tai khoan: `admin` va mat khau: `admin`.
 
 ## 7) API backend mock
 
@@ -109,14 +110,14 @@ Hoac:
 5. Mo `http://localhost:5173/api/health` va xac nhan json co `ok: true`
 6. Test dang ky/dang nhap user
 7. Dang nhap admin va vao `/admin`
-8. Kiem tra Home/Admin su dung du lieu `data2`
+8. Kiem tra Home/Admin su dung du lieu `data3`
 
 ## 9) Cau truc thu muc chinh
 
 - `src/`: frontend app
 - `server/`: backend mock
 - `scripts/dev-all.js`: chay frontend + backend dong thoi
-- `data/data2.json`: du lieu nguon
+- `data/data3.json`: du lieu nguon chinh
 - `src/data/data2Runtime.js`: map du lieu de render UI/admin
 
 ## 10) Ghi chu

@@ -1,6 +1,7 @@
-﻿import data2 from "../../data/data2.json";
+﻿import data3 from "../../data/data3.json";
 
-const DATA2_SYNC_AT = "2026-04-11T00:00:00.000Z";
+export const SOURCE_DATASET = "data3.json";
+const DATA3_SYNC_AT = "2026-04-11T00:00:00.000Z";
 const DEFAULT_COORDS = { lat: 10.776889, lng: 106.700806 };
 const TRENDING_LIMIT = 4;
 const VIEW_MULTIPLIER = 12;
@@ -39,7 +40,7 @@ function pickAreaFromAddress(address) {
 
 function createTags(item) {
   const categoryTags = String(item.category ?? "")
-    .split(/[\/,&]/)
+    .split(/[/,&]/)
     .map((segment) => slugify(segment))
     .filter(Boolean);
 
@@ -71,7 +72,7 @@ function mapReviews(itemId, reviewsInput) {
   });
 }
 
-const workingItems = Array.isArray(data2) ? data2 : [];
+const workingItems = Array.isArray(data3) ? data3 : [];
 
 const sortedByTrend = [...workingItems].sort((a, b) => {
   const aScore = toNumber(a.rating) * 1000 + toNumber(a.totalReviews);
@@ -118,8 +119,8 @@ export const adminRestaurantsSeed = homePlaces.map((place) => ({
   hidden: false,
   views: Math.max(1, Math.round(place.reviewCount * VIEW_MULTIPLIER)),
   tags: createTags(place),
-  sourceSyncStatus: "seed-data2",
-  lastSyncedAt: DATA2_SYNC_AT,
+  sourceSyncStatus: "seed-data3",
+  lastSyncedAt: DATA3_SYNC_AT,
   rating: place.rating,
   totalReviews: place.reviewCount,
   address: place.address,
