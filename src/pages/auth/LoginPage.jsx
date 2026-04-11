@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { ChefHat, LogIn, ShieldCheck } from "lucide-react";
+import { ChefHat, LogIn } from "lucide-react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const { isAuthenticated, isAdmin, login, loginAsAdmin } = useAuth();
+  const { isAuthenticated, isAdmin, login } = useAuth();
   const [formState, setFormState] = useState({
-    email: "",
+    identifier: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,12 +29,11 @@ export function LoginPage() {
     }
   };
 
-  const handleSubmit = async (event) => { // Thêm chữ async
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Thêm chữ await để chờ Backend trả kết quả
-    const result = await login(formState); 
-    
+    const result = await login(formState);
+
     if (!result.ok) {
       setErrorMessage(result.message);
       return;
@@ -47,11 +46,6 @@ export function LoginPage() {
         authMessage: `Chao mung ${result.session.displayName} quay tro lai (${result.source || "api"}).`,
       },
     });
-  };
-
-  const handleAdminDemo = () => {
-    loginAsAdmin();
-    navigate("/admin");
   };
 
   return (
@@ -74,13 +68,13 @@ export function LoginPage() {
 
           <form className="auth-form" onSubmit={handleSubmit}>
             <label className="control-field">
-              <span>Email</span>
+              <span>Tai khoan hoac Email</span>
               <input
-                name="email"
-                type="email"
-                value={formState.email}
+                name="identifier"
+                type="text"
+                value={formState.identifier}
                 onChange={handleChange}
-                placeholder="ban@foodfinder.vn"
+                placeholder="admin hoac ban@foodfinder.vn"
               />
             </label>
 
@@ -102,11 +96,6 @@ export function LoginPage() {
           </form>
 
           <div className="auth-support-row">
-            <button type="button" className="brand-btn-secondary" onClick={handleAdminDemo}>
-              <ShieldCheck size={16} />
-              <span>Bat Admin Demo</span>
-            </button>
-
             <Link to="/" className="ghost-btn">
               <span>Tiep tuc voi vai tro khach</span>
             </Link>
