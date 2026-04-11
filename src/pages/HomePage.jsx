@@ -5,11 +5,26 @@ import { homePlaces } from "../data/mockData";
 import { useAuth } from "../context/useAuth";
 
 function PlaceCard({ place, showTrendingBadge }) {
+  
+  // HÀM XỬ LÝ MỞ BẢN ĐỒ
+  const handleOpenMap = (e) => {
+    e.preventDefault(); // Ngăn trình duyệt nhảy trang bậy bạ
+    
+    // Hàm encodeURIComponent giúp chuyển các dấu cách, dấu tiếng Việt thành định dạng chuẩn URL
+    // Ví dụ: "Quận 1" -> "Qu%E1%BA%ADn%201"
+    const encodedAddress = encodeURIComponent(`${place.name}, ${place.address}`);
+    
+    // Mở chế độ CHỈ ĐƯỜNG (Direction)
+    const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+    
+    // Mở tab mới (Trình duyệt web) hoặc tự động bật App Google Maps (Mobile)
+    window.open(mapUrl, '_blank');
+  };
+
   return (
     <article className="surface-card place-card">
       <div className="place-image-wrap">
         <img src={place.image} alt={place.name} className="place-image" />
-
         {showTrendingBadge && (
           <div className="place-badges">
             <span className="highlight-badge">Trending</span>
@@ -26,14 +41,48 @@ function PlaceCard({ place, showTrendingBadge }) {
             <span>{place.rating.toFixed(1)}</span>
           </span>
         </div>
-        <p className="muted-text">
-          {place.category} • {place.address}
-        </p>
-        <p className="muted-text">Mo cua: {place.time}</p>
+        
+        {/* NÚT ĐỊA CHỈ - BẤM VÀO ĐỂ MỞ MAPS */}
+        <button 
+          onClick={handleOpenMap}
+          className="flex items-center gap-1 mt-1 text-sm text-gray-500 hover:text-[#E65F38] transition-colors text-left"
+        >
+          <MapPin size={14} />
+          <span className="underline-offset-2 hover:underline">
+            {place.category} • {place.address}
+          </span>
+        </button>
+        
+        <p className="muted-text mt-1">Mở cửa: {place.time}</p>
       </div>
     </article>
   );
 }
+// Hàm này lấy vị trí hiện tại của người dùng và gửi lên backend để lấy danh sách quán ăn gần đó trong bán kính 5km.
+const handleGetNearby = () => {
+  if (!navigator.geolocation) {
+    alert("Trình duyệt của bạn không hỗ trợ định vị.");
+    return;
+  }
+
+  // Bắt đầu lấy tọa độ
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
+      console.log("Tọa độ của bạn:", latitude, longitude);
+
+      // Gửi tọa độ này lên Backend để lấy danh sách quán ăn trong bán kính 5km
+      const response = await fetch(`http://localhost:3000/restaurants/nearby?lat=${latitude}&lng=${longitude}&radius=5`);
+      const data = await response.json();
+      
+      // Sau đó cập nhật danh sách quán ăn lên giao diện
+      // setRestaurants(data); 
+    },
+    (error) => {
+      alert("Không thể lấy vị trí. Vui lòng kiểm tra quyền truy cập vị trí.");
+    }
+  );
+};
 
 export function HomePage() {
   const { session, isAdmin, isAuthenticated, loginAsAdmin, logout } = useAuth();
