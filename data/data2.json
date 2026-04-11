@@ -1,0 +1,538 @@
+[
+  {
+    "id": "bom_kitchen_001",
+    "name": "BỜM - Kitchen & Wine Bar",
+    "category": "Nhà hàng / Fine Dining",
+    "rating": 4.7,
+    "totalReviews": 780,
+    "priceLevel": "Trên 1.000.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEJGbxhpVTcsw6L2Jwrp6U2qmcfgW4B2QMOWjWN4chB8PATHaXdQDQofM95FtZz2vE_BHk4lMuchJNZrsOiqn5uW6og24Y6P6HiWo3M_giRxQbQzMeOBOTwbQFoL_4MAW4Zzfo=w408-h271-k-no",
+    "location": {
+      "address": "24 Nguyễn Thị Nghĩa, Bến Thành, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "QMCV+6F Bến Thành, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "bomkitchen.com",
+      "phone": "+84 823 999 980"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "23:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Chỗ ngồi ngoài trời",
+        "Giao hàng gián tiếp",
+        "Giao hàng",
+        "Đồ ăn mang đi",
+        "Ăn tại chỗ"
+      ],
+      "highlights": [
+        "Cà phê ngon",
+        "Chỗ ngồi trên sân thượng",
+        "Món tráng miệng ngon",
+        "Nhạc sống",
+        "Nhiều rượu vang ngon",
+        "Rượu cốc tai ngon",
+        "Thể thao"
+      ],
+      "offerings": [
+        "Bia",
+        "Cà phê",
+        "Các món chay",
+        "Các món thuần chay",
+        "Có giờ giảm giá đặc biệt",
+        "Đồ ăn cho người theo đạo Hồi",
+        "Đồ uống vào giờ vàng",
+        "Phần ăn nhỏ",
+        "Rượu",
+        "Rượu cốc tai",
+        "Rượu mạnh",
+        "Rượu vang"
+      ],
+      "diningOptions": [
+        "Bữa sáng",
+        "Bữa trưa",
+        "Bữa tối",
+        "Dịch vụ ăn uống",
+        "Món tráng miệng",
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "accessibility": {
+        "supported": [
+          "Chỗ đỗ xe cho xe lăn",
+          "Chỗ ngồi cho xe lăn"
+        ],
+        "unsupported": [
+          "Lối vào cho xe lăn",
+          "Vòng trợ thính"
+        ]
+      },
+      "amenities": [
+        "Nhà vệ sinh",
+        "Nhà vệ sinh cho cả hai giới",
+        "Quầy bar tại chỗ",
+        "Wi-Fi",
+        "Wi-Fi miễn phí"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Cao cấp",
+        "Lãng mạn",
+        "Yên tĩnh"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Dành cho gia đình",
+        "Du khách",
+        "Nhóm"
+      ],
+      "planning": [
+        "Nên đặt chỗ ăn tối trước",
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Chỗ đỗ xe trong khuôn viên",
+        "Dịch vụ đỗ xe",
+        "Đỗ xe miễn phí trên đường"
+      ],
+      "children": [
+        "Ghế cao cho bé",
+        "Phù hợp cho trẻ em",
+        "Thực đơn dành cho trẻ em"
+      ]
+    },
+    "menuHighlights": [
+      "Mì Ý Tôm Rim",
+      "Tuna Tataki",
+      "Duck Spring Rolls",
+      "Mackerel Tomato",
+      "Ocean Medley",
+      "Bò tái kiểu Pháp",
+      "Cá ngừ áp chảo lòng đào"
+    ],
+    "reviews": [
+      {
+        "author": "Duong Le",
+        "badge": "Local Guide",
+        "rating": 4,
+        "timeAgo": "2 tháng trước",
+        "content": "Trải nghiệm của mình ở quán chỉ bình thường, không có gì đặc sắc lắm. Nhân viên service bình thường, có bác bảo vệ thì cực xuất sắc chăm lo cho khách. Món ngon nhất trên bàn là món khai vị cà chua sống. Ngoài ra các món khác rất thường...",
+        "subRatings": {
+          "food": 3,
+          "service": 4,
+          "atmosphere": 3
+        }
+      },
+      {
+        "author": "Nguyễn Quốc Thắng “Winn Nguyễn”",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian bar hiện đại, ánh sáng ấm và khá “chill”, phù hợp hẹn hò hoặc gặp gỡ bạn bè. Món ăn trình bày đẹp, vị ổn và cân bằng – đặc biệt cá ngừ áp chảo lòng đào rất đáng thử.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Uyên Lê Thị Tú",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Đúng là quán đạt Michelin đồ ăn xứng giá tiền cũng như phục vụ. Phục vụ rất dễ thương, vui vẻ và chuyên nghiệp.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "den_dau_thao_dien_001",
+    "name": "Đèn Dầu Thảo Điền",
+    "category": "Quán bar cocktail",
+    "rating": 4.6,
+    "totalReviews": 160,
+    "priceLevel": "400.000 - 500.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEfq_8cdFT18cy8O7ZBe_qzNsQe6dqZcQBtC1CVwVHI4KnHXlad27775y7jkC2fGw18BPxDI6hdx31YauaIWxVpGUATjG41LZG9Ah5wv1U0BdFvTKLLB8M4oBPI0jHQdXr7uW5in1-hBfY-=w408-h272-k-no",
+    "location": {
+      "address": "19C Ngô Quang Huy, Thảo Điền, An Khánh, Hồ Chí Minh 700000, Việt Nam",
+      "plusCode": "RP3M+P7 An Khánh, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "phone": "+84 902 941 127"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "0:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Chỗ ngồi ngoài trời",
+        "Đồ ăn mang đi",
+        "Ăn tại chỗ"
+      ],
+      "unsupportedServices": [
+        "Giao hàng"
+      ],
+      "highlights": [
+        "Nhiều bia ngon",
+        "Nhiều rượu vang ngon",
+        "Rượu cốc tai ngon"
+      ],
+      "offerings": [
+        "Bia",
+        "Đồ uống vào giờ vàng",
+        "Rượu",
+        "Rượu cốc tai",
+        "Rượu mạnh",
+        "Rượu vang",
+        "Thực phẩm"
+      ],
+      "diningOptions": [
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "amenities": [
+        "Nhà vệ sinh"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Sành điệu"
+      ],
+      "crowd": [
+        "Nhóm"
+      ],
+      "planning": [
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Bãi đỗ xe miễn phí",
+        "Nhiều chỗ đỗ xe"
+      ]
+    },
+    "menuHighlights": [
+      "Bánh tiêu phá lấu",
+      "Cánh gà đèn dầu",
+      "Tré",
+      "Hoành thánh",
+      "Lẩu"
+    ],
+    "reviews": [
+      {
+        "author": "Minh Châu",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Theo cá nhân mình các món ăn đậm nét Việt Nam từ món tré đến các món khác đều rất ok, riêng món tôm mình thấy hơi đậm vị thôi, đặc biệt là bánh tiêu phá lấu hương vị quen thuộc như hồi nhỏ mình được ăn.",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Phuong Anh Nguyen Le",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian hẹn hò lãng mạn đáng để thử. Mỗi món mỗi vị rất khác biệt đầu bếp rất chỉn chu trong từng món. Cocktail ngon.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Thuong Phan",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "4 tháng trước",
+        "content": "Mình có trải nghiệm ở đây khá là tốt, không gian quán decor kiểu ấm cúng chill chil tạo cảm giác thoải mái thân thuộc... Món nào cũng ngon với giá cả hợp lý. Must try “cánh gà đèn dầu”.",
+        "subRatings": {
+          "food": 5,
+          "service": 3,
+          "atmosphere": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "mr_saigon_001",
+    "name": "Mr.Saigon - Mì Ý, Salad Sài Gòn - Lê Lai",
+    "category": "Nhà hàng Phương Tây",
+    "rating": 4.8,
+    "totalReviews": 1945,
+    "priceLevel": "1.099.000 đ (Combo Honeymoon)",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweokJEEj1cXeV-VAOCCLEbi5x84O8zM1J-FKmv8Zdu8h4QWM5OlInc9e7b6eahYnxyCQ6rjBa5GwDyLWLB0C7BP-ZkmDjQPDUzzoQREVQJ-6TK4enuZHvz5Qq4JQXCJorA3mABew=w408-h306-k-no",
+    "location": {
+      "address": "75 Đ. Lê Lai, Phường 3, Hạnh Thông, Hồ Chí Minh, Việt Nam",
+      "plusCode": "RM9M+F2 Hạnh Thông, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "mrsaigon.vn",
+      "phone": "+84 941 878 875"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "22:00"
+    },
+    "features": {
+      "serviceOptions": [
+        "Ăn tại chỗ",
+        "Đồ ăn mang đi",
+        "Giao hàng gián tiếp",
+        "Giao hàng"
+      ],
+      "highlights": [
+        "Món tráng miệng ngon",
+        "Nhiều rượu vang ngon"
+      ],
+      "offerings": [
+        "Ăn thoả thích",
+        "Bia",
+        "Cà phê",
+        "Các món chay",
+        "Có giờ giảm giá đặc biệt",
+        "Đồ ăn khuya",
+        "Đồ uống vào giờ vàng",
+        "Món ăn từ nguyên liệu hữu cơ",
+        "Nhà hàng thức ăn nhanh",
+        "Phần ăn nhỏ",
+        "Rượu",
+        "Rượu mạnh",
+        "Rượu vang"
+      ],
+      "diningOptions": [
+        "Bữa sáng",
+        "Bữa nửa buổi",
+        "Bữa trưa",
+        "Bữa tối",
+        "Dịch vụ ăn uống",
+        "Món tráng miệng",
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "accessibility": {
+        "supported": [
+          "Chỗ ngồi cho xe lăn",
+          "Lối vào cho xe lăn",
+          "Nhà vệ sinh cho xe lăn"
+        ]
+      },
+      "amenities": [
+        "Nhà vệ sinh",
+        "Wi-Fi",
+        "Wi-Fi miễn phí"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Cao cấp",
+        "Lãng mạn",
+        "Thông thường"
+      ],
+      "crowd": [
+        "Chào đón những người thuộc giới LGBTQ+",
+        "Dành cho gia đình",
+        "Nhóm",
+        "Nơi an toàn cho người chuyển giới",
+        "Sinh viên"
+      ],
+      "planning": [
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Bãi đỗ xe miễn phí",
+        "Nhiều chỗ đỗ xe"
+      ],
+      "children": [
+        "Phù hợp cho trẻ em",
+        "Thực đơn dành cho trẻ em"
+      ]
+    },
+    "menuHighlights": [
+      "Bò Lúc Lắc",
+      "Panna Cotta Dâu",
+      "Kem",
+      "Cheesy Garlic Butter Seafood Pasta",
+      "Pan-Seared Sockeye Alaska Salmon",
+      "Fuji Striploin (200g)",
+      "Seasonal Fruit & Burrata Salad"
+    ],
+    "reviews": [
+      {
+        "author": "Hoàng Lương",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Mình vừa có buổi hẹn hò tại nhà hàng và thật sự rất ấn tượng. Không gian decor kiểu châu Âu sang trọng nhưng vẫn ấm cúng... Món ăn chuẩn vị Âu, steak mềm, sốt đậm đà, pasta thơm béo vừa phải, plating đẹp mắt.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Cúc Nguyễn",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "1 tháng trước",
+        "content": "Không gian riêng tư yên tĩnh cho các cặp đôi muốn làm sinh nhật, anni , mọi người nên trải nghiệm ở đây nha. Đồ ăn cũng ngon nè.",
+        "subRatings": null
+      }
+    ]
+  },
+  {
+    "id": "fenice_cuisine_bar_001",
+    "name": "Fenice - Cuisine & Bar",
+    "category": "Nhà hàng",
+    "rating": 4.5,
+    "totalReviews": 143,
+    "priceLevel": "900.000 - 1.000.000 đ/người",
+    "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweo4nk21_I5_du0-k4MxTIYs1lyitRrXHTZbLK2kWEl-ki0x5p5yJfcAD-lkDp0G5wcdHpsHUPphQttYnCEl5eIpWdLoIdxHxet7T3uQrFQ7z8_NkNL1ukjQy0YzyDzzcY9REAomJujP57-C=w408-h288-k-no",
+    "location": {
+      "address": "688/46 Đ. Lê Đức Thọ, Phường 15, An Hội Đông, Hồ Chí Minh 71414, Việt Nam",
+      "plusCode": "RMWC+WV An Hội Đông, Hồ Chí Minh, Việt Nam"
+    },
+    "contact": {
+      "website": "facebook.com",
+      "phone": "+84 818 198 998"
+    },
+    "operatingHours": {
+      "status": "Đang mở cửa",
+      "closingTime": "Mở cả ngày"
+    },
+    "features": {
+      "serviceOptions": [
+        "Chỗ ngồi ngoài trời",
+        "Ăn tại chỗ"
+      ],
+      "highlights": [
+        "Cà phê ngon",
+        "Món tráng miệng ngon",
+        "Nhiều bia ngon",
+        "Nhiều rượu vang ngon",
+        "Rượu cốc tai ngon"
+      ],
+      "offerings": [
+        "Bia",
+        "Cà phê",
+        "Đồ uống vào giờ vàng",
+        "Phần ăn nhỏ",
+        "Rượu",
+        "Rượu cốc tai",
+        "Rượu mạnh",
+        "Rượu vang"
+      ],
+      "diningOptions": [
+        "Bữa tối",
+        "Dịch vụ ăn uống",
+        "Món tráng miệng",
+        "Chỗ ngồi",
+        "Phục vụ tại bàn"
+      ],
+      "accessibility": {
+        "supported": [
+          "Nhà vệ sinh cho xe lăn"
+        ]
+      },
+      "amenities": [
+        "Nhà vệ sinh",
+        "Quầy bar tại chỗ"
+      ],
+      "atmosphere": [
+        "Ấm cúng",
+        "Lãng mạn",
+        "Sành điệu",
+        "Rất yên tĩnh"
+      ],
+      "crowd": [
+        "Du khách",
+        "Nhóm"
+      ],
+      "planning": [
+        "Nhận đặt chỗ"
+      ],
+      "payments": [
+        "Thanh toán di động qua NFC",
+        "Thẻ ghi nợ",
+        "Thẻ tín dụng"
+      ],
+      "parking": [
+        "Bãi đỗ xe miễn phí",
+        "Nhiều chỗ đỗ xe",
+        "Dịch vụ đỗ xe"
+      ],
+      "children": [
+        "Phù hợp cho trẻ em",
+        "Thực đơn dành cho trẻ em"
+      ]
+    },
+    "menuHighlights": [
+      "Bò nướng nước mắm",
+      "Má heo nướng sốt Thái",
+      "Cá hồi áp chảo",
+      "Gà cuộn măng tây",
+      "Bò Mỹ nướng",
+      "Tôm nướng",
+      "Bạch tuộc nướng"
+    ],
+    "reviews": [
+      {
+        "author": "Bao Tran Nguyen",
+        "badge": "Người dùng",
+        "rating": 5,
+        "timeAgo": "2 tháng trước",
+        "content": "Chỗ này mấy ní phải nên đi nha, hẹn hò đẹp, sinh nhật ok... Từ cách phục vụ đến món ăn đều rất ok nha (đồ ăn 1 món rất nhìu ăn rất ngon). Tới cái toilet mà còn sang xịn mịn là đủ hỉu.",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "02 suqii",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "5 tháng trước",
+        "content": "Nhân viên phục vụ tận tình, chụp hình dùm mình luôn, mà nhiệt tình lắm. Nước ngon, đồ ăn ổn, không gian quầy bar lên hình xuất sắc luôn❤️",
+        "subRatings": {
+          "food": 4,
+          "service": 5,
+          "atmosphere": 5
+        }
+      },
+      {
+        "author": "Huy Tran",
+        "badge": "Local Guide",
+        "rating": 5,
+        "timeAgo": "3 tháng trước",
+        "content": "Dịch vụ rất tốt, nhân viên rất là tốt, nhiệt tình (có bé Vi rất dễ thương luôn, chụp ảnh xịn và rất có tâm ❤️❤️❤️)",
+        "subRatings": {
+          "food": 5,
+          "service": 5,
+          "atmosphere": 5
+        }
+      }
+    ]
+  }
+]
