@@ -726,6 +726,108 @@ button {
   padding: 0.55rem 0.65rem;
 }
 
+.inline-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.inline-row > input {
+  flex: 1;
+  min-width: 210px;
+}
+
+.tag-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag-chip {
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: #fff3ec;
+  color: #a44726;
+  border: 1px solid #ffd8c6;
+}
+
+.tag-chip-warning {
+  background: #fff4dd;
+  border-color: #ffe0a1;
+  color: #8c6300;
+}
+
+.history-list {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.history-item {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: #fffdfb;
+}
+
+.strong-label {
+  font-weight: 700;
+}
+
+.sync-banner {
+  padding: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.triple-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.notification-row {
+  align-items: flex-start;
+}
+
+.risk-row {
+  align-items: flex-start;
+}
+
+.risk-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.risk-pill-low {
+  background: #e8f7ed;
+  color: #1d7a3b;
+}
+
+.risk-pill-medium {
+  background: #fff5dd;
+  color: #8e6800;
+}
+
+.risk-pill-high {
+  background: #ffe8e8;
+  color: #a12a2a;
+}
+
 .double-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -781,6 +883,10 @@ button {
   .form-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .triple-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 960px) {
@@ -794,6 +900,10 @@ button {
   }
 
   .double-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .triple-grid {
     grid-template-columns: 1fr;
   }
 
@@ -836,6 +946,16 @@ button {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .inline-row {
+    align-items: stretch;
+  }
+
+  .inline-row > input,
+  .inline-row > .ghost-btn {
+    width: 100%;
+    min-width: 100%;
   }
 }
 
