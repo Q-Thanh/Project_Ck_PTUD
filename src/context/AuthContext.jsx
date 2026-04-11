@@ -4,7 +4,7 @@ import { requestJson } from "../services/httpClient";
 
 const SESSION_STORAGE_KEY = "foodfinder_session_v1";
 const ACCOUNT_STORAGE_KEY = "foodfinder_accounts_v1";
-const AUTH_API_BASE = import.meta.env.VITE_AUTH_API_BASE ?? "http://localhost:3000";
+const AUTH_API_BASE = import.meta.env.VITE_AUTH_API_BASE ?? "/api";
 
 const DEFAULT_FALLBACK_ACCOUNTS = [
   {
