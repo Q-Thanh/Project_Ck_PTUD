@@ -1,6 +1,8 @@
 ﻿import { Navigate, Route, Routes } from "react-router-dom";
 import { AdminLayout } from "../layouts/AdminLayout";
 import { HomePage } from "../pages/HomePage";
+import RestaurantDetailPage from "../pages/RestaurantDetailPage";
+import CreatePostForm from "../components/CreatePostForm";
 import { LoginPage } from "../pages/auth/LoginPage";
 import { RegisterPage } from "../pages/auth/RegisterPage";
 import { AdminOverviewPage } from "../pages/admin/AdminOverviewPage";
@@ -32,6 +34,8 @@ export function AppRouter() {
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/restaurants/:id" element={<RestaurantDetailPage />} />
+      <Route path="/posts/create" element={<CreatePostForm />} />
     </Routes>
   );
 }
