@@ -53,7 +53,7 @@ export function RegisterPage() {
 
     navigate("/", {
       replace: true,
-      state: { authMessage: `Tài khoản ${result.session.displayName} đã sẵn sàng.` },
+      state: { authMessage: `Tai khoan ${result.session.displayName} da san sang (${result.source || "api"}).` },
     });
   };
 

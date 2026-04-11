@@ -1,8 +1,10 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react";
-import { Eye, EyeOff, Pencil, Plus, RefreshCw, Search } from "lucide-react";
+import { Eye, EyeOff, Pencil, Plus, RefreshCw, Search, Tags, UploadCloud } from "lucide-react";
 import {
+  attachTagsToRestaurant,
   createRestaurant,
   listRestaurants,
+  syncRestaurantsFromSource,
   toggleRestaurantVisibility,
   updateRestaurant,
 } from "../../services/adminService";
@@ -14,21 +16,47 @@ const EMPTY_FORM = {
   priceLevel: "$$",
   views: 0,
   hidden: false,
+  tags: "",
 };
+
+function formatDate(dateValue) {
+  return new Date(dateValue).toLocaleString("vi-VN", {
+    hour12: false,
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 export function AdminRestaurantsPage() {
   const [filters, setFilters] = useState({ query: "", area: "all", hidden: "all" });
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState(null);
+  const [syncing, setSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState(null);
 
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
+  const [tagDrafts, setTagDrafts] = useState({});
 
   const loadRestaurants = useCallback(async () => {
     setLoading(true);
     const data = await listRestaurants(filters);
     setRestaurants(data);
+
+    setTagDrafts((previous) => {
+      const next = { ...previous };
+      data.forEach((restaurant) => {
+        if (!(restaurant.id in next)) {
+          next[restaurant.id] = (restaurant.tags || []).join(", ");
+        }
+      });
+      return next;
+    });
+
     setLoading(false);
   }, [filters]);
 
@@ -50,6 +78,7 @@ export function AdminRestaurantsPage() {
       priceLevel: restaurant.priceLevel,
       views: restaurant.views,
       hidden: restaurant.hidden,
+      tags: (restaurant.tags || []).join(", "),
     });
   };
 
@@ -69,11 +98,13 @@ export function AdminRestaurantsPage() {
       await updateRestaurant(editingId, {
         ...form,
         views: Number(form.views) || 0,
+        tags: form.tags,
       });
     } else {
       await createRestaurant({
         ...form,
         views: Number(form.views) || 0,
+        tags: form.tags,
       });
     }
 
@@ -88,11 +119,45 @@ export function AdminRestaurantsPage() {
     setBusyId(null);
   };
 
+  const handleAttachTags = async (restaurantId) => {
+    setBusyId(restaurantId);
+    await attachTagsToRestaurant(restaurantId, tagDrafts[restaurantId] || "");
+    await loadRestaurants();
+    setBusyId(null);
+  };
+
+  const handleSyncSource = async () => {
+    setSyncing(true);
+    const result = await syncRestaurantsFromSource();
+    setSyncResult(result);
+    await loadRestaurants();
+    setSyncing(false);
+  };
+
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
         <h2>Quan ly quan an</h2>
-        <p className="muted-text">Them, sua, an hien quan va loc du lieu theo khu vuc.</p>
+        <p className="muted-text">Them, sua, an hien, gan tag va dong bo du lieu quan an tu nguon goc.</p>
+      </section>
+
+      <section className="surface-card sync-banner">
+        <div>
+          <h3>Dong bo du lieu voi nguon ban dau</h3>
+          <p className="muted-text">
+            Cap nhat thong tin quan va bo sung quan moi tu source de dam bao du lieu nhat quan.
+          </p>
+          {syncResult && (
+            <p className="muted-text">
+              Lan dong bo gan nhat: {formatDate(syncResult.syncedAt)} • Moi: {syncResult.created} • Cap nhat: {syncResult.updated}
+            </p>
+          )}
+        </div>
+
+        <button type="button" className="brand-btn" disabled={syncing} onClick={handleSyncSource}>
+          <UploadCloud size={16} />
+          <span>{syncing ? "Dang dong bo..." : "Dong bo ngay"}</span>
+        </button>
       </section>
 
       <section className="surface-card filter-row">
@@ -101,7 +166,7 @@ export function AdminRestaurantsPage() {
           <input
             type="search"
             value={filters.query}
-            placeholder="Tim theo ten quan / loai mon"
+            placeholder="Tim theo ten quan / loai mon / tag"
             onChange={(event) => setFilters((prev) => ({ ...prev, query: event.target.value }))}
           />
         </label>
@@ -201,6 +266,15 @@ export function AdminRestaurantsPage() {
             />
           </label>
 
+          <label className="control-field">
+            <span>Tags</span>
+            <input
+              value={form.tags}
+              onChange={(event) => setForm((prev) => ({ ...prev, tags: event.target.value }))}
+              placeholder="vd: bun-bo, breakfast"
+            />
+          </label>
+
           <label className="control-check">
             <input
               type="checkbox"
@@ -236,6 +310,43 @@ export function AdminRestaurantsPage() {
               </div>
 
               <p className="muted-text">Luot xem: {restaurant.views.toLocaleString("vi-VN")}</p>
+              <p className="muted-text">
+                Sync: {restaurant.sourceSyncStatus} • {formatDate(restaurant.lastSyncedAt)}
+              </p>
+
+              <div className="tag-list">
+                {(restaurant.tags || []).map((tag) => (
+                  <span key={`${restaurant.id}-${tag}`} className="tag-chip">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+
+              <label className="control-field">
+                <span>Cap nhat tags</span>
+                <div className="inline-row">
+                  <input
+                    value={tagDrafts[restaurant.id] ?? ""}
+                    onChange={(event) =>
+                      setTagDrafts((prev) => ({
+                        ...prev,
+                        [restaurant.id]: event.target.value,
+                      }))
+                    }
+                    placeholder="vd: family, rooftop"
+                  />
+
+                  <button
+                    type="button"
+                    className="ghost-btn"
+                    disabled={busyId === restaurant.id}
+                    onClick={() => handleAttachTags(restaurant.id)}
+                  >
+                    <Tags size={15} />
+                    <span>Gan tag</span>
+                  </button>
+                </div>
+              </label>
 
               <div className="moderation-actions">
                 <button type="button" className="ghost-btn" onClick={() => startEdit(restaurant)}>
