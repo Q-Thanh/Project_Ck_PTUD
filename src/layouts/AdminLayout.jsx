@@ -1,12 +1,10 @@
-﻿import { LayoutDashboard, LogOut, ShieldCheck, Store, UsersRound, FileCheck2, Home } from "lucide-react";
+﻿import { Home, LayoutDashboard, LogOut, ShieldCheck, Store } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 
 const navItems = [
   { to: "/admin/overview", icon: LayoutDashboard, label: "Tong quan" },
-  { to: "/admin/posts", icon: FileCheck2, label: "Bai dang" },
   { to: "/admin/restaurants", icon: Store, label: "Quan an" },
-  { to: "/admin/users", icon: UsersRound, label: "Nguoi dung" },
 ];
 
 export function AdminLayout() {
@@ -75,4 +73,3 @@ export function AdminLayout() {
     </div>
   );
 }
-

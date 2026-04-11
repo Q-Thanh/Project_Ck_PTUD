@@ -1,7 +1,7 @@
 ﻿import { ArrowRight, LogOut, MapPin, Search, ShieldCheck, Sparkles, Star, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { UserRound } from "lucide-react";
-import { homePlaces } from "../data/mockData";
+import { homePlaces } from "../data/data2Runtime";
 import { useAuth } from "../context/useAuth";
 import { useState } from "react";
 
