@@ -1,10 +1,12 @@
-﻿import { Home, LayoutDashboard, LogOut, ShieldCheck, Store } from "lucide-react";
+﻿import { FileCheck2, Home, LayoutDashboard, LogOut, ShieldCheck, Store, Users } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 
 const navItems = [
   { to: "/admin/overview", icon: LayoutDashboard, label: "Tong quan" },
   { to: "/admin/restaurants", icon: Store, label: "Quan an" },
+  { to: "/admin/posts", icon: FileCheck2, label: "Bai dang" },
+  { to: "/admin/users", icon: Users, label: "Nguoi dung" },
 ];
 
 export function AdminLayout() {

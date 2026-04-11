@@ -6,9 +6,18 @@ export function AdminGuard({ children }) {
   const location = useLocation();
 
   if (!isAdmin) {
-    return <Navigate to="/" replace state={{ deniedPath: location.pathname }} />;
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={{
+          deniedPath: location.pathname,
+          adminRequired: true,
+          adminHint: "De dung chuc nang Admin, dang nhap tai khoan: admin, mat khau: admin.",
+        }}
+      />
+    );
   }
 
   return children;
 }
-

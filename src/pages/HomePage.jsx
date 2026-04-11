@@ -5,7 +5,7 @@ import { homePlaces } from "../data/data2Runtime";
 import { useAuth } from "../context/useAuth";
 import { useState } from "react";
 
-function PlaceCard({ place, showTrendingBadge }) {
+function PlaceCard({ place, showTrendingBadge, onImageClick }) {
   return (
     <article className="surface-card place-card">
       <div className="place-image-wrap" onClick={() => onImageClick(place)}>
@@ -250,7 +250,7 @@ export function HomePage() {
 
         {deniedPath && (
           <div className="surface-card inline-alert" role="status">
-            Duong dan <strong>{deniedPath}</strong> can quyen admin. Vui long dang nhap tai khoan admin tai trang dang nhap.
+            Duong dan <strong>{deniedPath}</strong> can quyen admin. De dung chuc nang Admin, vui long dang nhap tai khoan: admin, mat khau: admin.
           </div>
         )}
 
@@ -440,4 +440,5 @@ export function HomePage() {
     </div>
   );
 }
+
 
