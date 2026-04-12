@@ -31,7 +31,7 @@ export default function CreatePostForm() {
 
     const selectedRestaurant = restaurants.find((item) => String(item.id) === String(restaurantId));
 
-    await submitPostForModeration({
+    const post = await submitPostForModeration({
       restaurantId,
       rating: Number(rating) || 5,
       content: content.trim(),
@@ -41,6 +41,11 @@ export default function CreatePostForm() {
       tags: selectedRestaurant?.category ? [selectedRestaurant.category] : [],
       mediaNames: files.map((file) => file.name),
     });
+
+    if (!post) {
+      setMessage("Khong dang bai duoc. Vui long thu lai.");
+      return;
+    }
 
     setMessage("Dang bai thanh cong. Bai dang da vao trang thai cho duyet.");
     setContent("");

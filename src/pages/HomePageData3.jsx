@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, LogOut, MapPin, Search, ShieldCheck, Sparkles, Star, UserRound } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../context/useAuth";
-import { fetchCommunityHighlights, fetchVisibleRestaurants } from "../services/publicRestaurantService";
+import { Link } from "react-router-dom";
+import { LocateFixed, Search, Sparkles, Star } from "lucide-react";
+import { AppTopNav } from "../components/AppTopNav";
+import {
+  fetchDecisionRestaurant,
+  fetchNearbyRestaurants,
+  fetchVisibleRestaurants,
+} from "../services/publicRestaurantService";
 
 function PlaceCard({ place }) {
   return (
@@ -11,8 +15,8 @@ function PlaceCard({ place }) {
         <img src={place.image} alt={place.name} className="place-image" />
         {place.isTrending && (
           <div className="place-badges">
-            <span className="highlight-badge">Gợi ý</span>
-            <span className="price-badge">Nổi bật</span>
+            <span className="highlight-badge">Top</span>
+            <span className="price-badge">Gan ban</span>
           </div>
         )}
       </div>
@@ -27,20 +31,20 @@ function PlaceCard({ place }) {
             </span>
           </span>
         </div>
-
         <p className="muted-text">
           {place.category} / {place.area}
         </p>
-        <p className="muted-text">Địa chỉ: {place.shortAddress}</p>
-        <p className="muted-text">{place.closingLabel}</p>
-        <p className="muted-text">Giá: {place.priceLevel}</p>
+        <p className="muted-text">{place.shortAddress || place.address}</p>
+        <p className="muted-text">
+          {place.closingLabel} / {Number(place.distance || 0).toFixed(2)} km
+        </p>
 
         <div className="place-card-actions">
           <Link to={`/restaurants/${place.id}`} className="brand-btn">
-            Xem chi tiết quán
+            Xem chi tiet
           </Link>
           <a href={place.mapsUrl} target="_blank" rel="noreferrer" className="ghost-btn">
-            Mở Google Maps
+            Mo Maps
           </a>
         </div>
       </div>
@@ -48,62 +52,45 @@ function PlaceCard({ place }) {
   );
 }
 
-function CommunityHighlightCard({ item }) {
-  return (
-    <article className="surface-card community-highlight-card">
-      <p className="hero-kicker">Cộng đồng</p>
-      <h3>{item.restaurantName}</h3>
-      <p className="muted-text">Tác giả: {item.author}</p>
-      {item.rating > 0 && (
-        <span className="rating-pill">
-          <Star size={14} fill="currentColor" />
-          <span>{item.rating.toFixed(1)}</span>
-        </span>
-      )}
-      <p className="muted-text">{item.excerpt}</p>
-      <Link to={`/restaurants/${item.restaurantId}`} className="link-btn">
-        Mở trang chi tiết
-      </Link>
-    </article>
-  );
+async function getCurrentPositionAsync() {
+  if (!navigator.geolocation) {
+    throw new Error("Trinh duyet khong ho tro dinh vi.");
+  }
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      enableHighAccuracy: true,
+      timeout: 12000,
+    });
+  });
 }
 
 export function HomePage() {
-  const { session, isAdmin, isAuthenticated, logout } = useAuth();
-  const location = useLocation();
-  const [places, setPlaces] = useState([]);
-  const [communityHighlights, setCommunityHighlights] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [places, setPlaces] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortBy, setSortBy] = useState("rating");
-  const [recommendedPlace, setRecommendedPlace] = useState(null);
+  const [nearbyPlaces, setNearbyPlaces] = useState([]);
+  const [decisionPlace, setDecisionPlace] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [locating, setLocating] = useState(false);
+  const [locationError, setLocationError] = useState("");
 
   useEffect(() => {
-    let mounted = true;
-
-    async function loadHomeData() {
+    let active = true;
+    async function loadRestaurants() {
       setLoading(true);
-      const [restaurantData, communityData] = await Promise.all([
-        fetchVisibleRestaurants(),
-        fetchCommunityHighlights(3),
-      ]);
-
-      if (!mounted) return;
-      setPlaces(restaurantData);
-      setCommunityHighlights(communityData);
+      const data = await fetchVisibleRestaurants();
+      if (!active) return;
+      setPlaces(data);
       setLoading(false);
     }
-
-    loadHomeData();
+    loadRestaurants();
     return () => {
-      mounted = false;
+      active = false;
     };
   }, []);
-
-  const authMessage = location.state?.authMessage;
-  const deniedPath = location.state?.deniedPath;
 
   const areas = useMemo(() => [...new Set(places.map((place) => place.area).filter(Boolean))], [places]);
   const categories = useMemo(() => [...new Set(places.map((place) => place.category).filter(Boolean))], [places]);
@@ -111,129 +98,86 @@ export function HomePage() {
   const filteredPlaces = useMemo(() => {
     return [...places]
       .filter((place) => {
-        const search = searchTerm.trim().toLowerCase();
-        const matchesSearch =
-          !search ||
-          place.name.toLowerCase().includes(search) ||
-          place.category.toLowerCase().includes(search) ||
-          place.address.toLowerCase().includes(search);
-        const matchesArea = !selectedArea || place.area === selectedArea;
-        const matchesCategory = !selectedCategory || place.category === selectedCategory;
-        return matchesSearch && matchesArea && matchesCategory;
+        const query = searchTerm.trim().toLowerCase();
+        const byQuery =
+          !query ||
+          place.name.toLowerCase().includes(query) ||
+          place.category.toLowerCase().includes(query) ||
+          place.address.toLowerCase().includes(query);
+        const byArea = !selectedArea || place.area === selectedArea;
+        const byCategory = !selectedCategory || place.category === selectedCategory;
+        return byQuery && byArea && byCategory;
       })
       .sort((left, right) => {
-        switch (sortBy) {
-          case "distance":
-            return Number(left.distance || 0) - Number(right.distance || 0);
-          case "reviews":
-            return Number(right.reviewCount || 0) - Number(left.reviewCount || 0);
-          case "price":
-            return Number(left.priceValue || Number.MAX_SAFE_INTEGER) - Number(right.priceValue || Number.MAX_SAFE_INTEGER);
-          case "rating":
-          default:
-            return Number(right.rating || 0) - Number(left.rating || 0);
-        }
+        if (sortBy === "distance") return Number(left.distance || 0) - Number(right.distance || 0);
+        if (sortBy === "reviews") return Number(right.reviewCount || 0) - Number(left.reviewCount || 0);
+        if (sortBy === "price") return Number(left.priceValue || Number.MAX_SAFE_INTEGER) - Number(right.priceValue || Number.MAX_SAFE_INTEGER);
+        return Number(right.rating || 0) - Number(left.rating || 0);
       });
   }, [places, searchTerm, selectedArea, selectedCategory, sortBy]);
 
-  const trendingPlaces = useMemo(() => places.filter((place) => place.isTrending).slice(0, 4), [places]);
+  const trendingPlaces = useMemo(() => filteredPlaces.filter((place) => place.isTrending).slice(0, 4), [filteredPlaces]);
 
-  const handleDecideForMe = () => {
-    const source = filteredPlaces.length ? filteredPlaces : places;
-    const best = [...source].sort((left, right) => {
-      const leftScore = Number(left.rating || 0) * 100 + Number(left.reviewCount || 0) - Number(left.distance || 0) * 10;
-      const rightScore = Number(right.rating || 0) * 100 + Number(right.reviewCount || 0) - Number(right.distance || 0) * 10;
-      return rightScore - leftScore;
-    })[0];
+  const getLocationAndLoadNearby = async () => {
+    setLocating(true);
+    setLocationError("");
+    try {
+      const position = await getCurrentPositionAsync();
+      const lat = Number(position.coords.latitude);
+      const lng = Number(position.coords.longitude);
+      setUserLocation({ lat, lng });
+      const nearby = await fetchNearbyRestaurants({ lat, lng, radiusKm: 5, limit: 5 });
+      setNearbyPlaces(nearby);
+      if (!nearby.length) {
+        setLocationError("Khong tim thay quan nao trong ban kinh 5km.");
+      }
+      return { lat, lng };
+    } catch {
+      setLocationError("Khong the lay vi tri hien tai. Hay cho phep truy cap vi tri va thu lai.");
+      return null;
+    } finally {
+      setLocating(false);
+    }
+  };
 
-    setRecommendedPlace(best || null);
+  const handleGetNearby = async () => {
+    await getLocationAndLoadNearby();
+  };
+
+  const handleDecision = async () => {
+    const sourceLocation = userLocation || (await getLocationAndLoadNearby());
+    if (!sourceLocation) return;
+    const picked = await fetchDecisionRestaurant({
+      lat: sourceLocation.lat,
+      lng: sourceLocation.lng,
+      radiusKm: 5,
+    });
+    setDecisionPlace(picked);
+    if (!picked) {
+      setLocationError("Khong co quan phu hop trong 5km de de xuat ngau nhien.");
+    }
   };
 
   return (
     <div className="page-wrap">
       <div className="app-shell">
-        <header className="surface-card top-nav">
-          <div className="top-nav-brand">
-            <div className="brand-icon">F</div>
-            <div>
-              <p className="brand-title">FoodFinder</p>
-              <p className="brand-subtitle">Khám phá quán ăn và đánh giá cộng đồng</p>
-            </div>
-          </div>
-
-          <nav className="top-nav-links">
-            <a href="#home">Trang chủ</a>
-            <a href="#data3">Dữ liệu</a>
-            <a href="#community">Cộng đồng</a>
-          </nav>
-
-          <div className="top-nav-actions">
-            {!isAuthenticated && (
-              <>
-                <Link to="/login" className="ghost-btn">
-                  <UserRound size={16} />
-                  <span>Đăng nhập</span>
-                </Link>
-                <Link to="/register" className="brand-btn-secondary">
-                  <span>Đăng ký</span>
-                </Link>
-              </>
-            )}
-
-            {isAuthenticated && !isAdmin && (
-              <>
-                <Link to="/posts/create" className="brand-btn">
-                  <Sparkles size={16} />
-                  <span>Đăng quán mới</span>
-                </Link>
-                <span className="status-pill">
-                  <UserRound size={14} />
-                  <span>{session.displayName}</span>
-                </span>
-                <button type="button" className="ghost-btn" onClick={logout}>
-                  <LogOut size={16} />
-                  <span>Đăng xuất</span>
-                </button>
-              </>
-            )}
-
-            {isAdmin && (
-              <>
-                <Link to="/admin" className="brand-btn">
-                  <ShieldCheck size={16} />
-                  <span>Quản trị viên</span>
-                </Link>
-                <button type="button" className="ghost-btn" onClick={logout}>
-                  <LogOut size={16} />
-                  <span>Đăng xuất</span>
-                </button>
-              </>
-            )}
-          </div>
-        </header>
-
-        {authMessage && <div className="surface-card inline-alert inline-alert-success">{authMessage}</div>}
-
-        {deniedPath && (
-          <div className="surface-card inline-alert">
-            Đường dẫn <strong>{deniedPath}</strong> cần quyền admin. Đăng nhập admin/admin để vào khu kiểm duyệt.
-          </div>
-        )}
+        <AppTopNav />
 
         <section id="home" className="hero-block">
-          <p className="hero-kicker">Khám phá quán ăn</p>
+          <p className="hero-kicker">Food Discovery Platform</p>
           <h1>
-            Xem chi tiết quán ăn <span>đầy đủ hơn</span>
+            Tim quan ngon trong <span>ban kinh 5km</span>
           </h1>
           <p className="hero-subtitle">
-            Trang chủ hiển thị danh sách quán sẵn có, có nút xem chi tiết, mở Google Maps và theo dõi bài đánh giá rõ ràng.
+            Duyet danh sach quan, lay vi tri hien tai de xem 5 quan gan ban nhat co danh gia cao, va de he thong chon
+            ngau nhien mot quan cho ban.
           </p>
 
           <div className="hero-search surface-card">
             <Search size={20} />
             <input
               type="text"
-              placeholder="Tìm theo tên quán, địa chỉ, loại món..."
+              placeholder="Tim theo ten quan, dia chi, loai mon..."
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
@@ -242,9 +186,9 @@ export function HomePage() {
           <div className="filters-section surface-card">
             <div className="filter-row">
               <div className="filter-group">
-                <label>Khu vực</label>
+                <label>Khu vuc</label>
                 <select value={selectedArea} onChange={(event) => setSelectedArea(event.target.value)} className="filter-select">
-                  <option value="">Tất cả</option>
+                  <option value="">Tat ca</option>
                   {areas.map((area) => (
                     <option key={area} value={area}>
                       {area}
@@ -254,13 +198,13 @@ export function HomePage() {
               </div>
 
               <div className="filter-group">
-                <label>Loại món</label>
+                <label>Loai mon</label>
                 <select
                   value={selectedCategory}
                   onChange={(event) => setSelectedCategory(event.target.value)}
                   className="filter-select"
                 >
-                  <option value="">Tất cả</option>
+                  <option value="">Tat ca</option>
                   {categories.map((category) => (
                     <option key={category} value={category}>
                       {category}
@@ -270,70 +214,68 @@ export function HomePage() {
               </div>
 
               <div className="filter-group">
-                <label>Sắp xếp</label>
+                <label>Sap xep</label>
                 <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} className="filter-select">
-                  <option value="rating">Đánh giá cao</option>
-                  <option value="distance">Gần nhất</option>
-                  <option value="reviews">Nhiều đánh giá</option>
-                  <option value="price">Giá hợp lý</option>
+                  <option value="rating">Danh gia cao</option>
+                  <option value="distance">Gan nhat</option>
+                  <option value="reviews">Nhieu danh gia</option>
+                  <option value="price">Gia hop ly</option>
                 </select>
               </div>
             </div>
           </div>
 
           <div className="hero-actions">
-            <button type="button" className="brand-btn big" onClick={handleDecideForMe}>
-              <Sparkles size={18} />
-              <span>Quyết định giúp tôi</span>
+            <button type="button" className="brand-btn big" onClick={handleGetNearby} disabled={locating}>
+              <LocateFixed size={18} />
+              <span>{locating ? "Dang lay vi tri..." : "Gan Toi"}</span>
             </button>
-            <Link to="/posts/create" className="brand-btn-secondary big">
-              <MapPin size={18} />
-              <span>Gửi bài cộng đồng</span>
-            </Link>
+
+            <button type="button" className="brand-btn-secondary big" onClick={handleDecision} disabled={locating}>
+              <Sparkles size={18} />
+              <span>Quyet dinh giup toi</span>
+            </button>
           </div>
         </section>
 
-        {recommendedPlace && (
+        {locationError && <div className="surface-card inline-alert">{locationError}</div>}
+
+        {userLocation && (
+          <div className="surface-card inline-alert inline-alert-success">
+            Vi tri cua ban: lat {userLocation.lat.toFixed(6)} / lng {userLocation.lng.toFixed(6)}
+          </div>
+        )}
+
+        {nearbyPlaces.length > 0 && (
           <section className="section-block">
             <div className="section-head">
-              <h2>Gợi ý cho bạn</h2>
+              <h2>5 quan gan ban (ban kinh 5km)</h2>
             </div>
-
-            <div className="surface-card recommendation-card">
-              <div className="recommendation-grid">
-                <img src={recommendedPlace.image} alt={recommendedPlace.name} className="recommendation-image" />
-                <div className="recommendation-info">
-                  <h3>{recommendedPlace.name}</h3>
-                  <p className="muted-text">
-                    {recommendedPlace.category} / {recommendedPlace.area} / {Number(recommendedPlace.distance || 0).toFixed(1)} km
-                  </p>
-                  <p className="muted-text">Địa chỉ: {recommendedPlace.address}</p>
-                  <p className="muted-text">{recommendedPlace.closingLabel}</p>
-                  <p className="muted-text">
-                    Đánh giá {Number(recommendedPlace.rating || 0).toFixed(1)} sao từ {recommendedPlace.reviewCount || 0} lượt
-                  </p>
-                  <div className="place-card-actions">
-                    <Link to={`/restaurants/${recommendedPlace.id}`} className="brand-btn">
-                      Xem chi tiết quán
-                    </Link>
-                    <a href={recommendedPlace.mapsUrl} target="_blank" rel="noreferrer" className="ghost-btn">
-                      Mở Google Maps
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div className="card-grid">
+              {nearbyPlaces.map((place) => (
+                <PlaceCard key={`nearby-${place.id}`} place={place} />
+              ))}
             </div>
           </section>
         )}
 
-        <section id="data3" className="section-block">
-          <div className="section-head">
-            <h2>Danh sách quán ăn</h2>
-            <p className="muted-text">Xem nhanh thông tin chính và mở trang chi tiết của từng quán.</p>
-          </div>
+        {decisionPlace && (
+          <section className="section-block">
+            <div className="section-head">
+              <h2>Quan ngau nhien de xuat cho ban</h2>
+            </div>
+            <div className="card-grid">
+              <PlaceCard place={{ ...decisionPlace, isTrending: true }} />
+            </div>
+          </section>
+        )}
 
+        <section className="section-block">
+          <div className="section-head">
+            <h2>Danh sach quan an</h2>
+          </div>
           {loading ? (
-            <div className="surface-card inline-alert">Đang tải danh sách quán...</div>
+            <div className="surface-card inline-alert">Dang tai danh sach quan...</div>
           ) : filteredPlaces.length > 0 ? (
             <div className="card-grid">
               {filteredPlaces.map((place) => (
@@ -341,53 +283,22 @@ export function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="surface-card inline-alert">Không tìm thấy quán nào phù hợp với bộ lọc hiện tại.</div>
+            <div className="surface-card inline-alert">Khong co ket qua phu hop bo loc hien tai.</div>
           )}
         </section>
 
-        <section id="community" className="section-block">
-          <div className="section-head">
-            <h2>Cộng đồng</h2>
-            <p className="muted-text">Bài đăng cộng đồng là phần bổ sung để mọi người chia sẻ trải nghiệm thực tế.</p>
-          </div>
-
-          <div className="community-cta surface-card">
-            <div>
-              <h3>Bạn vừa ăn được một quán hay?</h3>
-              <p className="muted-text">
-                Gửi địa chỉ, hình ảnh và nhận xét của bạn. Admin sẽ duyệt trước khi hiển thị công khai.
-              </p>
+        {!loading && trendingPlaces.length > 0 && (
+          <section className="section-block">
+            <div className="section-head">
+              <h2>Quan noi bat</h2>
             </div>
-            <Link to="/posts/create" className="brand-btn">
-              <ArrowRight size={16} />
-              <span>Mở form đăng quán</span>
-            </Link>
-          </div>
-
-          {communityHighlights.length > 0 ? (
-            <div className="community-highlight-grid">
-              {communityHighlights.map((item) => (
-                <CommunityHighlightCard key={item.id} item={item} />
+            <div className="card-grid">
+              {trendingPlaces.map((place) => (
+                <PlaceCard key={`trending-${place.id}`} place={place} />
               ))}
             </div>
-          ) : (
-            <div className="surface-card inline-alert">Chưa có bài cộng đồng nào được duyệt gần đây.</div>
-          )}
-
-          {!loading && (
-            <section className="section-block">
-              <div className="section-head">
-                <h2>Quán nổi bật</h2>
-                <p className="muted-text">Những quán được đánh giá cao để bạn mở nhanh trang chi tiết.</p>
-              </div>
-              <div className="card-grid">
-                {trendingPlaces.map((place) => (
-                  <PlaceCard key={place.id} place={place} />
-                ))}
-              </div>
-            </section>
-          )}
-        </section>
+          </section>
+        )}
       </div>
     </div>
   );
