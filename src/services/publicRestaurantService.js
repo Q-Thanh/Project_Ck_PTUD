@@ -32,7 +32,7 @@ export async function fetchRestaurantReviews(restaurantId) {
   const restaurant = await fetchVisibleRestaurantById(restaurantId);
   return (restaurant?.reviews || []).map((review, index) => ({
     id: review.id || `${restaurantId}-official-review-${index + 1}`,
-    author: review.author || "Nguoi dung",
+    author: review.author || "Người dùng",
     badge: review.badge || "",
     rating: Number(review.rating || 0),
     timeAgo: review.timeAgo || "",
@@ -96,7 +96,7 @@ export async function fetchCommunityHighlights(limit = 3) {
     excerpt: post.content,
     rating: Number(post.rating || 0),
     restaurantId: post.restaurantId,
-    restaurantName: post.restaurantSnapshot?.name || "Quan cong dong",
+    restaurantName: post.restaurantSnapshot?.name || "Quán cộng đồng",
     createdAt: post.publishedAt || post.createdAt,
   }));
 }

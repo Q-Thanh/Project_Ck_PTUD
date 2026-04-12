@@ -11,7 +11,7 @@ import {
 
 const EMPTY_FORM = {
   name: "",
-  area: "Quan 1",
+  area: "Quận 1",
   category: "Vietnamese",
   priceLevel: "",
   views: 0,
@@ -147,28 +147,28 @@ export function AdminRestaurantsPage() {
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
-        <h2>Quan ly quan an</h2>
+        <h2>Quản lý quán ăn</h2>
         <p className="muted-text">
-          Them, sua, an hien, cap nhat hinh anh/thong tin va dong bo du lieu quan an tu source data3.
+          Thêm, sửa, ẩn/hiện, cập nhật hình ảnh/thông tin và đồng bộ dữ liệu quán ăn từ source data3.
         </p>
       </section>
 
       <section className="surface-card sync-banner">
         <div>
-          <h3>Dong bo du lieu voi nguon ban dau</h3>
+          <h3>Đồng bộ dữ liệu với nguồn ban đầu</h3>
           <p className="muted-text">
-            Cap nhat thong tin quan va bo sung quan moi tu source de dam bao du lieu nhat quan.
+            Cập nhật thông tin quán và bổ sung quán mới từ source để đảm bảo dữ liệu nhất quán.
           </p>
           {syncResult && (
             <p className="muted-text">
-              Lan dong bo gan nhat: {formatDate(syncResult.syncedAt)} • Moi: {syncResult.created} • Cap nhat: {syncResult.updated}
+              Lần đồng bộ gần nhất: {formatDate(syncResult.syncedAt)} • Mới: {syncResult.created} • Cập nhật: {syncResult.updated}
             </p>
           )}
         </div>
 
         <button type="button" className="brand-btn" disabled={syncing} onClick={handleSyncSource}>
           <UploadCloud size={16} />
-          <span>{syncing ? "Dang dong bo..." : "Dong bo ngay"}</span>
+          <span>{syncing ? "Đang đồng bộ..." : "Đồng bộ ngay"}</span>
         </button>
       </section>
 
@@ -178,95 +178,95 @@ export function AdminRestaurantsPage() {
           <input
             type="search"
             value={filters.query}
-            placeholder="Tim theo ten quan / dia chi / loai mon / tag"
+            placeholder="Tìm theo tên quán / địa chỉ / loại món / tag"
             onChange={(event) => setFilters((prev) => ({ ...prev, query: event.target.value }))}
           />
         </label>
 
         <label className="control-field">
-          <span>Khu vuc</span>
+          <span>Khu vực</span>
           <select
             value={filters.area}
             onChange={(event) => setFilters((prev) => ({ ...prev, area: event.target.value }))}
           >
             {areaOptions.map((option) => (
               <option key={option} value={option}>
-                {option === "all" ? "Tat ca" : option}
+                {option === "all" ? "Tất cả" : option}
               </option>
             ))}
           </select>
         </label>
 
         <label className="control-field">
-          <span>Hien thi</span>
+          <span>Hiển thị</span>
           <select
             value={filters.hidden}
             onChange={(event) => setFilters((prev) => ({ ...prev, hidden: event.target.value }))}
           >
-            <option value="all">Tat ca</option>
-            <option value="visible">Dang hien</option>
-            <option value="hidden">Dang an</option>
+            <option value="all">Tất cả</option>
+            <option value="visible">Đang hiện</option>
+            <option value="hidden">Đang ẩn</option>
           </select>
         </label>
 
         <button type="button" className="ghost-btn" onClick={loadRestaurants}>
           <RefreshCw size={15} />
-          <span>Tai lai</span>
+          <span>Tải lại</span>
         </button>
       </section>
 
       <section className="surface-card table-card">
         <div className="table-head">
-          <h3>{editingId ? "Cap nhat quan an" : "Them quan an moi"}</h3>
+          <h3>{editingId ? "Cập nhật quán ăn" : "Thêm quán ăn mới"}</h3>
           {editingId && (
             <button type="button" className="ghost-btn" onClick={resetForm}>
-              Huy chinh sua
+              Hủy chỉnh sửa
             </button>
           )}
         </div>
 
         <form className="form-grid" onSubmit={submitForm}>
           <label className="control-field">
-            <span>Ten quan</span>
+            <span>Tên quán</span>
             <input
               value={form.name}
               onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
-              placeholder="Nhap ten quan"
+              placeholder="Nhập tên quán"
               required
             />
           </label>
 
           <label className="control-field">
-            <span>Khu vuc</span>
+            <span>Khu vực</span>
             <input
               value={form.area}
               onChange={(event) => setForm((prev) => ({ ...prev, area: event.target.value }))}
-              placeholder="VD: Quan 1"
+              placeholder="VD: Quận 1"
               required
             />
           </label>
 
           <label className="control-field">
-            <span>Loai mon</span>
+            <span>Loại món</span>
             <input
               value={form.category}
               onChange={(event) => setForm((prev) => ({ ...prev, category: event.target.value }))}
-              placeholder="VD: Nha hang Viet"
+              placeholder="VD: Nhà hàng Việt"
               required
             />
           </label>
 
           <label className="control-field">
-            <span>Muc gia</span>
+            <span>Mức giá</span>
             <input
               value={form.priceLevel}
               onChange={(event) => setForm((prev) => ({ ...prev, priceLevel: event.target.value }))}
-              placeholder="VD: 200.000 - 300.000 d/nguoi"
+              placeholder="VD: 200.000 - 300.000 đ/người"
             />
           </label>
 
           <label className="control-field">
-            <span>Luot xem</span>
+            <span>Lượt xem</span>
             <input
               type="number"
               min={0}
@@ -288,7 +288,7 @@ export function AdminRestaurantsPage() {
           </label>
 
           <label className="control-field">
-            <span>Tong reviews</span>
+            <span>Tổng reviews</span>
             <input
               type="number"
               min={0}
@@ -298,25 +298,25 @@ export function AdminRestaurantsPage() {
           </label>
 
           <label className="control-field">
-            <span>Gio mo cua</span>
+            <span>Giờ mở cửa</span>
             <input
               value={form.time}
               onChange={(event) => setForm((prev) => ({ ...prev, time: event.target.value }))}
-              placeholder="VD: Dang mo cua"
+              placeholder="VD: Đang mở cửa"
             />
           </label>
 
           <label className="control-field">
-            <span>Dia chi</span>
+            <span>Địa chỉ</span>
             <input
               value={form.address}
               onChange={(event) => setForm((prev) => ({ ...prev, address: event.target.value }))}
-              placeholder="Nhap dia chi"
+              placeholder="Nhập địa chỉ"
             />
           </label>
 
           <label className="control-field">
-            <span>URL hinh anh</span>
+            <span>URL hình ảnh</span>
             <input
               value={form.image}
               onChange={(event) => setForm((prev) => ({ ...prev, image: event.target.value }))}
@@ -339,17 +339,17 @@ export function AdminRestaurantsPage() {
               checked={form.hidden}
               onChange={(event) => setForm((prev) => ({ ...prev, hidden: event.target.checked }))}
             />
-            <span>An quan sau khi luu</span>
+            <span>Ẩn quán sau khi lưu</span>
           </label>
 
           <button type="submit" className="brand-btn">
             <Plus size={16} />
-            <span>{editingId ? "Luu cap nhat" : "Them quan"}</span>
+            <span>{editingId ? "Lưu cập nhật" : "Thêm quán"}</span>
           </button>
         </form>
       </section>
 
-      {loading && <div className="surface-card">Dang tai danh sach quan an...</div>}
+      {loading && <div className="surface-card">Đang tải danh sách quán ăn...</div>}
 
       {!loading && (
         <section className="card-stack">
@@ -376,13 +376,13 @@ export function AdminRestaurantsPage() {
                 />
               )}
 
-              <p className="muted-text">Dia chi: {restaurant.address || "Chua cap nhat"}</p>
+              <p className="muted-text">Địa chỉ: {restaurant.address || "Chưa cập nhật"}</p>
               <p className="muted-text">
-                Gio mo: {restaurant.time || "Chua cap nhat"} • Rating: {Number(restaurant.rating || 0).toFixed(1)} • Reviews: {Number(
+                Giờ mở: {restaurant.time || "Chưa cập nhật"} • Rating: {Number(restaurant.rating || 0).toFixed(1)} • Reviews: {Number(
                   restaurant.totalReviews || 0,
                 ).toLocaleString("vi-VN")}
               </p>
-              <p className="muted-text">Luot xem: {restaurant.views.toLocaleString("vi-VN")}</p>
+              <p className="muted-text">Lượt xem: {restaurant.views.toLocaleString("vi-VN")}</p>
               <p className="muted-text">
                 Sync: {restaurant.sourceSyncStatus} • {formatDate(restaurant.lastSyncedAt)}
               </p>
@@ -396,7 +396,7 @@ export function AdminRestaurantsPage() {
               </div>
 
               <label className="control-field">
-                <span>Cap nhat tags</span>
+                <span>Cập nhật tags</span>
                 <div className="inline-row">
                   <input
                     value={tagDrafts[restaurant.id] ?? ""}
@@ -416,7 +416,7 @@ export function AdminRestaurantsPage() {
                     onClick={() => handleAttachTags(restaurant.id)}
                   >
                     <Tags size={15} />
-                    <span>Gan tag</span>
+                    <span>Gắn tag</span>
                   </button>
                 </div>
               </label>
@@ -424,7 +424,7 @@ export function AdminRestaurantsPage() {
               <div className="moderation-actions">
                 <button type="button" className="ghost-btn" onClick={() => startEdit(restaurant)}>
                   <Pencil size={15} />
-                  <span>Sua thong tin</span>
+                  <span>Sửa thông tin</span>
                 </button>
 
                 <button
@@ -434,13 +434,13 @@ export function AdminRestaurantsPage() {
                   onClick={() => handleToggleVisibility(restaurant)}
                 >
                   {restaurant.hidden ? <Eye size={15} /> : <EyeOff size={15} />}
-                  <span>{restaurant.hidden ? "Hien quan" : "An quan"}</span>
+                  <span>{restaurant.hidden ? "Hiện quán" : "Ẩn quán"}</span>
                 </button>
               </div>
             </article>
           ))}
 
-          {!restaurants.length && <article className="surface-card">Khong co quan an phu hop bo loc.</article>}
+          {!restaurants.length && <article className="surface-card">Không có quán ăn phù hợp bộ lọc.</article>}
         </section>
       )}
     </div>

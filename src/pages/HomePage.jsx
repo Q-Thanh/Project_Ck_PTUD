@@ -206,10 +206,10 @@ export function HomePage() {
               <>
                 <Link to="/login" className="ghost-btn">
                   <UserRound size={16} />
-                  <span>Dang nhap</span>
+                  <span>Đăng nhập</span>
                 </Link>
                 <Link to="/register" className="brand-btn-secondary">
-                  <span>Dang ky</span>
+                  <span>Đăng ký</span>
                 </Link>
               </>
             )}
@@ -222,7 +222,7 @@ export function HomePage() {
                 </span>
                 <button type="button" className="ghost-btn" onClick={logout}>
                   <LogOut size={16} />
-                  <span>Dang xuat</span>
+                  <span>Đăng xuất</span>
                 </button>
               </>
             )}
@@ -235,7 +235,7 @@ export function HomePage() {
                 </Link>
                 <button type="button" className="ghost-btn" onClick={logout}>
                   <LogOut size={16} />
-                  <span>Dang xuat</span>
+                  <span>Đăng xuất</span>
                 </button>
               </>
             )}
@@ -318,7 +318,7 @@ export function HomePage() {
             </button>
             <button type="button" className="brand-btn-secondary big">
               <MapPin size={18} />
-              <span>Gan Toi</span>
+              <span>Gần Tôi</span>
             </button>
           </div>
 

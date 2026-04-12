@@ -2,12 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MapPinned, MessageSquarePlus, Star } from "lucide-react";
 import { useAuth } from "../context/useAuth";
-import {
-  fetchApprovedPostsForRestaurant,
-  fetchRestaurantReviews,
-  fetchVisibleRestaurantById,
-  submitCommentForApprovedPost,
-} from "../services/publicRestaurantService";
+import { fetchApprovedPostsForRestaurant, fetchRestaurantReviews, fetchVisibleRestaurantById, submitCommentForApprovedPost } from "../services/publicRestaurantService";
 
 function formatDate(dateValue) {
   return new Date(dateValue).toLocaleString("vi-VN", {
@@ -52,7 +47,7 @@ export default function RestaurantDetailCommunityPage() {
   }, [reviews]);
 
   if (!restaurant) {
-    return <div className="page-wrap p-6">Dang tai chi tiet quan...</div>;
+    return <div className="page-wrap p-6">Đang tải chi tiết quán...</div>;
   }
 
   const mapsUrl = restaurant.coords
@@ -72,13 +67,11 @@ export default function RestaurantDetailCommunityPage() {
 
   const handleSubmitComment = async (postId) => {
     const draft = commentDrafts[postId];
-    if (!draft?.content?.trim()) {
-      return;
-    }
+    if (!draft?.content?.trim()) return;
 
     setSubmittingPostId(postId);
     await submitCommentForApprovedPost(postId, {
-      author: session.displayName || "Nguoi dung",
+      author: session.displayName || "Người dùng",
       authorId: session.id || 0,
       content: draft.content.trim(),
       rating: Number(draft.rating || 0),
@@ -103,21 +96,21 @@ export default function RestaurantDetailCommunityPage() {
 
           <aside className="surface-card detail-sidebar">
             <Link to="/" className="ghost-btn">
-              Ve trang chu
+              Về trang chủ
             </Link>
             <h1>{restaurant.name}</h1>
             <p className="muted-text">
-              {restaurant.category} • {restaurant.area || "Khac"}
+              {restaurant.category} • {restaurant.area || "Khác"}
             </p>
-            <p className="muted-text">Mo cua: {restaurant.time || "Chua cap nhat"}</p>
-            <p className="muted-text">Gia: {restaurant.priceLevel || "Dang cap nhat"}</p>
+            <p className="muted-text">Mở cửa: {restaurant.time || "Chưa cập nhật"}</p>
+            <p className="muted-text">Giá: {restaurant.priceLevel || "Đang cập nhật"}</p>
 
             <div className="detail-address-card">
-              <p className="strong-label">Dia chi quan</p>
-              <p>{restaurant.address || "Chua cap nhat"}</p>
+              <p className="strong-label">Địa chỉ quán</p>
+              <p>{restaurant.address || "Chưa cập nhật"}</p>
               <a href={mapsUrl} target="_blank" rel="noreferrer" className="brand-btn">
                 <MapPinned size={16} />
-                <span>Mo tren Google Maps</span>
+                <span>Mở trên Google Maps</span>
               </a>
             </div>
 
@@ -126,12 +119,12 @@ export default function RestaurantDetailCommunityPage() {
                 <Star size={14} fill="currentColor" />
                 <span>{averageRating}</span>
               </div>
-              <p className="muted-text">{reviews.length} danh gia tu review goc, bai duyet va binh luan cong dong</p>
+              <p className="muted-text">{reviews.length} đánh giá từ review gốc, bài duyệt và bình luận cộng đồng</p>
             </div>
 
             {restaurant.menuHighlights?.length > 0 && (
               <div className="detail-menu-box">
-                <p className="strong-label">Mon noi bat</p>
+                <p className="strong-label">Món nổi bật</p>
                 <div className="tag-list">
                   {restaurant.menuHighlights.map((item) => (
                     <span key={item} className="tag-chip">
@@ -146,7 +139,7 @@ export default function RestaurantDetailCommunityPage() {
 
         <section className="surface-card detail-section">
           <div className="section-head">
-            <h2>Danh gia tong hop</h2>
+            <h2>Đánh giá tổng hợp</h2>
           </div>
           <div className="detail-review-list">
             {reviews.length > 0 ? (
@@ -163,14 +156,14 @@ export default function RestaurantDetailCommunityPage() {
                 </article>
               ))
             ) : (
-              <p className="muted-text">Chua co danh gia nao cho quan nay.</p>
+              <p className="muted-text">Chưa có đánh giá nào cho quán này.</p>
             )}
           </div>
         </section>
 
         <section className="surface-card detail-section">
           <div className="section-head">
-            <h2>Bai dang da duyet</h2>
+            <h2>Bài đăng đã duyệt</h2>
           </div>
 
           <div className="detail-post-stack">
@@ -191,14 +184,12 @@ export default function RestaurantDetailCommunityPage() {
                   )}
                 </div>
 
-                {post.restaurantSnapshot?.image && (
-                  <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />
-                )}
+                {post.restaurantSnapshot?.image && <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />}
 
                 <p>{post.content}</p>
 
                 <div className="detail-comment-block">
-                  <p className="strong-label">Binh luan va danh gia lai</p>
+                  <p className="strong-label">Bình luận và đánh giá lại</p>
 
                   {(post.comments || []).length > 0 ? (
                     <div className="detail-comment-list">
@@ -217,52 +208,35 @@ export default function RestaurantDetailCommunityPage() {
                       ))}
                     </div>
                   ) : (
-                    <p className="muted-text">Bai nay chua co binh luan nao.</p>
+                    <p className="muted-text">Bài này chưa có bình luận nào.</p>
                   )}
 
                   {!post.isFallback && isAuthenticated ? (
                     <div className="detail-comment-form">
                       <label className="control-field">
-                        <span>Danh gia cua ban</span>
-                        <input
-                          type="number"
-                          min="1"
-                          max="5"
-                          step="0.5"
-                          value={commentDrafts[post.id]?.rating || "5"}
-                          onChange={(event) => updateDraft(post.id, "rating", event.target.value)}
-                        />
+                        <span>Đánh giá của bạn</span>
+                        <input type="number" min="1" max="5" step="0.5" value={commentDrafts[post.id]?.rating || "5"} onChange={(event) => updateDraft(post.id, "rating", event.target.value)} />
                       </label>
 
                       <label className="control-field detail-comment-form-wide">
-                        <span>Viet binh luan</span>
-                        <textarea
-                          rows={3}
-                          value={commentDrafts[post.id]?.content || ""}
-                          onChange={(event) => updateDraft(post.id, "content", event.target.value)}
-                          placeholder="Ban thay quan nay the nao sau khi den an?"
-                        />
+                        <span>Viết bình luận</span>
+                        <textarea rows={3} value={commentDrafts[post.id]?.content || ""} onChange={(event) => updateDraft(post.id, "content", event.target.value)} placeholder="Bạn thấy quán này thế nào sau khi đến ăn?" />
                       </label>
 
-                      <button
-                        type="button"
-                        className="brand-btn"
-                        disabled={submittingPostId === post.id || !(commentDrafts[post.id]?.content || "").trim()}
-                        onClick={() => handleSubmitComment(post.id)}
-                      >
+                      <button type="button" className="brand-btn" disabled={submittingPostId === post.id || !(commentDrafts[post.id]?.content || "").trim()} onClick={() => handleSubmitComment(post.id)}>
                         <MessageSquarePlus size={16} />
-                        <span>{submittingPostId === post.id ? "Dang gui..." : "Gui binh luan"}</span>
+                        <span>{submittingPostId === post.id ? "Đang gửi..." : "Gửi bình luận"}</span>
                       </button>
                     </div>
                   ) : !post.isFallback ? (
                     <p className="muted-text">
                       <Link to="/login" className="link-btn">
-                        Dang nhap
+                        Đăng nhập
                       </Link>{" "}
-                      de binh luan va danh gia lai quan nay.
+                      để bình luận và đánh giá lại quán này.
                     </p>
                   ) : (
-                    <p className="muted-text">Binh luan se duoc mo khi co bai dang cong dong da duyet cho quan nay.</p>
+                    <p className="muted-text">Bình luận sẽ được mở khi có bài đăng cộng đồng đã duyệt cho quán này.</p>
                   )}
                 </div>
               </article>

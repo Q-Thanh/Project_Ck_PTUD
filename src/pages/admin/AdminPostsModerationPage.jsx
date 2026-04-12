@@ -3,10 +3,10 @@ import { CheckCircle2, CircleX, RefreshCw, Save, Search, Tags } from "lucide-rea
 import { approvePost, attachTagsToPost, listPosts, rejectPost, updatePost } from "../../services/adminService";
 
 const STATUS_OPTIONS = [
-  { value: "all", label: "Tat ca" },
-  { value: "pending", label: "Cho duyet" },
-  { value: "approved", label: "Da duyet" },
-  { value: "rejected", label: "Tu choi" },
+  { value: "all", label: "Tất cả" },
+  { value: "pending", label: "Chờ duyệt" },
+  { value: "approved", label: "Đã duyệt" },
+  { value: "rejected", label: "Từ chối" },
 ];
 
 function formatDate(dateValue) {
@@ -80,9 +80,9 @@ export function AdminPostsModerationPage() {
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
-        <h2>Quan ly bai dang cong dong</h2>
+        <h2>Quản lý bài đăng cộng đồng</h2>
         <p className="muted-text">
-          Admin co the duyet quan moi do user gui len, kiem tra dia chi, hinh anh, review va mo phan binh luan sau khi duyet.
+          Admin có thể duyệt quán mới do user gửi lên, kiểm tra địa chỉ, hình ảnh, review và mở phần bình luận sau khi duyệt.
         </p>
       </section>
 
@@ -92,13 +92,13 @@ export function AdminPostsModerationPage() {
           <input
             type="search"
             value={filters.query}
-            placeholder="Tim theo ten quan, tac gia, dia chi, noi dung"
+            placeholder="Tìm theo tên quán, tác giả, địa chỉ, nội dung"
             onChange={(event) => setFilters((prev) => ({ ...prev, query: event.target.value }))}
           />
         </label>
 
         <label className="control-field">
-          <span>Trang thai</span>
+          <span>Trạng thái</span>
           <select value={filters.status} onChange={(event) => setFilters((prev) => ({ ...prev, status: event.target.value }))}>
             {STATUS_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -110,18 +110,18 @@ export function AdminPostsModerationPage() {
 
         <button type="button" className="ghost-btn" onClick={loadPosts}>
           <RefreshCw size={15} />
-          <span>Tai lai</span>
+          <span>Tải lại</span>
         </button>
       </section>
 
       <section className="status-counters">
-        <span className="status-pill">Tat ca: {counters.all}</span>
-        <span className="status-pill status-pill-pending">Cho duyet: {counters.pending}</span>
-        <span className="status-pill status-pill-approved">Da duyet: {counters.approved}</span>
-        <span className="status-pill status-pill-rejected">Tu choi: {counters.rejected}</span>
+        <span className="status-pill">Tất cả: {counters.all}</span>
+        <span className="status-pill status-pill-pending">Chờ duyệt: {counters.pending}</span>
+        <span className="status-pill status-pill-approved">Đã duyệt: {counters.approved}</span>
+        <span className="status-pill status-pill-rejected">Từ chối: {counters.rejected}</span>
       </section>
 
-      {loading && <div className="surface-card">Dang tai bai dang...</div>}
+      {loading && <div className="surface-card">Đang tải bài đăng...</div>}
 
       {!loading && (
         <section className="card-stack">
@@ -131,7 +131,7 @@ export function AdminPostsModerationPage() {
                 <div>
                   <h3>{post.title}</h3>
                   <p className="muted-text">
-                    Tac gia: {post.author} • Tao luc: {formatDate(post.createdAt)}
+                    Tác giả: {post.author} • Tạo lúc: {formatDate(post.createdAt)}
                   </p>
                 </div>
                 <span className={`status-pill status-pill-${post.status}`}>{post.status}</span>
@@ -139,13 +139,13 @@ export function AdminPostsModerationPage() {
 
               <div className="admin-post-snapshot">
                 <div>
-                  <p className="strong-label">{post.restaurantSnapshot?.name || "Quan chua gan ten"}</p>
-                  <p className="muted-text">Dia chi: {post.restaurantSnapshot?.address || "Chua cap nhat"}</p>
+                  <p className="strong-label">{post.restaurantSnapshot?.name || "Quán chưa gắn tên"}</p>
+                  <p className="muted-text">Địa chỉ: {post.restaurantSnapshot?.address || "Chưa cập nhật"}</p>
                   <p className="muted-text">
-                    Loai mon: {post.restaurantSnapshot?.category || "Chua cap nhat"} • Gia: {post.restaurantSnapshot?.priceLevel || "Chua cap nhat"}
+                    Loại món: {post.restaurantSnapshot?.category || "Chưa cập nhật"} • Giá: {post.restaurantSnapshot?.priceLevel || "Chưa cập nhật"}
                   </p>
-                  <p className="muted-text">Gio mo cua: {post.restaurantSnapshot?.time || "Chua cap nhat"}</p>
-                  <p className="muted-text">Danh gia user gui: {Number(post.rating || 0).toFixed(1)}</p>
+                  <p className="muted-text">Giờ mở cửa: {post.restaurantSnapshot?.time || "Chưa cập nhật"}</p>
+                  <p className="muted-text">Đánh giá user gửi: {Number(post.rating || 0).toFixed(1)}</p>
                 </div>
 
                 {post.restaurantSnapshot?.image && (
@@ -161,11 +161,11 @@ export function AdminPostsModerationPage() {
                     #{tag}
                   </span>
                 ))}
-                {!(post.tags || []).length && <span className="muted-text">Chua co tag</span>}
+                {!(post.tags || []).length && <span className="muted-text">Chưa có tag</span>}
               </div>
 
               <label className="control-field">
-                <span>Gan tag bai dang</span>
+                <span>Gắn tag bài đăng</span>
                 <div className="inline-row">
                   <input
                     value={draftTags[post.id] ?? ""}
@@ -185,13 +185,13 @@ export function AdminPostsModerationPage() {
                     onClick={() => runAction(post.id, () => attachTagsToPost(post.id, draftTags[post.id] || ""))}
                   >
                     <Tags size={15} />
-                    <span>Gan tag</span>
+                    <span>Gắn tag</span>
                   </button>
                 </div>
               </label>
 
               <label className="control-field">
-                <span>Ghi chu moderation</span>
+                <span>Ghi chú moderation</span>
                 <textarea
                   rows={2}
                   value={draftNotes[post.id] ?? ""}
@@ -201,7 +201,7 @@ export function AdminPostsModerationPage() {
                       [post.id]: event.target.value,
                     }))
                   }
-                  placeholder="Ghi chu ly do tu choi hoac nhac user bo sung..."
+                  placeholder="Ghi chú lý do từ chối hoặc nhắc user bổ sung..."
                 />
               </label>
 
@@ -213,7 +213,7 @@ export function AdminPostsModerationPage() {
                   onClick={() => runAction(post.id, () => approvePost(post.id))}
                 >
                   <CheckCircle2 size={15} />
-                  <span>Duyet bai va mo comment</span>
+                  <span>Duyệt bài và mở comment</span>
                 </button>
 
                 <button
@@ -223,7 +223,7 @@ export function AdminPostsModerationPage() {
                   onClick={() => runAction(post.id, () => rejectPost(post.id, draftNotes[post.id] || undefined))}
                 >
                   <CircleX size={15} />
-                  <span>Tu choi</span>
+                  <span>Từ chối</span>
                 </button>
 
                 <button
@@ -239,7 +239,7 @@ export function AdminPostsModerationPage() {
                   }
                 >
                   <Save size={15} />
-                  <span>Luu ghi chu</span>
+                  <span>Lưu ghi chú</span>
                 </button>
               </div>
 
@@ -261,7 +261,7 @@ export function AdminPostsModerationPage() {
             </article>
           ))}
 
-          {!posts.length && <article className="surface-card">Khong co bai dang phu hop bo loc.</article>}
+          {!posts.length && <article className="surface-card">Không có bài đăng phù hợp bộ lọc.</article>}
         </section>
       )}
     </div>

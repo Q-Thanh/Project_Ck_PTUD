@@ -16,7 +16,7 @@ function PlaceCard({ place }) {
         {place.isTrending && (
           <div className="place-badges">
             <span className="highlight-badge">Top</span>
-            <span className="price-badge">Gan ban</span>
+            <span className="price-badge">Gần bạn</span>
           </div>
         )}
       </div>
@@ -41,10 +41,10 @@ function PlaceCard({ place }) {
 
         <div className="place-card-actions">
           <Link to={`/restaurants/${place.id}`} className="brand-btn">
-            Xem chi tiet
+            Xem chi tiết
           </Link>
           <a href={place.mapsUrl} target="_blank" rel="noreferrer" className="ghost-btn">
-            Mo Maps
+            Mở Maps
           </a>
         </div>
       </div>
@@ -54,7 +54,7 @@ function PlaceCard({ place }) {
 
 async function getCurrentPositionAsync() {
   if (!navigator.geolocation) {
-    throw new Error("Trinh duyet khong ho tro dinh vi.");
+    throw new Error("Trình duyệt không hỗ trợ định vị.");
   }
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject, {
@@ -129,11 +129,11 @@ export function HomePage() {
       const nearby = await fetchNearbyRestaurants({ lat, lng, radiusKm: 5, limit: 5 });
       setNearbyPlaces(nearby);
       if (!nearby.length) {
-        setLocationError("Khong tim thay quan nao trong ban kinh 5km.");
+        setLocationError("Không tìm thấy quán nào trong bán kính 5km.");
       }
       return { lat, lng };
     } catch {
-      setLocationError("Khong the lay vi tri hien tai. Hay cho phep truy cap vi tri va thu lai.");
+      setLocationError("Không thể lấy vị trí hiện tại. Hãy cho phép truy cập vị trí và thử lại.");
       return null;
     } finally {
       setLocating(false);
@@ -154,7 +154,7 @@ export function HomePage() {
     });
     setDecisionPlace(picked);
     if (!picked) {
-      setLocationError("Khong co quan phu hop trong 5km de de xuat ngau nhien.");
+      setLocationError("Không có quán phù hợp trong 5km để đề xuất ngẫu nhiên.");
     }
   };
 
@@ -166,18 +166,18 @@ export function HomePage() {
         <section id="home" className="hero-block">
           <p className="hero-kicker">Food Discovery Platform</p>
           <h1>
-            Tim quan ngon trong <span>ban kinh 5km</span>
+            Tìm quán ngon trong <span>bán kính 5km</span>
           </h1>
           <p className="hero-subtitle">
-            Duyet danh sach quan, lay vi tri hien tai de xem 5 quan gan ban nhat co danh gia cao, va de he thong chon
-            ngau nhien mot quan cho ban.
+            Duyệt danh sách quán, lấy vị trí hiện tại để xem 5 quán gần bạn nhất có đánh giá cao, và để hệ thống chọn
+            ngẫu nhiên một quán cho bạn.
           </p>
 
           <div className="hero-search surface-card">
             <Search size={20} />
             <input
               type="text"
-              placeholder="Tim theo ten quan, dia chi, loai mon..."
+              placeholder="Tìm theo tên quán, địa chỉ, loại món..."
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
@@ -186,9 +186,9 @@ export function HomePage() {
           <div className="filters-section surface-card">
             <div className="filter-row">
               <div className="filter-group">
-                <label>Khu vuc</label>
+                <label>Khu vực</label>
                 <select value={selectedArea} onChange={(event) => setSelectedArea(event.target.value)} className="filter-select">
-                  <option value="">Tat ca</option>
+                  <option value="">Tất cả</option>
                   {areas.map((area) => (
                     <option key={area} value={area}>
                       {area}
@@ -198,13 +198,13 @@ export function HomePage() {
               </div>
 
               <div className="filter-group">
-                <label>Loai mon</label>
+                <label>Loại món</label>
                 <select
                   value={selectedCategory}
                   onChange={(event) => setSelectedCategory(event.target.value)}
                   className="filter-select"
                 >
-                  <option value="">Tat ca</option>
+                  <option value="">Tất cả</option>
                   {categories.map((category) => (
                     <option key={category} value={category}>
                       {category}
@@ -214,12 +214,12 @@ export function HomePage() {
               </div>
 
               <div className="filter-group">
-                <label>Sap xep</label>
+                <label>Sắp xếp</label>
                 <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} className="filter-select">
-                  <option value="rating">Danh gia cao</option>
-                  <option value="distance">Gan nhat</option>
-                  <option value="reviews">Nhieu danh gia</option>
-                  <option value="price">Gia hop ly</option>
+                  <option value="rating">Đánh giá cao</option>
+                  <option value="distance">Gần nhất</option>
+                  <option value="reviews">Nhiều đánh giá</option>
+                  <option value="price">Giá hợp lý</option>
                 </select>
               </div>
             </div>
@@ -228,12 +228,12 @@ export function HomePage() {
           <div className="hero-actions">
             <button type="button" className="brand-btn big" onClick={handleGetNearby} disabled={locating}>
               <LocateFixed size={18} />
-              <span>{locating ? "Dang lay vi tri..." : "Gan Toi"}</span>
+              <span>{locating ? "Đang lấy vị trí..." : "Gần Tôi"}</span>
             </button>
 
             <button type="button" className="brand-btn-secondary big" onClick={handleDecision} disabled={locating}>
               <Sparkles size={18} />
-              <span>Quyet dinh giup toi</span>
+              <span>Quyết định giúp tôi</span>
             </button>
           </div>
         </section>
@@ -242,14 +242,14 @@ export function HomePage() {
 
         {userLocation && (
           <div className="surface-card inline-alert inline-alert-success">
-            Vi tri cua ban: lat {userLocation.lat.toFixed(6)} / lng {userLocation.lng.toFixed(6)}
+            Vị trí của bạn: lat {userLocation.lat.toFixed(6)} / lng {userLocation.lng.toFixed(6)}
           </div>
         )}
 
         {nearbyPlaces.length > 0 && (
           <section className="section-block">
             <div className="section-head">
-              <h2>5 quan gan ban (ban kinh 5km)</h2>
+              <h2>5 quán gần bạn (bán kính 5km)</h2>
             </div>
             <div className="card-grid">
               {nearbyPlaces.map((place) => (
@@ -262,7 +262,7 @@ export function HomePage() {
         {decisionPlace && (
           <section className="section-block">
             <div className="section-head">
-              <h2>Quan ngau nhien de xuat cho ban</h2>
+              <h2>Quán ngẫu nhiên đề xuất cho bạn</h2>
             </div>
             <div className="card-grid">
               <PlaceCard place={{ ...decisionPlace, isTrending: true }} />
@@ -272,10 +272,10 @@ export function HomePage() {
 
         <section className="section-block">
           <div className="section-head">
-            <h2>Danh sach quan an</h2>
+            <h2>Danh sách quán ăn</h2>
           </div>
           {loading ? (
-            <div className="surface-card inline-alert">Dang tai danh sach quan...</div>
+            <div className="surface-card inline-alert">Đang tải danh sách quán...</div>
           ) : filteredPlaces.length > 0 ? (
             <div className="card-grid">
               {filteredPlaces.map((place) => (
@@ -283,14 +283,14 @@ export function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="surface-card inline-alert">Khong co ket qua phu hop bo loc hien tai.</div>
+            <div className="surface-card inline-alert">Không có kết quả phù hợp bộ lọc hiện tại.</div>
           )}
         </section>
 
         {!loading && trendingPlaces.length > 0 && (
           <section className="section-block">
             <div className="section-head">
-              <h2>Quan noi bat</h2>
+              <h2>Quán nổi bật</h2>
             </div>
             <div className="card-grid">
               {trendingPlaces.map((place) => (

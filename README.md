@@ -1,39 +1,39 @@
 # FoodFinder - Project CK PTUD
 
-Ung dung tim quan an va cong dong review, gom 2 khoi:
+Ứng dụng tìm quán ăn và cộng đồng review, gồm 2 khối:
 - Frontend: React + Vite
-- Backend: Express + SQLite (luu ben vung)
+- Backend: Express + SQLite (lưu bền vững)
 
-## Tinh nang chinh
+## Tính năng chính
 
-- Trang chu:
-  - Tim kiem/loc/sap xep quan an
-  - Nut `Gan Toi` (xin quyen vi tri, goi y 5 quan trong 5km)
-  - Nut `Quyet dinh giup toi` (chon ngau nhien 1 quan trong nhom top 5 gan ban)
-- Cong dong:
-  - Hien thi bai dang da duoc admin duyet
-  - User dang bai moi vao hang cho duyet
-- Ban do:
-  - Hien thi marker quan an tren OpenStreetMap (React-Leaflet)
-  - Bam marker de xem thong tin va vao trang chi tiet quan
-- Ho so ca nhan:
-  - User cap nhat display name, phone, address, dob, bio, avatar URL
+- Trang chủ:
+  - Tìm kiếm/lọc/sắp xếp quán ăn
+  - Nút `Gần Tôi` (xin quyền vị trí, gợi ý 5 quán trong 5km)
+  - Nút `Quyết định giúp tôi` (chọn ngẫu nhiên 1 quán trong nhóm top 5 gần bạn)
+- Cộng đồng:
+  - Hiển thị bài đăng đã được admin duyệt
+  - User đăng bài mới vào hàng chờ duyệt
+- Bản đồ:
+  - Hiển thị marker quán ăn trên OpenStreetMap (React-Leaflet)
+  - Bấm marker để xem thông tin và vào trang chi tiết quán
+- Hồ sơ cá nhân:
+  - User cập nhật display name, phone, address, dob, bio, avatar URL
 - Admin:
-  - Quan ly bai dang (pending/approved/rejected, tag, history)
-  - Quan ly user (status active/locked/banned)
-  - Quan ly nha hang (CRUD, visibility, sync)
+  - Quản lý bài đăng (pending/approved/rejected, tag, history)
+  - Quản lý user (status active/locked/banned)
+  - Quản lý nhà hàng (CRUD, visibility, sync)
 
-## Cong nghe
+## Công nghệ
 
 - React 19, Vite 7
 - Express 5
 - SQLite (`better-sqlite3`)
-- Hash mat khau: `bcryptjs`
-- Ban do: `leaflet`, `react-leaflet`
+- Hash mật khẩu: `bcryptjs`
+- Bản đồ: `leaflet`, `react-leaflet`
 
-## Kien truc du lieu
+## Kiến trúc dữ liệu
 
-Backend SQLite la nguon du lieu duy nhat (khong fallback account localStorage):
+Backend SQLite là nguồn dữ liệu duy nhất (không fallback account localStorage):
 
 - `users`
 - `user_profiles`
@@ -45,36 +45,36 @@ Backend SQLite la nguon du lieu duy nhat (khong fallback account localStorage):
 - `geocode_cache`
 
 DB file runtime:
-- `server/data/foodfinder.db` (da duoc `.gitignore`)
+- `server/data/foodfinder.db` (đã được `.gitignore`)
 
-## Cai dat
+## Cài đặt
 
 ```bash
 npm install
 ```
 
-## Chay he thong (frontend + backend cung 1 link)
+## Chạy hệ thống (frontend + backend cùng 1 link)
 
 ```bash
 npm run dev:all
 ```
 
-Sau khi chay:
+Sau khi chạy:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:3100`
-- API dung qua frontend proxy: `http://localhost:5173/api/...`
+- API dùng qua frontend proxy: `http://localhost:5173/api/...`
 
 ## Script
 
-- `npm run dev` - chay frontend
-- `npm run dev:frontend` - chay frontend tai `0.0.0.0:5173`
-- `npm run dev:backend` - chay backend Express + SQLite
-- `npm run dev:all` - chay dong thoi frontend/backend
+- `npm run dev` - chạy frontend
+- `npm run dev:frontend` - chạy frontend tại `0.0.0.0:5173`
+- `npm run dev:backend` - chạy backend Express + SQLite
+- `npm run dev:all` - chạy đồng thời frontend/backend
 - `npm run lint` - eslint
 - `npm run build` - build production frontend
-- `npm run preview` - preview ban build
+- `npm run preview` - preview bản build
 
-## Tai khoan mac dinh
+## Tài khoản mặc định
 
 - Admin:
   - username: `admin`
@@ -83,7 +83,7 @@ Sau khi chay:
   - username: `user`
   - password: `user123`
 
-## API tieu bieu
+## API tiêu biểu
 
 - Auth:
   - `POST /api/auth/register`
@@ -116,12 +116,12 @@ Sau khi chay:
 1. `npm run lint`
 2. `npm run build`
 3. `npm run dev:all`
-4. Mo `http://localhost:5173`
-5. Kiem tra health `http://localhost:5173/api/health`
-6. Dang nhap admin, vao `/admin`, duyet 1 bai pending
-7. Vao `/community` kiem tra bai da hien thi
+4. Mở `http://localhost:5173`
+5. Kiểm tra health `http://localhost:5173/api/health`
+6. Đăng nhập admin, vào `/admin`, duyệt 1 bài pending
+7. Vào `/community` kiểm tra bài đã hiển thị
 
-## Ghi chu geocode
+## Ghi chú geocode
 
-- Backend co geocode cache cho dia chi (Nominatim + `geocode_cache`).
-- Nhung dia chi geocode fail se duoc danh dau de tranh goi lap moi lan khoi dong.
+- Backend có geocode cache cho địa chỉ (Nominatim + `geocode_cache`).
+- Những địa chỉ geocode fail sẽ được đánh dấu để tránh gọi lặp mỗi lần khởi động.

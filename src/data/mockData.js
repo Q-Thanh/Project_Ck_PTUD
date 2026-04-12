@@ -91,7 +91,7 @@
       "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
     reviews: [
       { user: "Nguyen I", comment: "Hai san tuoi ngon, gia cao nhung xung dang.", rating: 5 },
-      { user: "Tran J", comment: "Khong gian thoai mai.", rating: 4 }
+      { user: "Tran J", comment: "Không gian thoải mái.", rating: 4 }
     ]
   },
   {
