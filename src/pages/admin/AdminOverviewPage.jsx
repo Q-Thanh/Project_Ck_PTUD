@@ -15,7 +15,7 @@ export function AdminOverviewPage() {
 
     async function load() {
       setLoading(true);
-      const result = await getAdminStats("Tuan hien tai");
+      const result = await getAdminStats("Tuần hiện tại");
 
       if (!active) {
         return;
@@ -35,12 +35,12 @@ export function AdminOverviewPage() {
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
-        <p className="admin-header-kicker">Thong ke nha hang tu data3.json</p>
-        <h2>Tong quan he thong nha hang</h2>
-        <p className="muted-text">Bao gom thong ke moderation bai dang, nguoi dung va nha hang theo tuan.</p>
+        <p className="admin-header-kicker">Thống kê nhà hàng từ data3.json</p>
+        <h2>Tổng quan hệ thống nhà hàng</h2>
+        <p className="muted-text">Bao gồm thống kê moderation bài đăng, người dùng và nhà hàng theo tuần.</p>
       </section>
 
-      {loading && <div className="surface-card">Dang tai thong ke...</div>}
+      {loading && <div className="surface-card">Đang tải thống kê...</div>}
 
       {!loading && stats && (
         <>
@@ -49,7 +49,7 @@ export function AdminOverviewPage() {
               <span className="stat-icon">
                 <Store size={18} />
               </span>
-              <p>Tong nha hang</p>
+              <p>Tổng nhà hàng</p>
               <h3>{formatNumber(stats.totalRestaurants)}</h3>
             </article>
 
@@ -57,7 +57,7 @@ export function AdminOverviewPage() {
               <span className="stat-icon">
                 <Eye size={18} />
               </span>
-              <p>Nha hang dang an</p>
+              <p>Nhà hàng đang ẩn</p>
               <h3>{formatNumber(stats.hiddenRestaurants)}</h3>
             </article>
 
@@ -65,7 +65,7 @@ export function AdminOverviewPage() {
               <span className="stat-icon">
                 <FileCheck2 size={18} />
               </span>
-              <p>Bai dang cho duyet</p>
+              <p>Bài đăng chờ duyệt</p>
               <h3>{formatNumber(stats.pendingPosts)}</h3>
             </article>
 
@@ -73,7 +73,7 @@ export function AdminOverviewPage() {
               <span className="stat-icon">
                 <ShieldAlert size={18} />
               </span>
-              <p>Tai khoan bi han che</p>
+              <p>Tài khoản bị hạn chế</p>
               <h3>{formatNumber(stats.restrictedUsers)}</h3>
             </article>
 
@@ -81,7 +81,7 @@ export function AdminOverviewPage() {
               <span className="stat-icon">
                 <Star size={18} />
               </span>
-              <p>Rating trung binh</p>
+              <p>Rating trung bình</p>
               <h3>{Number(stats.ratingAverage || 0).toFixed(2)}</h3>
             </article>
 
@@ -89,14 +89,14 @@ export function AdminOverviewPage() {
               <span className="stat-icon">
                 <MapPinned size={18} />
               </span>
-              <p>Tong luot xem</p>
+              <p>Tổng lượt xem</p>
               <h3>{formatNumber(stats.totalViews)}</h3>
             </article>
           </section>
 
           <section className="surface-card table-card">
             <div className="table-head">
-              <h3>Top nha hang theo luot xem</h3>
+              <h3>Top nhà hàng theo lượt xem</h3>
             </div>
 
             <div className="simple-list">
@@ -106,64 +106,64 @@ export function AdminOverviewPage() {
                   <strong>{formatNumber(item.views)} views</strong>
                 </div>
               ))}
-              {!(stats.topViewedRestaurants || []).length && <p className="muted-text">Chua co du lieu.</p>}
+              {!(stats.topViewedRestaurants || []).length && <p className="muted-text">Chưa có dữ liệu.</p>}
             </div>
           </section>
 
           <div className="triple-grid">
             <section className="surface-card table-card">
               <div className="table-head">
-                <h3>Khu vuc noi bat</h3>
+                <h3>Khu vực nổi bật</h3>
               </div>
 
               <div className="simple-list">
                 {(stats.topAreas || []).map((item) => (
                   <div key={item.name} className="simple-list-row">
                     <span>{item.name}</span>
-                    <strong>{item.count} nha hang</strong>
+                    <strong>{item.count} nhà hàng</strong>
                   </div>
                 ))}
-                {!(stats.topAreas || []).length && <p className="muted-text">Chua co du lieu.</p>}
+                {!(stats.topAreas || []).length && <p className="muted-text">Chưa có dữ liệu.</p>}
               </div>
             </section>
 
             <section className="surface-card table-card">
               <div className="table-head">
-                <h3>Top tags pho bien</h3>
+                <h3>Top tags phổ biến</h3>
               </div>
 
               <div className="simple-list">
                 {(stats.topRecommendedDishes || []).map((item) => (
                   <div key={item.name} className="simple-list-row">
                     <span>#{item.name}</span>
-                    <strong>{item.count} lan</strong>
+                    <strong>{item.count} lần</strong>
                   </div>
                 ))}
-                {!(stats.topRecommendedDishes || []).length && <p className="muted-text">Chua co du lieu.</p>}
+                {!(stats.topRecommendedDishes || []).length && <p className="muted-text">Chưa có dữ liệu.</p>}
               </div>
             </section>
 
             <section className="surface-card table-card">
               <div className="table-head">
-                <h3>Chi so tong hop</h3>
+                <h3>Chỉ số tổng hợp</h3>
               </div>
 
               <div className="simple-list">
                 <div className="simple-list-row">
-                  <span>Tong reviews</span>
+                  <span>Tổng reviews</span>
                   <strong>{formatNumber(stats.totalReviews)}</strong>
                 </div>
                 <div className="simple-list-row">
-                  <span>Tong views</span>
+                  <span>Tổng views</span>
                   <strong>{formatNumber(stats.totalViews)}</strong>
                 </div>
                 <div className="simple-list-row">
-                  <span>Thong bao chua doc</span>
+                  <span>Thông báo chưa đọc</span>
                   <strong>{formatNumber(stats.unreadNotifications)}</strong>
                 </div>
                 <div className="simple-list-row">
                   <span>Week range</span>
-                  <strong>{stats.weekRange || "Tuan hien tai"}</strong>
+                  <strong>{stats.weekRange || "Tuần hiện tại"}</strong>
                 </div>
               </div>
             </section>

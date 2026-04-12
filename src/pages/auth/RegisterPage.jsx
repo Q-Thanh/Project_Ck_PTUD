@@ -31,7 +31,7 @@ export function RegisterPage() {
     }
   };
 
-  const handleSubmit = async (event) => { // Thêm chữ async
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (formState.password !== formState.confirmPassword) {
@@ -39,7 +39,6 @@ export function RegisterPage() {
       return;
     }
 
-    // Thêm chữ await
     const result = await register({
       displayName: formState.displayName,
       email: formState.email,
@@ -53,7 +52,7 @@ export function RegisterPage() {
 
     navigate("/", {
       replace: true,
-      state: { authMessage: `Tai khoan ${result.session.displayName} da san sang (${result.source || "api"}).` },
+      state: { authMessage: `Tài khoản ${result.session.displayName} đã sẵn sàng (${result.source || "api"}).` },
     });
   };
 
@@ -65,8 +64,8 @@ export function RegisterPage() {
             <div className="auth-logo">
               <ChefHat size={32} />
             </div>
-            <h1>Tao tai khoan moi</h1>
-            <p>Dang ky de luu hanh trinh kham pha am thuc cua ban trong FoodFinder.</p>
+            <h1>Tạo tài khoản mới</h1>
+            <p>Đăng ký để lưu hành trình khám phá ẩm thực của bạn trong FoodFinder.</p>
           </div>
 
           {errorMessage && (
@@ -77,7 +76,7 @@ export function RegisterPage() {
 
           <form className="auth-form" onSubmit={handleSubmit}>
             <label className="control-field">
-              <span>Ho va ten</span>
+              <span>Họ và tên</span>
               <input
                 name="displayName"
                 type="text"
@@ -99,45 +98,45 @@ export function RegisterPage() {
             </label>
 
             <label className="control-field">
-              <span>Mat khau</span>
+              <span>Mật khẩu</span>
               <input
                 name="password"
                 type="password"
                 value={formState.password}
                 onChange={handleChange}
-                placeholder="Tao mat khau cua ban"
+                placeholder="Tạo mật khẩu của bạn"
               />
             </label>
 
             <label className="control-field">
-              <span>Nhap lai mat khau</span>
+              <span>Nhập lại mật khẩu</span>
               <input
                 name="confirmPassword"
                 type="password"
                 value={formState.confirmPassword}
                 onChange={handleChange}
-                placeholder="Nhap lai mat khau"
+                placeholder="Nhập lại mật khẩu"
               />
             </label>
 
             <button type="submit" className="brand-btn auth-submit">
               <UserPlus size={16} />
-              <span>Dang ky tai khoan</span>
+              <span>Đăng ký tài khoản</span>
             </button>
           </form>
 
           <div className="auth-support-row">
             <Link to="/login" className="brand-btn-secondary">
-              <span>Da co tai khoan</span>
+              <span>Đã có tài khoản</span>
             </Link>
 
             <Link to="/" className="ghost-btn">
-              <span>Tiep tuc voi vai tro khach</span>
+              <span>Tiếp tục với vai trò khách</span>
             </Link>
           </div>
 
           <p className="auth-footer">
-            Ban da san sang dang nhap? <Link to="/login">Mo trang dang nhap</Link>
+            Bạn đã sẵn sàng đăng nhập? <Link to="/login">Mở trang đăng nhập</Link>
           </p>
         </section>
       </div>

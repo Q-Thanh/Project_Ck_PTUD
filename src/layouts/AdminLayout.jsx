@@ -3,10 +3,10 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 
 const navItems = [
-  { to: "/admin/overview", icon: LayoutDashboard, label: "Tong quan" },
-  { to: "/admin/restaurants", icon: Store, label: "Quan an" },
-  { to: "/admin/posts", icon: FileCheck2, label: "Bai dang" },
-  { to: "/admin/users", icon: Users, label: "Nguoi dung" },
+  { to: "/admin/overview", icon: LayoutDashboard, label: "Tổng quan" },
+  { to: "/admin/restaurants", icon: Store, label: "Quán ăn" },
+  { to: "/admin/posts", icon: FileCheck2, label: "Bài đăng" },
+  { to: "/admin/users", icon: Users, label: "Người dùng" },
 ];
 
 export function AdminLayout() {
@@ -47,11 +47,11 @@ export function AdminLayout() {
         <div className="admin-sidebar-footer">
           <button type="button" className="ghost-btn" onClick={() => navigate("/")}>
             <Home size={16} />
-            <span>Trang nguoi dung</span>
+            <span>Trang người dùng</span>
           </button>
           <button type="button" className="ghost-btn danger-btn" onClick={handleLogout}>
             <LogOut size={16} />
-            <span>Thoat Admin</span>
+            <span>Thoát Admin</span>
           </button>
         </div>
       </aside>
@@ -59,12 +59,12 @@ export function AdminLayout() {
       <main className="admin-main">
         <header className="admin-header surface-card">
           <div>
-            <p className="admin-header-kicker">Quan tri noi dung</p>
-            <h1>Bang dieu khien Admin</h1>
+            <p className="admin-header-kicker">Quản trị nội dung</p>
+            <h1>Bảng điều khiển Admin</h1>
           </div>
           <span className="status-pill status-pill-approved admin-role-pill">
             <ShieldCheck size={14} />
-            <span>Quyen Admin</span>
+            <span>Quyền Admin</span>
           </span>
         </header>
 

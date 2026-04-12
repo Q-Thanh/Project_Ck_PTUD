@@ -94,7 +94,7 @@ export const homePlaces = workingItems.map((item, index) => {
     category: item.category ?? "Unknown",
     area,
     address,
-    time: item?.operatingHours?.status || "Chua cap nhat",
+    time: item?.operatingHours?.status || "Chưa cập nhật",
     rating: toNumber(item.rating, 0),
     reviewCount: toNumber(item.totalReviews, reviews.length),
     priceLevel: item.priceLevel ?? "",

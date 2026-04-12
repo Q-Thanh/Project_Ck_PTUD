@@ -1,30 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  ArrowLeft,
-  Clock3,
-  Globe,
-  MapPin,
-  MapPinned,
-  MessageSquarePlus,
-  Phone,
-  Star,
-  UtensilsCrossed,
-  Wallet,
-  X,
-} from "lucide-react";
+import { ArrowLeft, Clock3, Globe, MapPin, MapPinned, MessageSquarePlus, Phone, Star, UtensilsCrossed, Wallet, X } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import {
-  fetchApprovedPostsForRestaurant,
-  fetchRestaurantReviews,
-  fetchVisibleRestaurantById,
-  submitCommentForApprovedPost,
-} from "../services/publicRestaurantService";
+import { fetchApprovedPostsForRestaurant, fetchRestaurantReviews, fetchVisibleRestaurantById, submitCommentForApprovedPost } from "../services/publicRestaurantService";
 
 const TAB_ITEMS = [
   { id: "overview", label: "Tổng quan" },
   { id: "menu", label: "Thực đơn" },
-  { id: "reviews", label: "Bài đánh giá" },
+  { id: "reviews", label: "Đánh giá" },
   { id: "about", label: "Giới thiệu" },
 ];
 
@@ -39,20 +22,11 @@ function formatDate(dateValue) {
   });
 }
 
-function formatSubRating(label, value) {
-  return `${label}: ${Number(value || 0).toFixed(1)}`;
-}
-
 function DetailInfoRow({ icon: Icon, label, value, href }) {
   if (!value) return null;
 
   const content = href ? (
-    <a
-      href={href}
-      target={href.startsWith("tel:") ? undefined : "_blank"}
-      rel={href.startsWith("tel:") ? undefined : "noreferrer"}
-      className="detail-info-link"
-    >
+    <a href={href} target={href.startsWith("tel:") ? undefined : "_blank"} rel={href.startsWith("tel:") ? undefined : "noreferrer"} className="detail-info-link">
       {value}
     </a>
   ) : (
@@ -85,16 +59,7 @@ function ReviewCard({ review }) {
           <span>{Number(review.rating || 0).toFixed(1)}</span>
         </span>
       </div>
-
-      <p>{review.content}</p>
-
-      {review.subRatings && (
-        <div className="detail-subrating-row">
-          <span className="detail-feature-pill">{formatSubRating("Ẩm thực", review.subRatings.food)}</span>
-          <span className="detail-feature-pill">{formatSubRating("Phục vụ", review.subRatings.service)}</span>
-          <span className="detail-feature-pill">{formatSubRating("Không gian", review.subRatings.atmosphere)}</span>
-        </div>
-      )}
+      <p>{review.content || review.text}</p>
     </article>
   );
 }
@@ -139,14 +104,11 @@ export default function RestaurantDetailData3Page() {
       return;
     }
 
-    const [reviewData, postData] = await Promise.all([
-      fetchRestaurantReviews(id),
-      fetchApprovedPostsForRestaurant(id),
-    ]);
+    const [reviewData, postData] = await Promise.all([fetchRestaurantReviews(id), fetchApprovedPostsForRestaurant(id)]);
 
     setRestaurant(restaurantData);
-    setOfficialReviews(reviewData);
-    setCommunityPosts(postData);
+    setOfficialReviews(reviewData || []);
+    setCommunityPosts(postData || []);
     setLoading(false);
   }, [id]);
 
@@ -157,7 +119,6 @@ export default function RestaurantDetailData3Page() {
 
   const aboutSections = useMemo(() => {
     if (!restaurant?.features) return [];
-
     return [
       { title: "Tùy chọn phục vụ", items: restaurant.features.serviceOptions },
       { title: "Điểm nổi bật", items: restaurant.features.highlights },
@@ -190,9 +151,7 @@ export default function RestaurantDetailData3Page() {
 
   const handleSubmitComment = async (postId) => {
     const draft = commentDrafts[postId];
-    if (!draft?.content?.trim()) {
-      return;
-    }
+    if (!draft?.content?.trim()) return;
 
     setSubmittingPostId(postId);
     await submitCommentForApprovedPost(postId, {
@@ -201,10 +160,7 @@ export default function RestaurantDetailData3Page() {
       content: draft.content.trim(),
       rating: Number(draft.rating || 0),
     });
-    setCommentDrafts((current) => ({
-      ...current,
-      [postId]: { rating: "5", content: "" },
-    }));
+    setCommentDrafts((current) => ({ ...current, [postId]: { rating: "5", content: "" } }));
     await loadData();
     setSubmittingPostId(null);
   };
@@ -243,12 +199,10 @@ export default function RestaurantDetailData3Page() {
           <Link to="/" className="detail-header-icon" aria-label="Quay lại">
             <ArrowLeft size={18} />
           </Link>
-
           <div className="detail-header-title">
             <p className="muted-text">Chi tiết quán ăn</p>
             <h1>{restaurant.name}</h1>
           </div>
-
           <Link to="/" className="detail-header-icon" aria-label="Đóng">
             <X size={18} />
           </Link>
@@ -256,12 +210,7 @@ export default function RestaurantDetailData3Page() {
 
         <nav className="surface-card detail-tabs" aria-label="Các tab chi tiết quán">
           {TAB_ITEMS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              className={`detail-tab ${activeTab === tab.id ? "detail-tab-active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
+            <button key={tab.id} type="button" className={`detail-tab ${activeTab === tab.id ? "detail-tab-active" : ""}`} onClick={() => setActiveTab(tab.id)}>
               {tab.label}
             </button>
           ))}
@@ -271,33 +220,19 @@ export default function RestaurantDetailData3Page() {
           <div className="detail-hero-media">
             <img src={restaurant.image} alt={restaurant.name} className="detail-hero-image" />
           </div>
-
           <div className="detail-hero-copy">
             <p className="hero-kicker">Thông tin quán</p>
             <h2>{restaurant.name}</h2>
-            <p className="muted-text">
-              {restaurant.category} / {restaurant.area}
-            </p>
-
+            <p className="muted-text">{restaurant.category} / {restaurant.area}</p>
             <div className="detail-hero-meta">
               <span className="rating-pill">
                 <Star size={14} fill="currentColor" />
-                <span>
-                  {Number(restaurant.rating || 0).toFixed(1)} / {restaurant.reviewCount} lượt đánh giá
-                </span>
+                <span>{Number(restaurant.rating || 0).toFixed(1)} / {restaurant.reviewCount} lượt đánh giá</span>
               </span>
               <span className="status-pill">{restaurant.closingLabel}</span>
             </div>
-
             <div className="detail-hero-actions">
-              <a
-                href={restaurant.reservationUrl || restaurant.mapsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="brand-btn"
-              >
-                Đặt bàn
-              </a>
+              <a href={restaurant.reservationUrl || restaurant.mapsUrl} target="_blank" rel="noreferrer" className="brand-btn">Đặt bàn</a>
               <a href={restaurant.mapsUrl} target="_blank" rel="noreferrer" className="ghost-btn">
                 <MapPinned size={16} />
                 <span>Mở Google Maps</span>
@@ -312,7 +247,6 @@ export default function RestaurantDetailData3Page() {
               <h2>3 bình luận nổi bật</h2>
               <p className="muted-text">Trích từ đánh giá sẵn có của quán để bạn xem nhanh ngay bên dưới.</p>
             </div>
-
             <div className="detail-review-preview-grid">
               {featuredReviews.map((review) => (
                 <ReviewCard key={review.id} review={review} />
@@ -327,15 +261,11 @@ export default function RestaurantDetailData3Page() {
               <div className="section-head">
                 <h2>Tổng quan</h2>
               </div>
-
               <div className="detail-service-pills">
-                {restaurant.serviceOptionsMain.map((item) => (
-                  <span key={item} className="detail-feature-pill detail-feature-pill-success">
-                    {item}
-                  </span>
+                {(restaurant.serviceOptionsMain || []).map((item) => (
+                  <span key={item} className="detail-feature-pill detail-feature-pill-success">{item}</span>
                 ))}
               </div>
-
               <div className="detail-info-list">
                 <DetailInfoRow icon={MapPin} label="Địa chỉ" value={restaurant.address} />
                 <DetailInfoRow icon={Clock3} label="Giờ mở cửa" value={restaurant.closingLabel} />
@@ -350,38 +280,17 @@ export default function RestaurantDetailData3Page() {
               <div className="section-head">
                 <h2>Thông tin nhanh</h2>
               </div>
-
-              <div className="detail-summary-grid">
-                <div className="detail-summary-item">
-                  <p className="strong-label">Đánh giá</p>
-                  <p>{Number(restaurant.rating || 0).toFixed(1)} sao</p>
-                </div>
-                <div className="detail-summary-item">
-                  <p className="strong-label">Lượt đánh giá</p>
-                  <p>{restaurant.reviewCount}</p>
-                </div>
-                <div className="detail-summary-item">
-                  <p className="strong-label">Loại món</p>
-                  <p>{restaurant.category}</p>
-                </div>
-                <div className="detail-summary-item">
-                  <p className="strong-label">Liên kết đặt bàn</p>
-                  <p>{restaurant.website || restaurant.mapsUrl || restaurant.phone || "Không có"}</p>
-                </div>
+              <div className="detail-menu-grid">
+                {(restaurant.menuHighlights || []).slice(0, 6).map((item) => (
+                  <article key={item} className="detail-menu-card">
+                    <UtensilsCrossed size={18} />
+                    <div>
+                      <p className="strong-label">{item}</p>
+                      <p className="muted-text">Món đang được nhiều người nhắc đến.</p>
+                    </div>
+                  </article>
+                ))}
               </div>
-
-              {restaurant.features.planning?.length > 0 && (
-                <div className="detail-inline-section">
-                  <p className="strong-label">Kế hoạch</p>
-                  <div className="detail-group-list">
-                    {restaurant.features.planning.map((item) => (
-                      <span key={item} className="detail-feature-pill">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </article>
           </section>
         )}
@@ -392,8 +301,7 @@ export default function RestaurantDetailData3Page() {
               <h2>Thực đơn</h2>
               <p className="muted-text">Những món nổi bật của quán.</p>
             </div>
-
-            {restaurant.menuHighlights.length > 0 ? (
+            {(restaurant.menuHighlights || []).length > 0 ? (
               <div className="detail-menu-grid">
                 {restaurant.menuHighlights.map((item) => (
                   <article key={item} className="detail-menu-card">
@@ -415,27 +323,15 @@ export default function RestaurantDetailData3Page() {
           <section className="detail-content-grid">
             <article className="surface-card detail-content-card">
               <div className="section-head">
-                <h2>Bài đánh giá sẵn có</h2>
-                <p className="muted-text">Nguồn nhận xét gốc của quán.</p>
+                <h2>Đánh giá sẵn có</h2>
               </div>
-
-              {officialReviews.length > 0 ? (
-                <div className="detail-review-list">
-                  {officialReviews.map((review) => (
-                    <ReviewCard key={review.id} review={review} />
-                  ))}
-                </div>
-              ) : (
-                <p className="muted-text">Chưa có đánh giá gốc nào cho quán này.</p>
-              )}
+              {officialReviews.length > 0 ? <div className="detail-review-list">{officialReviews.map((review) => <ReviewCard key={review.id} review={review} />)}</div> : <p className="muted-text">Chưa có đánh giá gốc nào cho quán này.</p>}
             </article>
 
             <article className="surface-card detail-content-card">
               <div className="section-head">
                 <h2>Đánh giá cộng đồng đã duyệt</h2>
-                <p className="muted-text">Hiển thị bổ sung bên dưới đánh giá gốc của quán.</p>
               </div>
-
               {communityPosts.length > 0 ? (
                 <div className="detail-post-stack">
                   {communityPosts.map((post) => (
@@ -443,11 +339,8 @@ export default function RestaurantDetailData3Page() {
                       <div className="place-row">
                         <div>
                           <h3>{post.title || post.restaurantSnapshot?.name || restaurant.name}</h3>
-                          <p className="muted-text">
-                            {post.author} / {formatDate(post.publishedAt || post.createdAt)}
-                          </p>
+                          <p className="muted-text">{post.author} / {formatDate(post.publishedAt || post.createdAt)}</p>
                         </div>
-
                         {Number(post.rating || 0) > 0 && (
                           <span className="rating-pill">
                             <Star size={14} fill="currentColor" />
@@ -456,10 +349,7 @@ export default function RestaurantDetailData3Page() {
                         )}
                       </div>
 
-                      {post.restaurantSnapshot?.image && (
-                        <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />
-                      )}
-
+                      {post.restaurantSnapshot?.image && <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />}
                       <p>{post.content}</p>
 
                       {(post.comments || []).length > 0 && (
@@ -482,47 +372,24 @@ export default function RestaurantDetailData3Page() {
 
                       <div className="detail-comment-block">
                         <p className="strong-label">Bình luận và đánh giá lại</p>
-
                         {isAuthenticated ? (
                           <div className="detail-comment-form">
                             <label className="control-field">
                               <span>Đánh giá của bạn</span>
-                              <input
-                                type="number"
-                                min="1"
-                                max="5"
-                                step="0.5"
-                                value={commentDrafts[post.id]?.rating || "5"}
-                                onChange={(event) => updateCommentDraft(post.id, "rating", event.target.value)}
-                              />
+                              <input type="number" min="1" max="5" step="0.5" value={commentDrafts[post.id]?.rating || "5"} onChange={(event) => updateCommentDraft(post.id, "rating", event.target.value)} />
                             </label>
-
                             <label className="control-field detail-comment-form-wide">
                               <span>Viết bình luận</span>
-                              <textarea
-                                rows={3}
-                                value={commentDrafts[post.id]?.content || ""}
-                                onChange={(event) => updateCommentDraft(post.id, "content", event.target.value)}
-                                placeholder="Bạn thấy quán này thế nào sau khi ghé ăn?"
-                              />
+                              <textarea rows={3} value={commentDrafts[post.id]?.content || ""} onChange={(event) => updateCommentDraft(post.id, "content", event.target.value)} placeholder="Bạn thấy quán này thế nào sau khi ghé ăn?" />
                             </label>
-
-                            <button
-                              type="button"
-                              className="brand-btn"
-                              disabled={submittingPostId === post.id || !(commentDrafts[post.id]?.content || "").trim()}
-                              onClick={() => handleSubmitComment(post.id)}
-                            >
+                            <button type="button" className="brand-btn" disabled={submittingPostId === post.id || !(commentDrafts[post.id]?.content || "").trim()} onClick={() => handleSubmitComment(post.id)}>
                               <MessageSquarePlus size={16} />
                               <span>{submittingPostId === post.id ? "Đang gửi..." : "Gửi bình luận"}</span>
                             </button>
                           </div>
                         ) : (
                           <p className="muted-text">
-                            <Link to="/login" className="link-btn">
-                              Đăng nhập
-                            </Link>{" "}
-                            để thêm bình luận và đánh giá lại.
+                            <Link to="/login" className="link-btn">Đăng nhập</Link> để thêm bình luận và đánh giá lại.
                           </p>
                         )}
                       </div>
@@ -542,16 +409,7 @@ export default function RestaurantDetailData3Page() {
               <h2>Giới thiệu</h2>
               <p className="muted-text">Tổng hợp thêm các thông tin mở rộng về quán.</p>
             </div>
-
-            {aboutSections.length > 0 ? (
-              <div className="detail-group-grid">
-                {aboutSections.map((section) => (
-                  <FeatureGroup key={section.title} title={section.title} items={section.items} />
-                ))}
-              </div>
-            ) : (
-              <p className="muted-text">Hiện chưa có nhiều thông tin giới thiệu cho quán này.</p>
-            )}
+            {aboutSections.length > 0 ? <div className="detail-group-grid">{aboutSections.map((section) => <FeatureGroup key={section.title} title={section.title} items={section.items} />)}</div> : <p className="muted-text">Hiện chưa có nhiều thông tin giới thiệu cho quán này.</p>}
           </section>
         )}
       </div>

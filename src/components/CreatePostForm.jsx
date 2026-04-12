@@ -25,7 +25,7 @@ export default function CreatePostForm() {
     event.preventDefault();
 
     if (!restaurantId || !content.trim()) {
-      setMessage("Vui long chon quan va nhap noi dung bai dang.");
+      setMessage("Vui lòng chọn quán và nhập nội dung bài đăng.");
       return;
     }
 
@@ -35,19 +35,19 @@ export default function CreatePostForm() {
       restaurantId,
       rating: Number(rating) || 5,
       content: content.trim(),
-      title: selectedRestaurant ? `Review ${selectedRestaurant.name}` : "Bai chia se moi",
-      author: session?.displayName || "Nguoi dung",
+      title: selectedRestaurant ? `Review ${selectedRestaurant.name}` : "Bài chia sẻ mới",
+      author: session?.displayName || "Người dùng",
       authorId: session?.id || 0,
       tags: selectedRestaurant?.category ? [selectedRestaurant.category] : [],
       mediaNames: files.map((file) => file.name),
     });
 
     if (!post) {
-      setMessage("Khong dang bai duoc. Vui long thu lai.");
+      setMessage("Không đăng bài được. Vui lòng thử lại.");
       return;
     }
 
-    setMessage("Dang bai thanh cong. Bai dang da vao trang thai cho duyet.");
+    setMessage("Đăng bài thành công. Bài đăng đã vào trạng thái chờ duyệt.");
     setContent("");
     setFiles([]);
     setRestaurantId("");
@@ -56,14 +56,14 @@ export default function CreatePostForm() {
 
   return (
     <form onSubmit={handleSubmit} className="surface-card p-4 space-y-3 max-w-xl">
-      <h3 className="text-lg font-semibold">Tao bai dang</h3>
+      <h3 className="text-lg font-semibold">Tạo bài đăng</h3>
 
       {message && <p className="muted-text">{message}</p>}
 
       <label className="block">
-        Chon quan
+        Chọn quán
         <select className="w-full p-2 border rounded" value={restaurantId} onChange={(event) => setRestaurantId(event.target.value)}>
-          <option value="">Chon quan</option>
+          <option value="">Chọn quán</option>
           {restaurants.map((restaurant) => (
             <option key={restaurant.id} value={restaurant.id}>
               {restaurant.name}
@@ -73,7 +73,7 @@ export default function CreatePostForm() {
       </label>
 
       <label>
-        Danh gia
+        Đánh giá
         <input
           type="number"
           min="1"
@@ -85,7 +85,7 @@ export default function CreatePostForm() {
       </label>
 
       <label className="block">
-        Noi dung
+        Nội dung
         <textarea className="w-full p-2 border rounded" value={content} onChange={(event) => setContent(event.target.value)} />
       </label>
 
@@ -107,7 +107,7 @@ export default function CreatePostForm() {
       </div>
 
       <button type="submit" className="brand-btn">
-        Dang bai
+        Đăng bài
       </button>
     </form>
   );

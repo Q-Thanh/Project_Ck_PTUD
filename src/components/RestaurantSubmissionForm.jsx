@@ -19,7 +19,7 @@ function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result || ""));
-    reader.onerror = () => reject(new Error("Khong doc duoc anh da chon."));
+    reader.onerror = () => reject(new Error("Không đọc được ảnh đã chọn."));
     reader.readAsDataURL(file);
   });
 }
@@ -74,12 +74,12 @@ export default function RestaurantSubmissionForm() {
     event.preventDefault();
 
     if (!isAuthenticated) {
-      setError("Ban can dang nhap truoc khi dang quan moi.");
+      setError("Bạn cần đăng nhập trước khi đăng quán mới.");
       return;
     }
 
     if (!canSubmit) {
-      setError("Vui long nhap ten quan, dia chi, anh, nhan xet va diem danh gia.");
+      setError("Vui lòng nhập tên quán, địa chỉ, ảnh, nhận xét và điểm đánh giá.");
       return;
     }
 
@@ -91,9 +91,9 @@ export default function RestaurantSubmissionForm() {
       const imageSource = imagePreview || form.imageUrl.trim();
 
       const post = await submitPostForModeration({
-        title: `${form.restaurantName.trim()} - review cong dong`,
+        title: `${form.restaurantName.trim()} - review cộng đồng`,
         content: form.review.trim(),
-        author: session.displayName || "Nguoi dung",
+        author: session.displayName || "Người dùng",
         authorId: session.id || 0,
         rating: Number(form.rating),
         mediaNames: [imageFile?.name || form.imageUrl.trim() || "anh-quan"],
@@ -109,16 +109,16 @@ export default function RestaurantSubmissionForm() {
       });
 
       if (!post) {
-        setError("Khong gui duoc bai dang. Vui long thu lai.");
+        setError("Không gửi được bài đăng. Vui lòng thử lại.");
         return;
       }
 
       setForm(INITIAL_FORM);
       setImageFile(null);
       setImagePreview("");
-      setMessage("Bai dang da duoc gui. Admin se duyet truoc khi hien thi cong khai.");
+      setMessage("Bài đăng đã được gửi. Admin sẽ duyệt trước khi hiển thị công khai.");
     } catch {
-      setError("Khong gui duoc bai dang. Vui long thu lai.");
+      setError("Không gửi được bài đăng. Vui lòng thử lại.");
     } finally {
       setSubmitting(false);
     }
@@ -128,19 +128,19 @@ export default function RestaurantSubmissionForm() {
     return (
       <section className="surface-card submission-shell">
         <div className="submission-heading">
-          <p className="hero-kicker">Cong Dong</p>
-          <h2>Dang quan moi sau khi dang nhap</h2>
+          <p className="hero-kicker">Cộng Đồng</p>
+          <h2>Đăng quán mới sau khi đăng nhập</h2>
           <p className="muted-text">
-            Ban can dang nhap de gui bai dang cho admin duyet truoc khi hien thi tren he thong.
+            Bạn cần đăng nhập để gửi bài đăng cho admin duyệt trước khi hiển thị trên hệ thống.
           </p>
         </div>
 
         <div className="submission-auth-actions">
           <Link to="/login" className="brand-btn">
-            Dang nhap de dang bai
+            Đăng nhập để đăng bài
           </Link>
           <Link to="/register" className="ghost-btn">
-            Tao tai khoan moi
+            Tạo tài khoản mới
           </Link>
         </div>
       </section>
@@ -150,10 +150,10 @@ export default function RestaurantSubmissionForm() {
   return (
     <section className="surface-card submission-shell">
       <div className="submission-heading">
-        <p className="hero-kicker">Bai Dang Cua Ban</p>
-        <h2>Gui quan an moi cho cong dong</h2>
+        <p className="hero-kicker">Bài Đăng Của Bạn</p>
+        <h2>Gửi quán ăn mới cho cộng đồng</h2>
         <p className="muted-text">
-          Bat buoc nhap ten quan, dia chi, anh, nhan xet va danh gia. Menu va thong tin phu la tuy chon.
+          Bắt buộc nhập tên quán, địa chỉ, ảnh, nhận xét và đánh giá. Menu và thông tin phụ là tùy chọn.
         </p>
       </div>
 
@@ -162,27 +162,27 @@ export default function RestaurantSubmissionForm() {
 
       <form className="submission-form" onSubmit={handleSubmit}>
         <label className="control-field">
-          <span>Ten quan</span>
+          <span>Tên quán</span>
           <input
             value={form.restaurantName}
             onChange={(event) => updateField("restaurantName", event.target.value)}
-            placeholder="Nhap ten quan"
+            placeholder="Nhập tên quán"
             required
           />
         </label>
 
         <label className="control-field submission-form-wide">
-          <span>Dia chi quan</span>
+          <span>Địa chỉ quán</span>
           <input
             value={form.address}
             onChange={(event) => updateField("address", event.target.value)}
-            placeholder="So nha, duong, quan..."
+            placeholder="Số nhà, đường, quận..."
             required
           />
         </label>
 
         <label className="control-field">
-          <span>Danh gia</span>
+          <span>Đánh giá</span>
           <input
             type="number"
             min="1"
@@ -195,78 +195,78 @@ export default function RestaurantSubmissionForm() {
         </label>
 
         <label className="control-field">
-          <span>Loai mon</span>
+          <span>Loại món</span>
           <input
             value={form.category}
             onChange={(event) => updateField("category", event.target.value)}
-            placeholder="Vi du: Bun bo, Ca phe"
+            placeholder="Ví dụ: Bún bò, Cà phê"
           />
         </label>
 
         <label className="control-field">
-          <span>Muc gia</span>
+          <span>Mức giá</span>
           <input
             value={form.priceLevel}
             onChange={(event) => updateField("priceLevel", event.target.value)}
-            placeholder="Vi du: $$ hoac 50.000 - 100.000"
+            placeholder="Ví dụ: $$ hoặc 50.000 - 100.000"
           />
         </label>
 
         <label className="control-field">
-          <span>Gio mo cua</span>
+          <span>Giờ mở cửa</span>
           <input
             value={form.time}
             onChange={(event) => updateField("time", event.target.value)}
-            placeholder="Vi du: 07:00 - 22:00"
+            placeholder="Ví dụ: 07:00 - 22:00"
           />
         </label>
 
         <label className="control-field submission-form-wide">
-          <span>Anh quan (URL)</span>
+          <span>Ảnh quán (URL)</span>
           <input
             value={form.imageUrl}
             onChange={(event) => updateField("imageUrl", event.target.value)}
-            placeholder="Dan link anh neu ban co san"
+            placeholder="Dán link ảnh nếu bạn có sẵn"
           />
         </label>
 
         <label className="control-field submission-form-wide">
-          <span>Hoac tai len 1 anh</span>
+          <span>Hoặc tải lên 1 ảnh</span>
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </label>
 
         <label className="control-field submission-form-wide">
-          <span>Nhan xet cua ban</span>
+          <span>Nhận xét của bạn</span>
           <textarea
             rows={5}
             value={form.review}
             onChange={(event) => updateField("review", event.target.value)}
-            placeholder="Quan co ngon khong, khong gian ra sao, co nen quay lai khong..."
+            placeholder="Quán có ngon không, không gian ra sao, có nên quay lại không..."
             required
           />
         </label>
 
         <label className="control-field submission-form-wide">
-          <span>Menu noi bat (tuy chon)</span>
+          <span>Menu nổi bật (tùy chọn)</span>
           <input
             value={form.menuHighlights}
             onChange={(event) => updateField("menuHighlights", event.target.value)}
-            placeholder="Pho dac biet, tra dao, com suon..."
+            placeholder="Phở đặc biệt, trà đào, cơm sườn..."
           />
         </label>
 
         {(imagePreview || form.imageUrl.trim()) && (
           <div className="submission-preview">
-            <img src={imagePreview || form.imageUrl.trim()} alt={form.restaurantName || "Anh quan"} />
+            <img src={imagePreview || form.imageUrl.trim()} alt={form.restaurantName || "Ảnh quán"} />
           </div>
         )}
 
         <div className="submission-actions">
           <button type="submit" className="brand-btn" disabled={submitting || !canSubmit}>
-            {submitting ? "Dang gui..." : "Gui bai cho admin duyet"}
+            {submitting ? "Đang gửi..." : "Gửi bài cho admin duyệt"}
           </button>
           <Link to="/" className="ghost-btn">
-            Ve trang chu
+            Về trang chủ
           </Link>
         </div>
       </form>

@@ -3,10 +3,10 @@ import { AlertTriangle, Ban, Lock, RefreshCw, Search, ShieldCheck } from "lucide
 import { listUserRiskSignals, listUsers, updateUserStatus } from "../../services/adminService";
 
 const STATUS_FILTERS = [
-  { value: "all", label: "Tat ca" },
-  { value: "active", label: "Dang hoat dong" },
-  { value: "locked", label: "Tam khoa" },
-  { value: "banned", label: "Cam" },
+  { value: "all", label: "Tất cả" },
+  { value: "active", label: "Đang hoạt động" },
+  { value: "locked", label: "Tạm khóa" },
+  { value: "banned", label: "Cấm" },
 ];
 
 function formatDate(dateValue) {
@@ -65,9 +65,9 @@ export function AdminUsersPage() {
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
-        <h2>Quan ly nguoi dung</h2>
+        <h2>Quản lý người dùng</h2>
         <p className="muted-text">
-          Theo doi tai khoan, cap nhat trang thai va giam sat cac tin hieu hanh vi bat thuong.
+          Theo dõi tài khoản, cập nhật trạng thái và giám sát các tín hiệu hành vi bất thường.
         </p>
       </section>
 
@@ -75,7 +75,7 @@ export function AdminUsersPage() {
         <div className="table-head">
           <h3>
             <AlertTriangle size={16} />
-            <span>Nguoi dung co rui ro cao</span>
+            <span>Người dùng có rủi ro cao</span>
           </h3>
         </div>
 
@@ -89,7 +89,7 @@ export function AdminUsersPage() {
               <span className={`risk-pill risk-pill-${riskTier(signal.riskScore)}`}>{signal.riskScore}/100</span>
             </div>
           ))}
-          {!riskSignals.length && <p className="muted-text">Khong co canh bao rui ro.</p>}
+          {!riskSignals.length && <p className="muted-text">Không có cảnh báo rủi ro.</p>}
         </div>
       </section>
 
@@ -99,13 +99,13 @@ export function AdminUsersPage() {
           <input
             type="search"
             value={filters.query}
-            placeholder="Tim theo ten hoac email"
+            placeholder="Tìm theo tên hoặc email"
             onChange={(event) => setFilters((prev) => ({ ...prev, query: event.target.value }))}
           />
         </label>
 
         <label className="control-field">
-          <span>Trang thai</span>
+          <span>Trạng thái</span>
           <select
             value={filters.status}
             onChange={(event) => setFilters((prev) => ({ ...prev, status: event.target.value }))}
@@ -120,18 +120,18 @@ export function AdminUsersPage() {
 
         <button type="button" className="ghost-btn" onClick={loadUsers}>
           <RefreshCw size={15} />
-          <span>Tai lai</span>
+          <span>Tải lại</span>
         </button>
       </section>
 
       <section className="status-counters">
-        <span className="status-pill">Tong: {counters.total}</span>
+        <span className="status-pill">Tổng: {counters.total}</span>
         <span className="status-pill status-pill-approved">Active: {counters.active}</span>
         <span className="status-pill status-pill-pending">Locked: {counters.locked}</span>
         <span className="status-pill status-pill-rejected">Banned: {counters.banned}</span>
       </section>
 
-      {loading && <div className="surface-card">Dang tai danh sach nguoi dung...</div>}
+      {loading && <div className="surface-card">Đang tải danh sách người dùng...</div>}
 
       {!loading && (
         <section className="card-stack">
@@ -143,14 +143,14 @@ export function AdminUsersPage() {
                   <p className="muted-text">
                     {user.email} • role: {user.role}
                   </p>
-                  <p className="muted-text">Lan hoat dong gan nhat: {formatDate(user.lastActive)}</p>
+                  <p className="muted-text">Lần hoạt động gần nhất: {formatDate(user.lastActive)}</p>
                 </div>
                 <span className={`status-pill status-pill-${user.status}`}>{user.status}</span>
               </div>
 
               <div className="inline-row">
                 <span className={`risk-pill risk-pill-${riskTier(user.riskScore)}`}>Risk: {user.riskScore}/100</span>
-                <span className="muted-text">Hanh dong gan nhat: {user.lastAction}</span>
+                <span className="muted-text">Hành động gần nhất: {user.lastAction}</span>
               </div>
 
               <div className="tag-list">
@@ -159,7 +159,7 @@ export function AdminUsersPage() {
                     {flag}
                   </span>
                 ))}
-                {!(user.abnormalFlags || []).length && <span className="muted-text">Khong co co bat thuong</span>}
+                {!(user.abnormalFlags || []).length && <span className="muted-text">Không có cờ bất thường</span>}
               </div>
 
               <div className="moderation-actions">
@@ -170,7 +170,7 @@ export function AdminUsersPage() {
                   onClick={() => handleUpdateStatus(user.id, "active")}
                 >
                   <ShieldCheck size={15} />
-                  <span>Mo khoa</span>
+                  <span>Mở khóa</span>
                 </button>
 
                 <button
@@ -180,7 +180,7 @@ export function AdminUsersPage() {
                   onClick={() => handleUpdateStatus(user.id, "locked")}
                 >
                   <Lock size={15} />
-                  <span>Tam khoa</span>
+                  <span>Tạm khóa</span>
                 </button>
 
                 <button
@@ -190,13 +190,13 @@ export function AdminUsersPage() {
                   onClick={() => handleUpdateStatus(user.id, "banned")}
                 >
                   <Ban size={15} />
-                  <span>Cam tai khoan</span>
+                  <span>Cấm tài khoản</span>
                 </button>
               </div>
             </article>
           ))}
 
-          {!users.length && <article className="surface-card">Khong co nguoi dung phu hop bo loc.</article>}
+          {!users.length && <article className="surface-card">Không có người dùng phù hợp bộ lọc.</article>}
         </section>
       )}
     </div>
