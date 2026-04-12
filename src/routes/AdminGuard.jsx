@@ -13,7 +13,6 @@ export function AdminGuard({ children }) {
         state={{
           deniedPath: location.pathname,
           adminRequired: true,
-          adminHint: "De dung chuc nang Admin, dang nhap tai khoan: admin, mat khau: admin.",
         }}
       />
     );

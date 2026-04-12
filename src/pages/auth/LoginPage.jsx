@@ -1,9 +1,7 @@
 ﻿import { useState } from "react";
-import { ChefHat, LogIn, ShieldCheck } from "lucide-react";
+import { ChefHat, LogIn } from "lucide-react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
-
-const DEFAULT_ADMIN_HINT = "De dung chuc nang Admin, dang nhap tai khoan: admin, mat khau: admin.";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -17,7 +15,6 @@ export function LoginPage() {
 
   const adminRequired = Boolean(location.state?.adminRequired);
   const deniedPath = location.state?.deniedPath;
-  const adminHint = location.state?.adminHint || DEFAULT_ADMIN_HINT;
 
   if (isAuthenticated && !adminRequired) {
     return <Navigate to={isAdmin ? "/admin" : "/"} replace />;
@@ -65,14 +62,6 @@ export function LoginPage() {
             </div>
             <h1>Chao mung tro lai</h1>
             <p>Dang nhap de luu dia diem yeu thich va tiep tuc hanh trinh an uong.</p>
-          </div>
-
-          <div className="auth-info" role="note">
-            <div className="auth-info-title">
-              <ShieldCheck size={16} />
-              <strong>Thong tin dang nhap Admin</strong>
-            </div>
-            <p>{adminHint}</p>
           </div>
 
           {adminRequired && deniedPath && (

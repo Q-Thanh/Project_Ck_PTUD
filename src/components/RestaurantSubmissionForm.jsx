@@ -90,7 +90,7 @@ export default function RestaurantSubmissionForm() {
     try {
       const imageSource = imagePreview || form.imageUrl.trim();
 
-      await submitPostForModeration({
+      const post = await submitPostForModeration({
         title: `${form.restaurantName.trim()} - review cong dong`,
         content: form.review.trim(),
         author: session.displayName || "Nguoi dung",
@@ -107,6 +107,11 @@ export default function RestaurantSubmissionForm() {
           menuHighlights: form.menuHighlights,
         },
       });
+
+      if (!post) {
+        setError("Khong gui duoc bai dang. Vui long thu lai.");
+        return;
+      }
 
       setForm(INITIAL_FORM);
       setImageFile(null);

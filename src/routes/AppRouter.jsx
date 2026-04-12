@@ -1,6 +1,9 @@
-﻿import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { AdminLayout } from "../layouts/AdminLayout";
 import { HomePage } from "../pages/HomePageData3";
+import { CommunityPage } from "../pages/CommunityPage";
+import { MapPage } from "../pages/MapPage";
+import { ProfilePage } from "../pages/ProfilePage";
 import RestaurantDetailPage from "../pages/RestaurantDetailData3Page";
 import RestaurantSubmissionForm from "../components/RestaurantSubmissionForm";
 import { LoginPage } from "../pages/auth/LoginPage";
@@ -15,6 +18,9 @@ export function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/community" element={<CommunityPage />} />
+      <Route path="/map" element={<MapPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
@@ -33,9 +39,9 @@ export function AppRouter() {
         <Route path="users" element={<AdminUsersPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
       <Route path="/restaurants/:id" element={<RestaurantDetailPage />} />
       <Route path="/posts/create" element={<RestaurantSubmissionForm />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

@@ -1,28 +1,59 @@
-# Project CK PTUD - FoodFinder
+# FoodFinder - Project CK PTUD
 
-Ung dung goi y quan an gom:
+Ung dung tim quan an va cong dong review, gom 2 khoi:
 - Frontend: React + Vite
-- Backend mock: Node.js (`server/index.js`)
-- Du lieu runtime: `data/data3.json` (thong qua `src/data/data2Runtime.js`)
+- Backend: Express + SQLite (luu ben vung)
 
-`main` da duoc hop nhat theo yeu cau va tong hop cac nhanh:
-- `feature/admin-mvp-ui`
-- `merge-local-auth-20260407`
-- `complete-project-setup`
-- `add_search`
+## Tinh nang chinh
 
-## 1) Yeu cau moi truong
+- Trang chu:
+  - Tim kiem/loc/sap xep quan an
+  - Nut `Gan Toi` (xin quyen vi tri, goi y 5 quan trong 5km)
+  - Nut `Quyet dinh giup toi` (chon ngau nhien 1 quan trong nhom top 5 gan ban)
+- Cong dong:
+  - Hien thi bai dang da duoc admin duyet
+  - User dang bai moi vao hang cho duyet
+- Ban do:
+  - Hien thi marker quan an tren OpenStreetMap (React-Leaflet)
+  - Bam marker de xem thong tin va vao trang chi tiet quan
+- Ho so ca nhan:
+  - User cap nhat display name, phone, address, dob, bio, avatar URL
+- Admin:
+  - Quan ly bai dang (pending/approved/rejected, tag, history)
+  - Quan ly user (status active/locked/banned)
+  - Quan ly nha hang (CRUD, visibility, sync)
 
-- Node.js 20+ (khuyen nghi LTS)
-- npm 10+
+## Cong nghe
 
-## 2) Cai dat
+- React 19, Vite 7
+- Express 5
+- SQLite (`better-sqlite3`)
+- Hash mat khau: `bcryptjs`
+- Ban do: `leaflet`, `react-leaflet`
+
+## Kien truc du lieu
+
+Backend SQLite la nguon du lieu duy nhat (khong fallback account localStorage):
+
+- `users`
+- `user_profiles`
+- `restaurants`
+- `posts`
+- `post_comments`
+- `post_moderation_history`
+- `notifications`
+- `geocode_cache`
+
+DB file runtime:
+- `server/data/foodfinder.db` (da duoc `.gitignore`)
+
+## Cai dat
 
 ```bash
 npm install
 ```
 
-## 3) Chay frontend + backend tren cung 1 link (khuyen nghi)
+## Chay he thong (frontend + backend cung 1 link)
 
 ```bash
 npm run dev:all
@@ -31,96 +62,66 @@ npm run dev:all
 Sau khi chay:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:3100`
-- Link su dung chinh cho nguoi dung: `http://localhost:5173`
-- Tat ca request auth di qua `/api` va duoc proxy tu Vite sang backend.
+- API dung qua frontend proxy: `http://localhost:5173/api/...`
 
-## 4) Cac script chinh
+## Script
 
-- `npm run dev`: chay frontend Vite mac dinh
-- `npm run dev:frontend`: chay frontend tai `0.0.0.0:5173`
-- `npm run dev:backend`: chay backend mock
-- `npm run dev:all`: chay dong thoi backend + frontend, dung 1 link frontend
-- `npm run build`: build production frontend
-- `npm run preview`: preview ban build
-- `npm run lint`: lint code
+- `npm run dev` - chay frontend
+- `npm run dev:frontend` - chay frontend tai `0.0.0.0:5173`
+- `npm run dev:backend` - chay backend Express + SQLite
+- `npm run dev:all` - chay dong thoi frontend/backend
+- `npm run lint` - eslint
+- `npm run build` - build production frontend
+- `npm run preview` - preview ban build
 
-## 5) Bien moi truong
+## Tai khoan mac dinh
 
-- `BACKEND_PORT`
-  - Dung cho `dev:all` va `vite.config.js`
-  - Mac dinh: `3100`
-- `VITE_AUTH_API_BASE`
-  - Mac dinh trong app: `/api`
-  - Neu can co the override trong file `.env`
+- Admin:
+  - username: `admin`
+  - password: `admin`
+- User demo:
+  - username: `user`
+  - password: `user123`
 
-Vi du:
+## API tieu bieu
 
-```bash
-BACKEND_PORT=3200 npm run dev:all
-```
+- Auth:
+  - `POST /api/auth/register`
+  - `POST /api/auth/login`
+- User:
+  - `GET /api/users/me`
+  - `PUT /api/users/me/profile`
+- Restaurants:
+  - `GET /api/restaurants`
+  - `GET /api/restaurants/:id`
+  - `GET /api/restaurants/nearby?lat&lng&radiusKm=5&limit=5`
+  - `GET /api/restaurants/decision?lat&lng&radiusKm=5`
+- Community:
+  - `GET /api/community/posts`
+  - `POST /api/community/posts`
+  - `POST /api/community/posts/:id/comments`
+- Admin:
+  - `GET /api/admin/stats`
+  - `GET /api/admin/posts`
+  - `PATCH /api/admin/posts/:id/approve`
+  - `PATCH /api/admin/posts/:id/reject`
+  - `GET /api/admin/users`
+  - `PATCH /api/admin/users/:id/status`
+  - `GET /api/admin/restaurants`
+  - `PATCH /api/admin/restaurants/:id`
+  - `PATCH /api/admin/restaurants/:id/visibility`
 
-## 6) Tai khoan test
-
-Auth co 2 lop:
-- Goi API backend (`/api/login`, `/api/register`)
-- Neu backend khong tra session hop le, app fallback local account
-
-Tai khoan fallback he thong:
-- Admin: `admin` / `admin` (email: `admin@foodfinder.local`)
-- User: `user` / `user123` (email: `user@foodfinder.local`)
-
-Luu y:
-- Dang ky tai khoan admin moi bi chan.
-- Quyen admin yeu cau dang nhap bang tai khoan admin (khong con demo bypass).
-- Muon dung chuc nang admin, bat buoc dang nhap dung tai khoan: `admin` va mat khau: `admin`.
-
-## 7) API backend mock
-
-Base URL thuc te cua backend: `http://localhost:<PORT>`
-
-Endpoint:
-- `GET /api/health` (hoac `/health`)
-- `POST /api/login`
-- `POST /api/register`
-
-Payload mau:
-
-```json
-{
-  "identifier": "admin",
-  "password": "admin"
-}
-```
-
-Hoac:
-
-```json
-{
-  "email": "user@foodfinder.local",
-  "password": "user123"
-}
-```
-
-## 8) Kiem tra nhanh (smoke test)
+## Smoke test nhanh
 
 1. `npm run lint`
 2. `npm run build`
 3. `npm run dev:all`
 4. Mo `http://localhost:5173`
-5. Mo `http://localhost:5173/api/health` va xac nhan json co `ok: true`
-6. Test dang ky/dang nhap user
-7. Dang nhap admin va vao `/admin`
-8. Kiem tra Home/Admin su dung du lieu `data3`
+5. Kiem tra health `http://localhost:5173/api/health`
+6. Dang nhap admin, vao `/admin`, duyet 1 bai pending
+7. Vao `/community` kiem tra bai da hien thi
 
-## 9) Cau truc thu muc chinh
+## Ghi chu geocode
 
-- `src/`: frontend app
-- `server/`: backend mock
-- `scripts/dev-all.js`: chay frontend + backend dong thoi
-- `data/data3.json`: du lieu nguon chinh
-- `src/data/data2Runtime.js`: map du lieu de render UI/admin
-
-## 10) Ghi chu
-
-- Neu gap loi CORS khi tu chay rieng frontend/backend, uu tien dung `npm run dev:all` de su dung proxy `/api`.
-- Neu muon doi cong backend, dat `BACKEND_PORT` va giu frontend truy cap qua `http://localhost:5173`.
+- Backend co geocode cache cho dia chi (Nominatim + `geocode_cache`).
+- Nhung dia chi geocode fail se duoc danh dau de tranh goi lap moi lan khoi dong.
