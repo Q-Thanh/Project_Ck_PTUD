@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function SearchBar({ onSearch, filters = {} }) {
+export default function SearchBar({ onSearch }) {
   const [q, setQ] = useState("");
   const [area, setArea] = useState("");
   const [category, setCategory] = useState("");

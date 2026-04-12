@@ -26,7 +26,7 @@ const DEFAULT_FALLBACK_ACCOUNTS = [
 ];
 
 function createGuestSession() {
-  return { role: "guest", displayName: "Khach", email: "" };
+  return { id: 0, role: "guest", displayName: "Khach", email: "", username: "" };
 }
 
 function normalizeEmail(email) {
@@ -54,8 +54,10 @@ function readStoredSession() {
     }
 
     return {
+      id: Number(parsed.id) || 0,
       displayName: typeof parsed.displayName === "string" ? parsed.displayName : "Khach",
       email: typeof parsed.email === "string" ? parsed.email : "",
+      username: typeof parsed.username === "string" ? parsed.username : "",
       role: parsed.role,
     };
   } catch {
@@ -107,9 +109,11 @@ function createSessionFromPayload(payload, defaultRole = "user") {
   const role = ["guest", "user", "admin"].includes(payload?.role) ? payload.role : defaultRole;
 
   return {
+    id: Number(payload?.id) || 0,
     role,
     displayName: payload?.displayName || payload?.name || "Nguoi dung",
     email: payload?.email || "",
+    username: payload?.username || "",
   };
 }
 
