@@ -26,6 +26,19 @@ function normalizeText(value) {
     .toLowerCase();
 }
 
+function pickAreaFromAddress(address) {
+  const parts = String(address ?? "")
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (parts.length >= 2) {
+    return parts[1];
+  }
+
+  return parts[0] || "Khac";
+}
+
 function normalizeTagList(tagsInput) {
   const tagsArray = Array.isArray(tagsInput)
     ? tagsInput
@@ -48,6 +61,26 @@ function normalizeTagList(tagsInput) {
   });
 
   return [...unique];
+}
+
+function normalizeRestaurantDraft(payload = {}, fallback = {}) {
+  const address = String(payload.address ?? fallback.address ?? "").trim();
+
+  return {
+    name: String(payload.name ?? fallback.name ?? "").trim(),
+    address,
+    area: String(payload.area ?? fallback.area ?? pickAreaFromAddress(address)).trim() || "Khac",
+    category: String(payload.category ?? fallback.category ?? "").trim(),
+    priceLevel: String(payload.priceLevel ?? fallback.priceLevel ?? "").trim(),
+    time: String(payload.time ?? fallback.time ?? "").trim(),
+    image: String(payload.image ?? fallback.image ?? "").trim(),
+    menuHighlights: Array.isArray(payload.menuHighlights)
+      ? payload.menuHighlights.map((item) => String(item).trim()).filter(Boolean)
+      : String(payload.menuHighlights ?? fallback.menuHighlights ?? "")
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean),
+  };
 }
 
 function readStore(key, fallbackValue) {
@@ -86,9 +119,9 @@ function normalizeRestaurantInput(payload = {}, fallback = {}) {
     ...payload,
     id: String(payload.id ?? fallback.id),
     name: String(payload.name ?? fallback.name ?? "Quan moi").trim(),
-    area: payload.area ?? fallback.area ?? "Khac",
-    category: payload.category ?? fallback.category ?? "Unknown",
-    priceLevel: payload.priceLevel ?? fallback.priceLevel ?? "",
+    area: String(payload.area ?? fallback.area ?? "Khac").trim() || "Khac",
+    category: String(payload.category ?? fallback.category ?? "Unknown").trim() || "Unknown",
+    priceLevel: String(payload.priceLevel ?? fallback.priceLevel ?? "").trim(),
     hidden: payload.hidden !== undefined ? Boolean(payload.hidden) : Boolean(fallback.hidden),
     views: Number.isFinite(Number(payload.views)) ? Number(payload.views) : Number(fallback.views ?? 0),
     tags,
@@ -98,13 +131,36 @@ function normalizeRestaurantInput(payload = {}, fallback = {}) {
     totalReviews: Number.isFinite(Number(payload.totalReviews))
       ? Number(payload.totalReviews)
       : Number(fallback.totalReviews ?? 0),
-    address: payload.address ?? fallback.address ?? "",
-    image: payload.image ?? fallback.image ?? "",
-    time: payload.time ?? fallback.time ?? "",
+    address: String(payload.address ?? fallback.address ?? "").trim(),
+    image: String(payload.image ?? fallback.image ?? "").trim(),
+    time: String(payload.time ?? fallback.time ?? "").trim(),
+    menuHighlights: Array.isArray(payload.menuHighlights)
+      ? payload.menuHighlights.map((item) => String(item).trim()).filter(Boolean)
+      : Array.isArray(fallback.menuHighlights)
+        ? fallback.menuHighlights
+        : [],
+  };
+}
+
+function normalizeCommentInput(payload = {}, fallback = {}) {
+  return {
+    ...fallback,
+    ...payload,
+    id: payload.id ?? fallback.id ?? `comment-${Date.now()}`,
+    author: String(payload.author ?? fallback.author ?? "Nguoi dung").trim(),
+    authorId: Number(payload.authorId ?? fallback.authorId ?? 0),
+    content: String(payload.content ?? fallback.content ?? "").trim(),
+    rating: Number.isFinite(Number(payload.rating)) ? Number(payload.rating) : Number(fallback.rating ?? 0),
+    createdAt: payload.createdAt ?? fallback.createdAt ?? new Date().toISOString(),
   };
 }
 
 function normalizePostInput(payload = {}, fallback = {}) {
+  const restaurantSnapshot = normalizeRestaurantDraft(
+    payload.restaurantSnapshot ?? {},
+    fallback.restaurantSnapshot ?? {},
+  );
+
   return {
     ...fallback,
     ...payload,
@@ -113,11 +169,29 @@ function normalizePostInput(payload = {}, fallback = {}) {
     content: String(payload.content ?? fallback.content ?? "").trim(),
     author: String(payload.author ?? fallback.author ?? "Nguoi dung").trim(),
     authorId: Number(payload.authorId ?? fallback.authorId ?? 0),
-    restaurantId: payload.restaurantId ?? fallback.restaurantId ?? null,
+    restaurantId:
+      payload.restaurantId !== undefined
+        ? payload.restaurantId
+          ? String(payload.restaurantId)
+          : null
+        : fallback.restaurantId ?? null,
     status: payload.status ?? fallback.status ?? "pending",
     createdAt: payload.createdAt ?? fallback.createdAt ?? new Date().toISOString(),
+    publishedAt: payload.publishedAt ?? fallback.publishedAt ?? null,
     violationNotes: String(payload.violationNotes ?? fallback.violationNotes ?? ""),
     tags: normalizeTagList(payload.tags ?? fallback.tags ?? []),
+    rating: Number.isFinite(Number(payload.rating)) ? Number(payload.rating) : Number(fallback.rating ?? 0),
+    mediaNames: Array.isArray(payload.mediaNames)
+      ? payload.mediaNames.map((item) => String(item).trim()).filter(Boolean)
+      : Array.isArray(fallback.mediaNames)
+        ? fallback.mediaNames
+        : [],
+    restaurantSnapshot,
+    comments: Array.isArray(payload.comments)
+      ? payload.comments.map((comment) => normalizeCommentInput(comment, comment))
+      : Array.isArray(fallback.comments)
+        ? fallback.comments.map((comment) => normalizeCommentInput(comment, comment))
+        : [],
     moderationHistory: Array.isArray(payload.moderationHistory)
       ? payload.moderationHistory
       : Array.isArray(fallback.moderationHistory)
@@ -166,6 +240,15 @@ function countByTag(items, getTags, limit = 5) {
     .slice(0, limit);
 }
 
+function buildPostTags(snapshot = {}, fallbackTags = []) {
+  return normalizeTagList([
+    ...(fallbackTags || []),
+    snapshot.category || "",
+    ...(snapshot.menuHighlights || []),
+    snapshot.area || "",
+  ]);
+}
+
 let restaurantsStore = readStore(STORAGE_KEYS.restaurants, adminRestaurantsSeed).map((restaurant) =>
   normalizeRestaurantInput(restaurant, restaurant),
 );
@@ -186,6 +269,15 @@ let moderationIdCounter =
     ),
   ) + 1;
 let notificationIdCounter = Math.max(500, ...notificationsStore.map((item) => Number(item.id) || 0)) + 1;
+let commentIdCounter = Math.max(
+  1000,
+  ...postsStore.flatMap((post) =>
+    (post.comments || []).map((comment) => {
+      const numeric = Number(String(comment.id || "").replace(/[^0-9]/g, ""));
+      return Number.isFinite(numeric) ? numeric : 0;
+    }),
+  ),
+) + 1;
 
 function persistRestaurants() {
   writeStore(STORAGE_KEYS.restaurants, restaurantsStore);
@@ -323,6 +415,116 @@ function appendModerationHistory(post, action, note = "") {
 
   moderationIdCounter += 1;
   return [...(post.moderationHistory || []), entry];
+}
+
+function findRestaurantBySnapshot(snapshot = {}, restaurantId = null) {
+  const lookupId = restaurantId ? String(restaurantId) : null;
+  const normalizedName = normalizeText(snapshot.name);
+  const normalizedAddress = normalizeText(snapshot.address);
+
+  return (
+    restaurantsStore.find((restaurant) => String(restaurant.id) === lookupId) ||
+    restaurantsStore.find((restaurant) => {
+      const sameName = normalizedName && normalizeText(restaurant.name) === normalizedName;
+      const sameAddress = normalizedAddress && normalizeText(restaurant.address) === normalizedAddress;
+      return sameName && (!normalizedAddress || sameAddress);
+    }) ||
+    null
+  );
+}
+
+function applyRatingToRestaurant(restaurant, rating, snapshot = {}) {
+  if (!restaurant || !Number.isFinite(Number(rating)) || Number(rating) <= 0) {
+    return restaurant;
+  }
+
+  const currentTotal = Number(restaurant.totalReviews || 0);
+  const nextTotal = currentTotal + 1;
+  const weightedRating = ((Number(restaurant.rating || 0) * currentTotal) + Number(rating)) / nextTotal;
+
+  return normalizeRestaurantInput(
+    {
+      ...restaurant,
+      rating: Number(weightedRating.toFixed(1)),
+      totalReviews: nextTotal,
+      address: snapshot.address || restaurant.address,
+      image: snapshot.image || restaurant.image,
+      time: snapshot.time || restaurant.time,
+      category: snapshot.category || restaurant.category,
+      area: snapshot.area || restaurant.area,
+      priceLevel: snapshot.priceLevel || restaurant.priceLevel,
+      menuHighlights:
+        snapshot.menuHighlights?.length ? snapshot.menuHighlights : restaurant.menuHighlights || [],
+      tags: normalizeTagList([...(restaurant.tags || []), ...buildPostTags(snapshot)]),
+      hidden: false,
+      sourceSyncStatus: "manual",
+      lastSyncedAt: new Date().toISOString(),
+    },
+    restaurant,
+  );
+}
+
+function ensureRestaurantForApprovedPost(post) {
+  const snapshot = normalizeRestaurantDraft(post.restaurantSnapshot ?? {}, {});
+  const matched = findRestaurantBySnapshot(snapshot, post.restaurantId);
+  const nextTags = normalizeTagList([...(post.tags || []), ...buildPostTags(snapshot)]);
+
+  if (matched) {
+    const nextRestaurant = applyRatingToRestaurant(
+      normalizeRestaurantInput(
+        {
+          ...matched,
+          address: snapshot.address || matched.address,
+          image: snapshot.image || matched.image,
+          time: snapshot.time || matched.time,
+          category: snapshot.category || matched.category,
+          area: snapshot.area || matched.area,
+          priceLevel: snapshot.priceLevel || matched.priceLevel,
+          menuHighlights:
+            snapshot.menuHighlights.length > 0 ? snapshot.menuHighlights : matched.menuHighlights || [],
+          tags: normalizeTagList([...(matched.tags || []), ...nextTags]),
+          hidden: false,
+          sourceSyncStatus: "manual",
+          lastSyncedAt: new Date().toISOString(),
+        },
+        matched,
+      ),
+      post.rating,
+      snapshot,
+    );
+
+    restaurantsStore = restaurantsStore.map((restaurant) =>
+      String(restaurant.id) === String(matched.id) ? nextRestaurant : restaurant,
+    );
+    persistRestaurants();
+    return nextRestaurant;
+  }
+
+  const created = normalizeRestaurantInput(
+    {
+      id: createCustomRestaurantId(),
+      name: snapshot.name || post.title,
+      area: snapshot.area || pickAreaFromAddress(snapshot.address),
+      category: snapshot.category || "Cong dong de xuat",
+      priceLevel: snapshot.priceLevel || "",
+      hidden: false,
+      views: 0,
+      tags: nextTags,
+      sourceSyncStatus: "manual",
+      lastSyncedAt: new Date().toISOString(),
+      rating: Number(post.rating || 0),
+      totalReviews: Number(post.rating || 0) > 0 ? 1 : 0,
+      address: snapshot.address || "",
+      image: snapshot.image || "",
+      time: snapshot.time || "Chua cap nhat",
+      menuHighlights: snapshot.menuHighlights,
+    },
+    {},
+  );
+
+  restaurantsStore = [created, ...restaurantsStore];
+  persistRestaurants();
+  return created;
 }
 
 export async function getAdminStats(weekRange = "Tuan hien tai") {
@@ -508,48 +710,69 @@ export async function listPosts(filters = {}) {
 
   const status = filters.status ?? "all";
   const query = normalizeText(filters.query);
+  const restaurantId =
+    filters.restaurantId !== undefined && filters.restaurantId !== null ? String(filters.restaurantId) : null;
 
   const filtered = postsStore.filter((post) => {
     const byStatus = status === "all" ? true : post.status === status;
+    const byRestaurant = restaurantId ? String(post.restaurantId) === restaurantId : true;
     const byQuery =
       !query ||
       normalizeText(post.title).includes(query) ||
       normalizeText(post.author).includes(query) ||
-      normalizeText(post.content).includes(query);
+      normalizeText(post.content).includes(query) ||
+      normalizeText(post.restaurantSnapshot?.name).includes(query) ||
+      normalizeText(post.restaurantSnapshot?.address).includes(query);
 
-    return byStatus && byQuery;
+    return byStatus && byRestaurant && byQuery;
   });
 
   return filtered
     .slice()
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort((a, b) => new Date(b.publishedAt || b.createdAt).getTime() - new Date(a.publishedAt || a.createdAt).getTime())
     .map((post) => clone(post));
 }
 
 export async function submitPostForModeration(payload = {}) {
   await wait();
 
-  const restaurantId = payload.restaurantId ? String(payload.restaurantId) : null;
-  const restaurant = restaurantId ? restaurantsStore.find((item) => String(item.id) === restaurantId) : null;
+  const snapshot = normalizeRestaurantDraft(payload.restaurantSnapshot ?? payload, {});
+  const restaurant = findRestaurantBySnapshot(snapshot, payload.restaurantId);
+  const author = payload.author || "Nguoi dung";
+  const createdAt = new Date().toISOString();
 
   const nextPost = normalizePostInput(
     {
       id: postIdCounter,
-      title: payload.title || (restaurant ? `Review ${restaurant.name}` : "Bai chia se moi"),
+      title: payload.title || `Review ${snapshot.name || restaurant?.name || "quan moi"}`,
       content: payload.content || "",
-      author: payload.author || "Nguoi dung",
+      author,
       authorId: Number(payload.authorId || 0),
-      restaurantId,
+      restaurantId: restaurant?.id ?? (payload.restaurantId ? String(payload.restaurantId) : null),
       status: "pending",
-      createdAt: new Date().toISOString(),
+      createdAt,
+      publishedAt: null,
       violationNotes: "",
-      tags: payload.tags || (restaurant?.tags || []).slice(0, 3),
+      tags: payload.tags || buildPostTags(snapshot, restaurant?.tags || []),
+      rating: Number(payload.rating || 0),
+      mediaNames: payload.mediaNames || [],
+      restaurantSnapshot: {
+        ...snapshot,
+        name: snapshot.name || restaurant?.name || "",
+        address: snapshot.address || restaurant?.address || "",
+        area: snapshot.area || restaurant?.area || pickAreaFromAddress(snapshot.address || restaurant?.address),
+        category: snapshot.category || restaurant?.category || "",
+        priceLevel: snapshot.priceLevel || restaurant?.priceLevel || "",
+        time: snapshot.time || restaurant?.time || "",
+        image: snapshot.image || restaurant?.image || "",
+      },
+      comments: [],
       moderationHistory: [
         {
           id: `mh-${moderationIdCounter}`,
           action: "submitted",
-          by: payload.author || "Nguoi dung",
-          at: new Date().toISOString(),
+          by: author,
+          at: createdAt,
           note: "Gui bai cho he thong",
         },
       ],
@@ -570,17 +793,37 @@ export async function approvePost(postId) {
   await wait();
 
   const lookupId = String(postId);
+  const target = postsStore.find((post) => String(post.id) === lookupId);
+  if (!target) return null;
+
+  const resolvedRestaurant = ensureRestaurantForApprovedPost(target);
   let updatedPost = null;
 
   postsStore = postsStore.map((post) => {
     if (String(post.id) !== lookupId) return post;
 
-    updatedPost = {
-      ...post,
-      status: "approved",
-      violationNotes: "",
-      moderationHistory: appendModerationHistory(post, "approved", "Bai dang dat tieu chuan"),
-    };
+    updatedPost = normalizePostInput(
+      {
+        ...post,
+        restaurantId: resolvedRestaurant?.id ?? post.restaurantId,
+        restaurantSnapshot: {
+          ...post.restaurantSnapshot,
+          name: resolvedRestaurant?.name || post.restaurantSnapshot?.name || "",
+          address: resolvedRestaurant?.address || post.restaurantSnapshot?.address || "",
+          area: resolvedRestaurant?.area || post.restaurantSnapshot?.area || "",
+          category: resolvedRestaurant?.category || post.restaurantSnapshot?.category || "",
+          priceLevel: resolvedRestaurant?.priceLevel || post.restaurantSnapshot?.priceLevel || "",
+          time: resolvedRestaurant?.time || post.restaurantSnapshot?.time || "",
+          image: resolvedRestaurant?.image || post.restaurantSnapshot?.image || "",
+          menuHighlights: resolvedRestaurant?.menuHighlights || post.restaurantSnapshot?.menuHighlights || [],
+        },
+        status: "approved",
+        publishedAt: post.publishedAt || new Date().toISOString(),
+        violationNotes: "",
+        moderationHistory: appendModerationHistory(post, "approved", "Bai dang dat tieu chuan"),
+      },
+      post,
+    );
 
     return updatedPost;
   });
@@ -674,6 +917,56 @@ export async function attachTagsToPost(postId, tagsInput) {
 
     return updatedPost;
   });
+
+  persistPosts();
+  return clone(updatedPost);
+}
+
+export async function addCommentToPost(postId, payload = {}) {
+  await wait();
+
+  const lookupId = String(postId);
+  let updatedPost = null;
+
+  postsStore = postsStore.map((post) => {
+    if (String(post.id) !== lookupId || post.status !== "approved") return post;
+
+    const nextComment = normalizeCommentInput(
+      {
+        id: `comment-${commentIdCounter}`,
+        author: payload.author || "Nguoi dung",
+        authorId: Number(payload.authorId || 0),
+        content: payload.content || "",
+        rating: Number(payload.rating || 0),
+        createdAt: new Date().toISOString(),
+      },
+      {},
+    );
+
+    commentIdCounter += 1;
+    updatedPost = normalizePostInput(
+      {
+        ...post,
+        comments: [...(post.comments || []), nextComment],
+      },
+      post,
+    );
+
+    return updatedPost;
+  });
+
+  if (!updatedPost) {
+    return null;
+  }
+
+  const matchedRestaurant = findRestaurantBySnapshot(updatedPost.restaurantSnapshot, updatedPost.restaurantId);
+  if (matchedRestaurant && Number(payload.rating || 0) > 0) {
+    const nextRestaurant = applyRatingToRestaurant(matchedRestaurant, payload.rating, updatedPost.restaurantSnapshot);
+    restaurantsStore = restaurantsStore.map((restaurant) =>
+      String(restaurant.id) === String(matchedRestaurant.id) ? nextRestaurant : restaurant,
+    );
+    persistRestaurants();
+  }
 
   persistPosts();
   return clone(updatedPost);

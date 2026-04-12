@@ -35,7 +35,7 @@ function PlaceCard({ place, showTrendingBadge, onImageClick }) {
   );
 }
 // Hàm này lấy vị trí hiện tại của người dùng và gửi lên backend để lấy danh sách quán ăn gần đó trong bán kính 5km.
-const handleGetNearby = () => {
+const _handleGetNearby = () => {
   if (!navigator.geolocation) {
     alert("Trình duyệt của bạn không hỗ trợ định vị.");
     return;
@@ -49,12 +49,12 @@ const handleGetNearby = () => {
 
       // Gửi tọa độ này lên Backend để lấy danh sách quán ăn trong bán kính 5km
       const response = await fetch(`http://localhost:3000/restaurants/nearby?lat=${latitude}&lng=${longitude}&radius=5`);
-      const data = await response.json();
+      const _data = await response.json();
       
       // Sau đó cập nhật danh sách quán ăn lên giao diện
       // setRestaurants(data); 
     },
-    (error) => {
+    (_error) => {
       alert("Không thể lấy vị trí. Vui lòng kiểm tra quyền truy cập vị trí.");
     }
   );
