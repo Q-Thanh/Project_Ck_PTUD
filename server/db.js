@@ -660,6 +660,8 @@ export function createStore(options = {}) {
   };
 
   seedInitialData();
+  // Ensure every restaurant from data3.json is always present in DB on startup.
+  syncRestaurantsFromSource();
   db.prepare(`UPDATE restaurants SET lat = NULL, lng = NULL, geocode_status = 'pending' WHERE lat = 0 AND lng = 0`).run();
 
   function nextUsername(base) {
@@ -977,12 +979,14 @@ export function createStore(options = {}) {
     let updated = 0;
     const tx = db.transaction(() => {
       sourceRestaurants.forEach((source) => {
-        const exists = db.prepare(`SELECT id, views FROM restaurants WHERE id = ?`).get(source.id);
+        const exists = db.prepare(`SELECT id, views, hidden FROM restaurants WHERE id = ?`).get(source.id);
         const merged = {
           ...source,
           sourceSyncStatus: "synced",
           lastSyncedAt: now,
           views: exists ? Number(exists.views || 0) : Number(source.views || 0),
+          // Keep admin-managed visibility if this row already exists.
+          hidden: exists ? Number(exists.hidden || 0) : Number(source.hidden || 0),
         };
         upsertRestaurantStmt.run(serializeRestaurantForDb(merged));
         if (exists) updated += 1;
