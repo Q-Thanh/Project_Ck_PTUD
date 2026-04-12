@@ -47,7 +47,7 @@ export function LoginPage() {
     navigate(nextPath, {
       replace: true,
       state: {
-        authMessage: `Chao mung ${result.session.displayName} quay tro lai (${result.source || "api"}).`,
+        authMessage: `Chào mừng ${result.session.displayName} quay trở lại (${result.source || "api"}).`,
       },
     });
   };
@@ -60,13 +60,13 @@ export function LoginPage() {
             <div className="auth-logo">
               <ChefHat size={32} />
             </div>
-            <h1>Chao mung tro lai</h1>
-            <p>Dang nhap de luu dia diem yeu thich va tiep tuc hanh trinh an uong.</p>
+            <h1>Chào mừng trở lại</h1>
+            <p>Đăng nhập để lưu địa điểm yêu thích và tiếp tục hành trình ăn uống.</p>
           </div>
 
           {adminRequired && deniedPath && (
             <div className="auth-error" role="alert">
-              Duong dan {deniedPath} can quyen admin. Vui long dang nhap bang tai khoan admin.
+              Đường dẫn {deniedPath} cần quyền admin. Vui lòng đăng nhập bằng tài khoản admin.
             </div>
           )}
 
@@ -78,41 +78,41 @@ export function LoginPage() {
 
           <form className="auth-form" onSubmit={handleSubmit}>
             <label className="control-field">
-              <span>Tai khoan hoac Email</span>
+              <span>Tài khoản hoặc Email</span>
               <input
                 name="identifier"
                 type="text"
                 value={formState.identifier}
                 onChange={handleChange}
-                placeholder="admin hoac ban@foodfinder.vn"
+                placeholder="admin hoặc ban@foodfinder.vn"
               />
             </label>
 
             <label className="control-field">
-              <span>Mat khau</span>
+              <span>Mật khẩu</span>
               <input
                 name="password"
                 type="password"
                 value={formState.password}
                 onChange={handleChange}
-                placeholder="Nhap mat khau cua ban"
+                placeholder="Nhập mật khẩu của bạn"
               />
             </label>
 
             <button type="submit" className="brand-btn auth-submit">
               <LogIn size={16} />
-              <span>Dang nhap</span>
+              <span>Đăng nhập</span>
             </button>
           </form>
 
           <div className="auth-support-row">
             <Link to="/" className="ghost-btn">
-              <span>Tiep tuc voi vai tro khach</span>
+              <span>Tiếp tục với vai trò khách</span>
             </Link>
           </div>
 
           <p className="auth-footer">
-            Chua co tai khoan? <Link to="/register">Dang ky ngay</Link>
+            Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
           </p>
         </section>
       </div>

@@ -39,7 +39,7 @@ export function ProfilePage() {
         });
       } catch (loadError) {
         if (!active) return;
-        setError(loadError.message || "Khong tai duoc thong tin profile.");
+        setError(loadError.message || "Không tải được thông tin profile.");
       } finally {
         if (active) setLoading(false);
       }
@@ -64,9 +64,9 @@ export function ProfilePage() {
     try {
       await updateMyProfile(profile);
       await refreshSession?.();
-      setMessage("Da cap nhat thong tin ca nhan.");
+      setMessage("Đã cập nhật thông tin cá nhân.");
     } catch (saveError) {
-      setError(saveError.message || "Khong cap nhat duoc profile.");
+      setError(saveError.message || "Không cập nhật được profile.");
     } finally {
       setSaving(false);
     }
@@ -83,33 +83,33 @@ export function ProfilePage() {
 
         <section className="section-block">
           <div className="section-head">
-            <h2>Thong tin ca nhan</h2>
-            <p className="muted-text">Cap nhat ho ten, lien he, ngay sinh, gioi thieu ngan va avatar URL.</p>
+            <h2>Thông tin cá nhân</h2>
+            <p className="muted-text">Cập nhật họ tên, liên hệ, ngày sinh, giới thiệu ngắn và avatar URL.</p>
           </div>
 
-          {loading && <div className="surface-card inline-alert">Dang tai profile...</div>}
+          {loading && <div className="surface-card inline-alert">Đang tải profile...</div>}
           {error && <div className="surface-card inline-alert">{error}</div>}
           {message && <div className="surface-card inline-alert inline-alert-success">{message}</div>}
 
           {!loading && (
             <form className="surface-card form-grid" onSubmit={handleSubmit}>
               <label className="control-field">
-                <span>Ho va ten</span>
+                <span>Họ và tên</span>
                 <input value={profile.displayName} onChange={(event) => updateField("displayName", event.target.value)} />
               </label>
 
               <label className="control-field">
-                <span>So dien thoai</span>
+                <span>Số điện thoại</span>
                 <input value={profile.phone} onChange={(event) => updateField("phone", event.target.value)} />
               </label>
 
               <label className="control-field">
-                <span>Ngay sinh</span>
+                <span>Ngày sinh</span>
                 <input type="date" value={profile.dob} onChange={(event) => updateField("dob", event.target.value)} />
               </label>
 
               <label className="control-field">
-                <span>Dia chi</span>
+                <span>Địa chỉ</span>
                 <input value={profile.address} onChange={(event) => updateField("address", event.target.value)} />
               </label>
 
@@ -119,12 +119,12 @@ export function ProfilePage() {
               </label>
 
               <label className="control-field" style={{ gridColumn: "1 / -1" }}>
-                <span>Gioi thieu</span>
+                <span>Giới thiệu</span>
                 <textarea rows={4} value={profile.bio} onChange={(event) => updateField("bio", event.target.value)} />
               </label>
 
               <button type="submit" className="brand-btn" disabled={saving}>
-                {saving ? "Dang luu..." : "Luu profile"}
+                {saving ? "Đang lưu..." : "Lưu profile"}
               </button>
             </form>
           )}

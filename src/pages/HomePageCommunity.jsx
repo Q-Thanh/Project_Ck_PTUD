@@ -25,7 +25,7 @@ function PlaceCard({ place }) {
         </p>
         <p className="muted-text">Dia chi: {place.address}</p>
         <p className="muted-text">
-          Mo cua: {place.time || "Chua cap nhat"} • {Number(place.distance || 0).toFixed(1)} km
+          Mở cửa: {place.time || "Chưa cập nhật"} • {Number(place.distance || 0).toFixed(1)} km
         </p>
 
         <div className="place-card-actions">
@@ -149,10 +149,10 @@ export function HomePage() {
               <>
                 <Link to="/login" className="ghost-btn">
                   <UserRound size={16} />
-                  <span>Dang nhap</span>
+                  <span>Đăng nhập</span>
                 </Link>
                 <Link to="/register" className="brand-btn-secondary">
-                  <span>Dang ky</span>
+                  <span>Đăng ký</span>
                 </Link>
               </>
             )}
@@ -169,7 +169,7 @@ export function HomePage() {
                 </span>
                 <button type="button" className="ghost-btn" onClick={logout}>
                   <LogOut size={16} />
-                  <span>Dang xuat</span>
+                  <span>Đăng xuất</span>
                 </button>
               </>
             )}
@@ -182,7 +182,7 @@ export function HomePage() {
                 </Link>
                 <button type="button" className="ghost-btn" onClick={logout}>
                   <LogOut size={16} />
-                  <span>Dang xuat</span>
+                  <span>Đăng xuất</span>
                 </button>
               </>
             )}
@@ -193,7 +193,7 @@ export function HomePage() {
 
         {deniedPath && (
           <div className="surface-card inline-alert">
-            Duong dan <strong>{deniedPath}</strong> can quyen admin. Dang nhap admin/admin de vao khu moderation.
+            Đường dẫn <strong>{deniedPath}</strong> cần quyền admin. Đăng nhập admin/admin để vào khu moderation.
           </div>
         )}
 
@@ -249,7 +249,7 @@ export function HomePage() {
               <div className="filter-group">
                 <label>Sap xep</label>
                 <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} className="filter-select">
-                  <option value="rating">Danh gia cao</option>
+                  <option value="rating">Đánh giá cao</option>
                   <option value="distance">Gan nhat</option>
                   <option value="reviews">Nhieu review</option>
                   <option value="price">Gia thap den cao</option>
@@ -261,7 +261,7 @@ export function HomePage() {
           <div className="hero-actions">
             <button type="button" className="brand-btn big" onClick={handleDecideForMe}>
               <Sparkles size={18} />
-              <span>Quyet dinh giup toi</span>
+              <span>Quyết định giúp tôi</span>
             </button>
             <Link to="/posts/create" className="brand-btn-secondary big">
               <MapPin size={18} />
@@ -286,7 +286,7 @@ export function HomePage() {
                   </p>
                   <p className="muted-text">Dia chi: {recommendedPlace.address}</p>
                   <p className="muted-text">
-                    Danh gia {Number(recommendedPlace.rating || 0).toFixed(1)} sao tu {recommendedPlace.reviewCount || 0} luot
+                    Đánh giá {Number(recommendedPlace.rating || 0).toFixed(1)} sao từ {recommendedPlace.reviewCount || 0} lượt
                   </p>
                   <div className="place-card-actions">
                     <Link to={`/restaurants/${recommendedPlace.id}`} className="brand-btn">
@@ -314,7 +314,7 @@ export function HomePage() {
           </div>
 
           {loading ? (
-            <div className="surface-card inline-alert">Dang tai danh sach quan...</div>
+            <div className="surface-card inline-alert">Đang tải danh sách quán...</div>
           ) : (
             <div className="card-grid">
               {(trendingPlaces.length ? trendingPlaces : filteredPlaces.slice(0, 4)).map((place) => (
@@ -326,7 +326,7 @@ export function HomePage() {
 
         <section id="community" className="section-block">
           <div className="section-head">
-            <h2>Cong dong quan an</h2>
+            <h2>Cộng đồng quán ăn</h2>
             <p className="muted-text">Quan duoc admin duyet se xuat hien tai day de moi nguoi tiep tuc danh gia.</p>
           </div>
 
@@ -346,7 +346,7 @@ export function HomePage() {
           )}
 
           {loading ? (
-            <div className="surface-card inline-alert">Dang tai du lieu cong dong...</div>
+            <div className="surface-card inline-alert">Đang tải dữ liệu cộng đồng...</div>
           ) : (
             <>
               {filteredPlaces.length > 0 ? (
@@ -356,7 +356,7 @@ export function HomePage() {
                   ))}
                 </div>
               ) : (
-                <div className="surface-card inline-alert">Khong tim thay quan nao phu hop bo loc hien tai.</div>
+                <div className="surface-card inline-alert">Không tìm thấy quán nào phù hợp bộ lọc hiện tại.</div>
               )}
             </>
           )}

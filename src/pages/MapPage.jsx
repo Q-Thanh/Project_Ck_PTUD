@@ -21,7 +21,7 @@ const DEFAULT_CENTER = [10.7769, 106.7009];
 
 async function getCurrentPositionAsync() {
   if (!navigator.geolocation) {
-    throw new Error("Trinh duyet khong ho tro dinh vi.");
+    throw new Error("Trình duyệt không hỗ trợ định vị.");
   }
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject, {
@@ -70,7 +70,7 @@ export function MapPage() {
         lng: Number(position.coords.longitude),
       });
     } catch {
-      setErrorMessage("Khong the lay vi tri hien tai. Hay cho phep truy cap vi tri va thu lai.");
+      setErrorMessage("Không thể lấy vị trí hiện tại. Hãy cho phép truy cập vị trí và thử lại.");
     }
   };
 
@@ -81,21 +81,21 @@ export function MapPage() {
 
         <section className="section-block">
           <div className="section-head">
-            <h2>Ban do OpenStreetMap</h2>
-            <p className="muted-text">Danh dau vi tri cac quan an. Bam marker de xem thong tin va mo trang chi tiet quan.</p>
+            <h2>Bản đồ OpenStreetMap</h2>
+            <p className="muted-text">Đánh dấu vị trí các quán ăn. Bấm marker để xem thông tin và mở trang chi tiết quán.</p>
           </div>
 
           <div className="hero-actions" style={{ marginBottom: "16px" }}>
             <button type="button" className="brand-btn" onClick={handleLocate}>
               <LocateFixed size={16} />
-              <span>Lay vi tri hien tai</span>
+              <span>Lấy vị trí hiện tại</span>
             </button>
           </div>
 
           {errorMessage && <div className="surface-card inline-alert">{errorMessage}</div>}
 
           {loading ? (
-            <div className="surface-card inline-alert">Dang tai du lieu ban do...</div>
+            <div className="surface-card inline-alert">Đang tải dữ liệu bản đồ...</div>
           ) : (
             <div className="surface-card" style={{ padding: "0", overflow: "hidden", borderRadius: "16px" }}>
               <MapContainer center={mapCenter} zoom={13} style={{ height: "560px", width: "100%" }}>
@@ -112,10 +112,10 @@ export function MapPage() {
                         <p>{item.category}</p>
                         <p>{item.shortAddress || item.address}</p>
                         <p>
-                          {Number(item.rating || 0).toFixed(1)} sao / {item.reviewCount || 0} danh gia
+                          {Number(item.rating || 0).toFixed(1)} sao / {item.reviewCount || 0} đánh giá
                         </p>
                         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                          <Link to={`/restaurants/${item.id}`}>Chi tiet</Link>
+                          <Link to={`/restaurants/${item.id}`}>Chi tiết</Link>
                           <a href={item.mapsUrl} target="_blank" rel="noreferrer">
                             Google Maps
                           </a>
@@ -127,7 +127,7 @@ export function MapPage() {
 
                 {userLocation && (
                   <CircleMarker center={[userLocation.lat, userLocation.lng]} radius={10} pathOptions={{ color: "#22c55e" }}>
-                    <Popup>Vi tri hien tai cua ban</Popup>
+                    <Popup>Vị trí hiện tại của bạn</Popup>
                   </CircleMarker>
                 )}
               </MapContainer>

@@ -86,7 +86,7 @@ export function AdminPostsPage() {
   return (
     <div className="admin-page-stack">
       <section className="surface-card admin-page-heading">
-        <h2>Quan ly bai dang</h2>
+        <h2>Quản lý bài đăng</h2>
         <p className="muted-text">
           Duyet, tu choi, cap nhat vi pham, gan tag va theo doi moderation history.
         </p>
@@ -130,7 +130,7 @@ export function AdminPostsPage() {
         <span className="status-pill status-pill-rejected">Tu choi: {counters.rejected}</span>
       </section>
 
-      {loading && <div className="surface-card">Dang tai danh sach bai dang...</div>}
+      {loading && <div className="surface-card">Đang tải danh sách bài đăng...</div>}
 
       {!loading && (
         <section className="card-stack">
@@ -140,7 +140,7 @@ export function AdminPostsPage() {
                 <div>
                   <h3>{post.title}</h3>
                   <p className="muted-text">
-                    Tac gia: {post.author} • Tao luc: {formatDate(post.createdAt)}
+                    Tác giả: {post.author} • Tạo lúc: {formatDate(post.createdAt)}
                   </p>
                 </div>
                 <span className={`status-pill status-pill-${post.status}`}>{post.status}</span>
@@ -154,7 +154,7 @@ export function AdminPostsPage() {
                     #{tag}
                   </span>
                 ))}
-                {!(post.tags || []).length && <span className="muted-text">Chua co tag</span>}
+                {!(post.tags || []).length && <span className="muted-text">Chưa có tag</span>}
               </div>
 
               <label className="control-field">
@@ -236,7 +236,7 @@ export function AdminPostsPage() {
                   }
                 >
                   <Save size={15} />
-                  <span>Luu ghi chu</span>
+                  <span>Lưu ghi chú</span>
                 </button>
               </div>
 
@@ -258,7 +258,7 @@ export function AdminPostsPage() {
             </article>
           ))}
 
-          {!posts.length && <article className="surface-card">Khong co bai dang phu hop bo loc.</article>}
+          {!posts.length && <article className="surface-card">Không có bài đăng phù hợp bộ lọc.</article>}
         </section>
       )}
     </div>

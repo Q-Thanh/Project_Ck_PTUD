@@ -36,7 +36,7 @@ function normalizeSession(payload) {
   return {
     id: Number(payload?.id) || 0,
     role: ["guest", "user", "admin"].includes(payload?.role) ? payload.role : "user",
-    displayName: String(payload?.displayName || payload?.name || "Nguoi dung"),
+    displayName: String(payload?.displayName || payload?.name || "Người dùng"),
     email: String(payload?.email || ""),
     username: String(payload?.username || ""),
   };
@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
       login: async ({ identifier, email, password }) => {
         const normalizedIdentifier = String(identifier || email || "").trim().toLowerCase();
         if (!normalizedIdentifier || !password) {
-          return { ok: false, message: "Vui long nhap day du tai khoan va mat khau." };
+          return { ok: false, message: "Vui lòng nhập đầy đủ tài khoản và mật khẩu." };
         }
 
         try {
@@ -71,7 +71,7 @@ export function AuthProvider({ children }) {
           setSession(nextSession);
           return { ok: true, session: nextSession, source: "api" };
         } catch (error) {
-          return { ok: false, message: error.message || "Dang nhap that bai." };
+          return { ok: false, message: error.message || "Đăng nhập thất bại." };
         }
       },
 
@@ -82,7 +82,7 @@ export function AuthProvider({ children }) {
           password: String(password ?? ""),
         };
         if (!payload.displayName || !payload.email || !payload.password) {
-          return { ok: false, message: "Vui long dien day du thong tin." };
+          return { ok: false, message: "Vui lòng điền đầy đủ thông tin." };
         }
 
         try {
@@ -95,7 +95,7 @@ export function AuthProvider({ children }) {
           setSession(nextSession);
           return { ok: true, session: nextSession, source: "api" };
         } catch (error) {
-          return { ok: false, message: error.message || "Dang ky that bai." };
+          return { ok: false, message: error.message || "Đăng ký thất bại." };
         }
       },
 

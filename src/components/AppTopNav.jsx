@@ -11,14 +11,14 @@ export function AppTopNav() {
         <div className="brand-icon">F</div>
         <div>
           <p className="brand-title">FoodFinder</p>
-          <p className="brand-subtitle">Community + Ban do + Moderation</p>
+          <p className="brand-subtitle">Community + Bản đồ + Moderation</p>
         </div>
       </div>
 
       <nav className="top-nav-links">
-        <NavLink to="/">Trang chu</NavLink>
-        <NavLink to="/community">Cong dong</NavLink>
-        <NavLink to="/map">Ban do</NavLink>
+        <NavLink to="/">Trang chủ</NavLink>
+        <NavLink to="/community">Cộng đồng</NavLink>
+        <NavLink to="/map">Bản đồ</NavLink>
       </nav>
 
       <div className="top-nav-actions">
@@ -26,10 +26,10 @@ export function AppTopNav() {
           <>
             <Link to="/login" className="ghost-btn">
               <UserRound size={16} />
-              <span>Dang nhap</span>
+              <span>Đăng nhập</span>
             </Link>
             <Link to="/register" className="brand-btn-secondary">
-              <span>Dang ky</span>
+              <span>Đăng ký</span>
             </Link>
           </>
         )}
@@ -38,7 +38,7 @@ export function AppTopNav() {
           <>
             <Link to="/posts/create" className="brand-btn">
               <Sparkles size={16} />
-              <span>Dang bai</span>
+              <span>Đăng bài</span>
             </Link>
             <Link to="/profile" className="ghost-btn">
               <MapPinned size={16} />
@@ -46,7 +46,7 @@ export function AppTopNav() {
             </Link>
             <button type="button" className="ghost-btn" onClick={logout}>
               <LogOut size={16} />
-              <span>Dang xuat</span>
+              <span>Đăng xuất</span>
             </button>
           </>
         )}
@@ -55,7 +55,7 @@ export function AppTopNav() {
           <>
             <Link to="/admin" className="brand-btn">
               <ShieldCheck size={16} />
-              <span>Quan tri vien</span>
+              <span>Quản trị viên</span>
             </Link>
             <Link to="/profile" className="ghost-btn">
               <MapPinned size={16} />
@@ -63,7 +63,7 @@ export function AppTopNav() {
             </Link>
             <button type="button" className="ghost-btn" onClick={logout}>
               <LogOut size={16} />
-              <span>Dang xuat</span>
+              <span>Đăng xuất</span>
             </button>
           </>
         )}

@@ -11,7 +11,7 @@ function CommunityPostCard({ post }) {
         <div>
           <h3>{post.title}</h3>
           <p className="muted-text">
-            Tac gia: {post.author} / Quan: {post.restaurantSnapshot?.name || "Quan cong dong"}
+            Tác giả: {post.author} / Quán: {post.restaurantSnapshot?.name || "Quán cộng đồng"}
           </p>
         </div>
         <span className="rating-pill">
@@ -30,11 +30,11 @@ function CommunityPostCard({ post }) {
       )}
 
       <p>{post.content}</p>
-      <p className="muted-text">{(post.comments || []).length} binh luan</p>
+      <p className="muted-text">{(post.comments || []).length} bình luận</p>
 
       <div className="place-card-actions">
         <Link to={`/restaurants/${post.restaurantId}`} className="brand-btn">
-          Xem chi tiet quan
+          Xem chi tiết quán
         </Link>
       </div>
     </article>
@@ -67,25 +67,25 @@ export function CommunityPage() {
 
         <section className="section-block">
           <div className="section-head">
-            <h2>Bai dang cong dong</h2>
+            <h2>Bài đăng cộng đồng</h2>
             <p className="muted-text">
-              Cac bai dang nay da duoc admin duyet. Bai moi do nguoi dung gui se xuat hien tai day sau khi approved.
+              Các bài đăng này đã được admin duyệt. Bài mới do người dùng gửi sẽ xuất hiện tại đây sau khi approved.
             </p>
           </div>
 
           <div className="community-cta surface-card">
             <div>
-              <h3>Muon chia se quan ngon ban vua thu?</h3>
-              <p className="muted-text">Gui bai ngay, admin duyet xong se hien thi o feed cong dong nay.</p>
+              <h3>Muốn chia sẻ quán ngon bạn vừa thử?</h3>
+              <p className="muted-text">Gửi bài ngay, admin duyệt xong sẽ hiển thị ở feed cộng đồng này.</p>
             </div>
             <Link to="/posts/create" className="brand-btn">
               <ArrowRight size={16} />
-              <span>Mo form dang bai</span>
+              <span>Mở form đăng bài</span>
             </Link>
           </div>
 
           {loading ? (
-            <div className="surface-card inline-alert">Dang tai bai dang cong dong...</div>
+            <div className="surface-card inline-alert">Đang tải bài đăng cộng đồng...</div>
           ) : posts.length > 0 ? (
             <div className="card-stack">
               {posts.map((post) => (
@@ -93,7 +93,7 @@ export function CommunityPage() {
               ))}
             </div>
           ) : (
-            <div className="surface-card inline-alert">Chua co bai dang cong dong duoc duyet.</div>
+            <div className="surface-card inline-alert">Chưa có bài đăng cộng đồng được duyệt.</div>
           )}
         </section>
       </div>
