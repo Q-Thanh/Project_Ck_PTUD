@@ -2,7 +2,30 @@ import { createServer } from "node:http";
 
 const port = Number(process.env.PORT || 3000);
 
-const users = [];
+const SYSTEM_USERS = [
+  {
+    id: 1,
+    username: "admin",
+    displayName: "Admin",
+    email: "admin@foodfinder.local",
+    password: "admin",
+    role: "admin",
+  },
+  {
+    id: 2,
+    username: "user",
+    displayName: "Demo User",
+    email: "user@foodfinder.local",
+    password: "user123",
+    role: "user",
+  },
+];
+
+const users = [...SYSTEM_USERS];
+
+function normalizeIdentifier(value) {
+  return String(value ?? "").trim().toLowerCase();
+}
 
 function sendJson(res, statusCode, payload) {
   const body = JSON.stringify(payload);
@@ -40,7 +63,7 @@ function readJsonBody(req) {
 }
 
 function normalizeEmail(value) {
-  return String(value ?? "").trim().toLowerCase();
+  return normalizeIdentifier(value);
 }
 
 const server = createServer(async (req, res) => {
@@ -76,7 +99,8 @@ const server = createServer(async (req, res) => {
       }
 
       const newUser = {
-        id: users.length + 1,
+        id: Math.max(0, ...users.map((user) => Number(user.id) || 0)) + 1,
+        username: normalizeIdentifier(body.username || email.split("@")[0]),
         displayName,
         email,
         password,
@@ -103,10 +127,12 @@ const server = createServer(async (req, res) => {
   if (method === "POST" && (pathname === "/api/login" || pathname === "/login")) {
     try {
       const body = await readJsonBody(req);
-      const identifier = normalizeEmail(body.identifier ?? body.email);
+      const identifier = normalizeIdentifier(body.identifier ?? body.email);
       const password = String(body.password ?? "");
 
-      const user = users.find((item) => item.email === identifier);
+      const user = users.find(
+        (item) => item.email === identifier || normalizeIdentifier(item.username) === identifier,
+      );
       if (!user || user.password !== password) {
         sendJson(res, 200, { ok: false, message: "Email hoac mat khau sai" });
         return;
