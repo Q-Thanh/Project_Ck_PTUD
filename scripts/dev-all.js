@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { resolve } from "node:path";
+import "dotenv/config";
 
 const children = [];
 let isShuttingDown = false;
