@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { LocateFixed, Search, Sparkles, Star } from "lucide-react";
 import { AppTopNav } from "../components/AppTopNav";
@@ -8,7 +8,14 @@ import {
   fetchVisibleRestaurants,
 } from "../services/publicRestaurantService";
 
-function PlaceCard({ place }) {
+function PlaceCard({ place, currentPageRestaurantCount }) {
+  const handleDetailClick = () => {
+    // Lưu trạng thái infinite scroll trước khi navigate
+    const currentPage = Math.ceil(currentPageRestaurantCount / 8);
+    sessionStorage.setItem("foodFinder_page", currentPage);
+    sessionStorage.setItem("foodFinder_scrollPos", window.scrollY);
+  };
+
   return (
     <article className="surface-card place-card">
       <div className="place-image-wrap">
@@ -40,7 +47,11 @@ function PlaceCard({ place }) {
         </p>
 
         <div className="place-card-actions">
-          <Link to={`/restaurants/${place.id}`} className="brand-btn">
+          <Link 
+            to={`/restaurants/${place.id}`} 
+            className="brand-btn"
+            onClick={handleDetailClick}
+          >
             Xem chi tiết
           </Link>
           <a href={place.mapsUrl} target="_blank" rel="noreferrer" className="ghost-btn">
@@ -77,20 +88,12 @@ export function HomePage() {
   const [locating, setLocating] = useState(false);
   const [locationError, setLocationError] = useState("");
 
-  useEffect(() => {
-    let active = true;
-    async function loadRestaurants() {
-      setLoading(true);
-      const data = await fetchVisibleRestaurants();
-      if (!active) return;
-      setPlaces(data);
-      setLoading(false);
-    }
-    loadRestaurants();
-    return () => {
-      active = false;
-    };
-  }, []);
+  // Infinite scroll state
+  const [displayedRestaurants, setDisplayedRestaurants] = useState([]);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
+  const [shouldRestoreScroll, setShouldRestoreScroll] = useState(false);
 
   const areas = useMemo(() => [...new Set(places.map((place) => place.area).filter(Boolean))], [places]);
   const categories = useMemo(() => [...new Set(places.map((place) => place.category).filter(Boolean))], [places]);
@@ -116,7 +119,98 @@ export function HomePage() {
       });
   }, [places, searchTerm, selectedArea, selectedCategory, sortBy]);
 
+  useEffect(() => {
+    let active = true;
+    async function loadRestaurants() {
+      setLoading(true);
+      const data = await fetchVisibleRestaurants();
+      if (!active) return;
+      setPlaces(data);
+      setLoading(false);
+    }
+    loadRestaurants();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+ // Restore infinite scroll state from sessionStorage
+  useEffect(() => {
+    const savedPage = sessionStorage.getItem("foodFinder_page");
+    const savedScrollPos = sessionStorage.getItem("foodFinder_scrollPos");
+
+    if (savedPage && filteredPlaces.length > 0) {
+      const page = parseInt(savedPage, 10);
+      const itemsToLoad = page * 8;
+      
+      // Load restaurants up to the saved page (Lấy bao nhiêu cũng được, slice tự lo)
+      setDisplayedRestaurants(filteredPlaces.slice(0, itemsToLoad));
+      setHasMore(itemsToLoad < filteredPlaces.length);
+      
+      // Mark that we need to restore scroll position after render
+      setShouldRestoreScroll(true);
+
+      // Clean up sessionStorage
+      sessionStorage.removeItem("foodFinder_page");
+    }
+  }, [filteredPlaces]);
+
+  // Restore scroll position after render
+  useEffect(() => {
+    if (shouldRestoreScroll) {
+      const savedScrollPos = sessionStorage.getItem("foodFinder_scrollPos");
+      if (savedScrollPos) {
+        const scrollPos = parseInt(savedScrollPos, 10);
+        window.scrollTo({ top: scrollPos, behavior: "instant" });
+        sessionStorage.removeItem("foodFinder_scrollPos");
+      }
+      setShouldRestoreScroll(false);
+    }
+  }, [shouldRestoreScroll, displayedRestaurants]);
+
   const trendingPlaces = useMemo(() => filteredPlaces.filter((place) => place.isTrending).slice(0, 4), [filteredPlaces]);
+
+  // Reset displayed restaurants when filters change
+  useEffect(() => {
+    // Don't reset if we're restoring state from back navigation
+    if (shouldRestoreScroll) return;
+    
+    setDisplayedRestaurants(filteredPlaces.slice(0, 8));
+    setHasMore(filteredPlaces.length > 8);
+    setLoadingMore(false);
+  }, [filteredPlaces, shouldRestoreScroll]);
+
+  // Setup Intersection Observer for infinite scroll
+  useEffect(() => {
+    const node = loaderRef.current;
+    if (!node || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !loadingMore && hasMore) {
+            setLoadingMore(true);
+            // Simulate small delay to show loading state
+            setTimeout(() => {
+              setDisplayedRestaurants((prev) => {
+                const nextBatch = filteredPlaces.slice(prev.length, prev.length + 8);
+                const updated = [...prev, ...nextBatch];
+                setHasMore(updated.length < filteredPlaces.length);
+                setLoadingMore(false);
+                return updated;
+              });
+            }, 300);
+          }
+        });
+      },
+      { root: null, rootMargin: "200px" }
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasMore, loadingMore, filteredPlaces]);
 
   const getLocationAndLoadNearby = async () => {
     setLocating(true);
@@ -198,7 +292,7 @@ export function HomePage() {
               </div>
 
               <div className="filter-group">
-                <label>Loại món</label>
+                <label>Loại quán</label>
                 <select
                   value={selectedCategory}
                   onChange={(event) => setSelectedCategory(event.target.value)}
@@ -277,11 +371,27 @@ export function HomePage() {
           {loading ? (
             <div className="surface-card inline-alert">Đang tải danh sách quán...</div>
           ) : filteredPlaces.length > 0 ? (
-            <div className="card-grid">
-              {filteredPlaces.map((place) => (
-                <PlaceCard key={place.id} place={place} />
-              ))}
-            </div>
+            <>
+              <div className="card-grid">
+                {displayedRestaurants.map((place) => (
+                  <PlaceCard 
+                    key={place.id} 
+                    place={place}
+                    currentPageRestaurantCount={displayedRestaurants.length}
+                  />
+                ))}
+              </div>
+              {hasMore && (
+                <div 
+                  ref={loaderRef} 
+                  style={{ height: "60px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center" }}
+                >
+                  <div className="surface-card inline-alert" style={{ width: "100%", textAlign: "center" }}>
+                    {loadingMore ? "Đang tải thêm..." : "Kéo xuống để xem thêm quán"}
+                  </div>
+                </div>
+              )}
+            </>
           ) : (
             <div className="surface-card inline-alert">Không có kết quả phù hợp bộ lọc hiện tại.</div>
           )}
