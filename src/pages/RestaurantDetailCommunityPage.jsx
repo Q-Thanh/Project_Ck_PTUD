@@ -184,7 +184,9 @@ export default function RestaurantDetailCommunityPage() {
                   )}
                 </div>
 
-                {post.restaurantSnapshot?.image && <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />}
+                {post.restaurantSnapshot?.image && (
+                  <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />
+                )}
 
                 <p>{post.content}</p>
 

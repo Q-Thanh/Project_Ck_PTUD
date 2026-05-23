@@ -1,13 +1,31 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { LogOut, MapPinned, ShieldCheck, Sparkles, UserRound } from "lucide-react";
 import { useAuth } from "../context/useAuth";
 
 export function AppTopNav() {
   const { session, isAdmin, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleGoHome = (e) => {
+    e.preventDefault();
+    // Xóa bộ nhớ đệm của tính năng cuộn
+    sessionStorage.removeItem("foodFinder_page");
+    sessionStorage.removeItem("foodFinder_scrollPos");
+
+    // Nếu không phải trang chủ, navigate về trang chủ
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      // Nếu đang ở trang chủ, reload trang để reset dữ liệu
+      window.scrollTo(0, 0);
+      window.location.reload();
+    }
+  };
 
   return (
     <header className="surface-card top-nav">
-      <div className="top-nav-brand">
+      <div className="top-nav-brand cursor-pointer" onClick={handleGoHome}>
         <div className="brand-icon">F</div>
         <div>
           <p className="brand-title">FoodFinder</p>
@@ -16,7 +34,9 @@ export function AppTopNav() {
       </div>
 
       <nav className="top-nav-links">
-        <NavLink to="/">Trang chủ</NavLink>
+        <NavLink to="/" onClick={handleGoHome} className="cursor-pointer">
+          Trang chủ
+        </NavLink>
         <NavLink to="/community">Cộng đồng</NavLink>
         <NavLink to="/map">Bản đồ</NavLink>
       </nav>

@@ -309,7 +309,21 @@ app.use((req, res) => {
   sendFail(res, 404, `Not Found: ${req.method} ${req.path}`);
 });
 
-app.listen(port, () => {
+// Keep event loop alive to prevent premature exit after geocoding completes
+setInterval(() => {
+  // This dummy interval keeps the process alive even with no active connections
+}, 60000);
+
+// Add error handlers to prevent silent crashes
+process.on("uncaughtException", (error) => {
+  console.error("[backend] uncaught exception:", error);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("[backend] unhandled rejection at:", promise, "reason:", reason);
+});
+
+const server = app.listen(port, () => {
   console.log(`[backend] running at http://localhost:${port}`);
   console.log(`[backend] health check at http://localhost:${port}/api/health`);
   console.log(`[backend] sqlite: ${store.dbPath}`);

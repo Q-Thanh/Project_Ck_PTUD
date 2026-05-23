@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Clock3, Globe, MapPin, MapPinned, MessageSquarePlus, Phone, Star, UtensilsCrossed, Wallet, X } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import { fetchApprovedPostsForRestaurant, fetchRestaurantReviews, fetchVisibleRestaurantById, submitCommentForApprovedPost } from "../services/publicRestaurantService";
 
@@ -83,6 +83,7 @@ function FeatureGroup({ title, items }) {
 
 export default function RestaurantDetailData3Page() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { isAuthenticated, session } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
   const [loading, setLoading] = useState(true);
@@ -196,14 +197,14 @@ export default function RestaurantDetailData3Page() {
     <div className="page-wrap">
       <div className="app-shell">
         <header className="surface-card detail-header-bar">
-          <Link to="/" className="detail-header-icon" aria-label="Quay lại">
+          <button onClick={() => navigate(-1)} className="detail-header-icon" aria-label="Quay lại" type="button" style={{ border: "none", background: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <ArrowLeft size={18} />
-          </Link>
+          </button>
           <div className="detail-header-title">
             <p className="muted-text">Chi tiết quán ăn</p>
             <h1>{restaurant.name}</h1>
           </div>
-          <Link to="/" className="detail-header-icon" aria-label="Đóng">
+          <Link to="/" className="detail-header-icon"  aria-label="Đóng" onClick={() => { sessionStorage.removeItem("foodFinder_page"); sessionStorage.removeItem("foodFinder_scrollPos"); }}>
             <X size={18} />
           </Link>
         </header>
