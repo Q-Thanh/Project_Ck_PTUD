@@ -7,7 +7,8 @@ import { ProfilePage } from "../pages/ProfilePage";
 import RestaurantDetailPage from "../pages/RestaurantDetailData3Page";
 import RestaurantSubmissionForm from "../components/RestaurantSubmissionForm";
 import { LoginPage } from "../pages/auth/LoginPage";
-import { RegisterPage } from "../pages/auth/RegisterPage";
+import RegisterPage from "../pages/auth/RegisterPage";
+import { AuthSuccessPage } from "../pages/auth/AuthSuccessPage";
 import { AdminOverviewPage } from "../pages/admin/AdminOverviewPage";
 import { AdminRestaurantsPage } from "../pages/admin/AdminRestaurantsPage";
 import { AdminPostsModerationPage } from "../pages/admin/AdminPostsModerationPage";
@@ -23,6 +24,7 @@ export function AppRouter() {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/auth/success" element={<AuthSuccessPage />} />
 
       <Route
         path="/admin"
