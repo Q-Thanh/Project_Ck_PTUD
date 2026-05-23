@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AuthContext } from "./authContextStore";
 import { apiRequest } from "../services/apiClient";
 
@@ -44,12 +44,19 @@ function normalizeSession(payload) {
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(readStoredSession);
+  const completeOAuthSession = useCallback((payload) => {
+    const nextSession = normalizeSession(payload);
+    persistSession(nextSession);
+    setSession(nextSession);
+    return nextSession;
+  }, []);
 
   const value = useMemo(
     () => ({
       session,
       isAuthenticated: session.role !== "guest",
       isAdmin: session.role === "admin",
+      completeOAuthSession,
 
       login: async ({ identifier, email, password }) => {
         const normalizedIdentifier = String(identifier || email || "").trim().toLowerCase();
@@ -118,7 +125,7 @@ export function AuthProvider({ children }) {
         setSession(guest);
       },
     }),
-    [session],
+    [completeOAuthSession, session],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,39 +1,54 @@
 # FoodFinder - Project CK PTUD
 
-Ứng dụng tìm quán ăn và cộng đồng review, gồm 2 khối:
+Ung dung tim quan an va cong dong review, gom 2 khoi:
 - Frontend: React + Vite
-- Backend: Express + SQLite (lưu bền vững)
+- Backend: Express + Supabase PostgreSQL
 
-## Tính năng chính
+## Tinh nang chinh
 
-- Trang chủ:
-  - Tìm kiếm/lọc/sắp xếp quán ăn
-  - Nút `Gần Tôi` (xin quyền vị trí, gợi ý 5 quán trong 5km)
-  - Nút `Quyết định giúp tôi` (chọn ngẫu nhiên 1 quán trong nhóm top 5 gần bạn)
-- Cộng đồng:
-  - Hiển thị bài đăng đã được admin duyệt
-  - User đăng bài mới vào hàng chờ duyệt
-- Bản đồ:
-  - Hiển thị marker quán ăn trên OpenStreetMap (React-Leaflet)
-  - Bấm marker để xem thông tin và vào trang chi tiết quán
-- Hồ sơ cá nhân:
-  - User cập nhật display name, phone, address, dob, bio, avatar URL
+- Trang chu:
+  - Tim kiem, loc, sap xep quan an
+  - Nut `Gan Toi` goi y quan trong ban kinh gan vi tri nguoi dung
+  - Nut `Quyet dinh giup toi` chon ngau nhien mot quan trong nhom goi y
+- Cong dong:
+  - Hien thi bai dang da duoc admin duyet
+  - User dang bai moi vao hang cho duyet
+- Ban do:
+  - Hien thi marker quan an tren OpenStreetMap
+  - Bam marker de xem thong tin va vao trang chi tiet quan
+- Ho so ca nhan:
+  - User cap nhat display name, phone, address, dob, bio, avatar URL
 - Admin:
-  - Quản lý bài đăng (pending/approved/rejected, tag, history)
-  - Quản lý user (status active/locked/banned)
-  - Quản lý nhà hàng (CRUD, visibility, sync)
+  - Quan ly bai dang, user, nha hang, thong bao va thong ke
 
-## Công nghệ
+## Cong nghe
 
 - React 19, Vite 7
 - Express 5
-- SQLite (`better-sqlite3`)
-- Hash mật khẩu: `bcryptjs`
-- Bản đồ: `leaflet`, `react-leaflet`
+- Supabase PostgreSQL qua package `pg`
+- Bien moi truong local qua `dotenv`
+- Hash mat khau: `bcryptjs`
+- Ban do: `leaflet`, `react-leaflet`
 
-## Kiến trúc dữ liệu
+## Cau hinh Supabase PostgreSQL
 
-Backend SQLite là nguồn dữ liệu duy nhất (không fallback account localStorage):
+1. Tao file `.env` o thu muc goc project.
+2. Lay connection string trong Supabase Project Settings -> Database.
+3. Dien vao `.env` theo mau:
+
+```bash
+DATABASE_URL=postgresql://postgres:<password>@db.<project-ref>.supabase.co:5432/postgres
+PGSSLMODE=require
+BACKEND_PORT=3100
+```
+
+Khong commit file `.env`. File `.env.example` chi la mau va khong chua mat khau that.
+
+Luu y bao mat: neu connection string that da tung duoc gui len chat, nen doi lai mat khau database trong Supabase sau khi cau hinh xong.
+
+## Kien truc du lieu
+
+Backend PostgreSQL la nguon du lieu duy nhat. Khi backend khoi dong, no tu tao cac bang neu chua co va seed du lieu demo neu database dang trong:
 
 - `users`
 - `user_profiles`
@@ -44,37 +59,34 @@ Backend SQLite là nguồn dữ liệu duy nhất (không fallback account local
 - `notifications`
 - `geocode_cache`
 
-DB file runtime:
-- `server/data/foodfinder.db` (đã được `.gitignore`)
-
-## Cài đặt
+## Cai dat
 
 ```bash
 npm install
 ```
 
-## Chạy hệ thống (frontend + backend cùng 1 link)
+## Chay he thong frontend + backend
 
 ```bash
 npm run dev:all
 ```
 
-Sau khi chạy:
+Sau khi chay:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:3100`
-- API dùng qua frontend proxy: `http://localhost:5173/api/...`
+- API qua frontend proxy: `http://localhost:5173/api/...`
 
 ## Script
 
-- `npm run dev` - chạy frontend
-- `npm run dev:frontend` - chạy frontend tại `0.0.0.0:5173`
-- `npm run dev:backend` - chạy backend Express + SQLite
-- `npm run dev:all` - chạy đồng thời frontend/backend
+- `npm run dev` - chay frontend
+- `npm run dev:frontend` - chay frontend tai `0.0.0.0:5173`
+- `npm run dev:backend` - chay backend Express + Supabase PostgreSQL
+- `npm run dev:all` - chay dong thoi frontend/backend
 - `npm run lint` - eslint
 - `npm run build` - build production frontend
-- `npm run preview` - preview bản build
+- `npm run preview` - preview ban build
 
-## Tài khoản mặc định
+## Tai khoan mac dinh
 
 - Admin:
   - username: `admin`
@@ -83,7 +95,7 @@ Sau khi chạy:
   - username: `user`
   - password: `user123`
 
-## API tiêu biểu
+## API tieu bieu
 
 - Auth:
   - `POST /api/auth/register`
@@ -113,15 +125,17 @@ Sau khi chạy:
 
 ## Smoke test nhanh
 
-1. `npm run lint`
-2. `npm run build`
-3. `npm run dev:all`
-4. Mở `http://localhost:5173`
-5. Kiểm tra health `http://localhost:5173/api/health`
-6. Đăng nhập admin, vào `/admin`, duyệt 1 bài pending
-7. Vào `/community` kiểm tra bài đã hiển thị
+1. Tao `.env` tu `.env.example`.
+2. `npm install`
+3. `npm run lint`
+4. `npm run build`
+5. `npm run dev:all`
+6. Mo `http://localhost:5173`
+7. Kiem tra health `http://localhost:5173/api/health`
+8. Dang nhap admin, vao `/admin`, duyet mot bai pending
+9. Vao Supabase Table Editor kiem tra cac bang va du lieu seed
 
-## Ghi chú geocode
+## Ghi chu geocode
 
-- Backend có geocode cache cho địa chỉ (Nominatim + `geocode_cache`).
-- Những địa chỉ geocode fail sẽ được đánh dấu để tránh gọi lặp mỗi lần khởi động.
+- Backend co geocode cache cho dia chi bang Nominatim + bang `geocode_cache`.
+- Nhung dia chi geocode fail se duoc danh dau de tranh goi lap lai moi lan khoi dong.
