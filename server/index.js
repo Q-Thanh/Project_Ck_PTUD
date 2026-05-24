@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
+import connectPgSimple from 'connect-pg-simple';
 import GoogleStrategy from 'passport-google-oauth20';
 import FacebookStrategy from 'passport-facebook';
 import { createStore } from './db.js';
@@ -18,6 +19,12 @@ const rootDir = path.resolve(__dirname, '..');
 const app = express();
 const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
 const backendOrigin = process.env.BACKEND_ORIGIN || `http://localhost:${process.env.BACKEND_PORT || process.env.PORT || 3100}`;
+const isProduction = process.env.NODE_ENV === 'production';
+const PgSessionStore = connectPgSimple(session);
+
+if (isProduction) {
+  app.set('trust proxy', 1);
+}
 
 app.use(cors({ credentials: true, origin: frontendOrigin }));
 app.use(express.json({ limit: '10mb' }));
@@ -25,9 +32,24 @@ app.use(express.json({ limit: '10mb' }));
 // Session config
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-secret-key',
+  store: process.env.DATABASE_URL
+    ? new PgSessionStore({
+        conObject: {
+          connectionString: process.env.DATABASE_URL,
+          ssl: process.env.PGSSLMODE === 'disable' ? false : { rejectUnauthorized: false },
+        },
+        createTableIfMissing: true,
+        tableName: 'user_sessions',
+      })
+    : undefined,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+  cookie: {
+    secure: isProduction,
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000,
+  },
 }));
 
 // Passport
@@ -533,7 +555,7 @@ app.patch('/api/admin/notifications/:id/read', asyncRoute(async (req, res) => {
   res.json({ ok: true, item });
 }));
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction) {
   const distDir = path.join(rootDir, 'dist');
 
   app.use(express.static(distDir));
