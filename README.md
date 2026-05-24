@@ -1,5 +1,22 @@
 # FoodFinder - Project CK PTUD
 
+## Link deploy: https://project-ck-ptud-aran.onrender.com/
+
+## Các lệnh tự chạy trên máy
+
+```bash
+git clone https://github.com/Q-Thanh/Project_Ck_PTUD.git
+cd Project_Ck_PTUD
+cp .env.docker.example .env.docker
+docker compose up --build
+```
+
+
+## Tai khoan mac dinh:
+- Admin: `admin` / `admin`
+- User demo: `user` / `user123`
+
+
 Ung dung tim quan an va cong dong review, gom 2 khoi:
 - Frontend: React + Vite
 - Backend: Express + Supabase PostgreSQL
@@ -123,20 +140,7 @@ Sau khi chay:
 - App: `http://localhost:3100`
 - Health check: `http://localhost:3100/api/health`
 
-Tai khoan mac dinh:
-- Admin: `admin` / `admin`
-- User demo: `user` / `user123`
 
-### Chia se cho nguoi khac
-
-Nguoi khac chi can clone repo va tao env rieng:
-
-```bash
-git clone https://github.com/Q-Thanh/Project_Ck_PTUD.git
-cd Project_Ck_PTUD
-cp .env.docker.example .env.docker
-docker compose up --build
-```
 
 Khong commit `.env` hoac `.env.docker`. Chi commit `.env.example` va `.env.docker.example`.
 
