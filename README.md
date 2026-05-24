@@ -2,6 +2,7 @@
 
 ## Link deploy: https://project-ck-ptud-aran.onrender.com/
 
+## Lưu ý : Bật Docker trước khi chạy
 ## Các lệnh tự chạy trên máy
 
 ```bash
