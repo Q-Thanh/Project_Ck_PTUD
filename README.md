@@ -76,6 +76,70 @@ Sau khi chay:
 - Backend: `http://localhost:3100`
 - API qua frontend proxy: `http://localhost:5173/api/...`
 
+## Chay bang Docker
+
+Docker mode chay 1 container app duy nhat:
+- Build React/Vite thanh thu muc `dist`
+- Chay Express bang `npm run server`
+- Express phuc vu API `/api/...`
+- Express phuc vu frontend production tu `dist`
+- Database khong nam trong container; app ket noi Supabase/PostgreSQL ngoai qua `DATABASE_URL`
+
+### Chuan bi env Docker
+
+Tao file `.env.docker` tu file mau:
+
+```bash
+cp .env.docker.example .env.docker
+```
+
+Dien cac bien quan trong:
+
+```bash
+DATABASE_URL=postgresql://postgres:<password>@db.<project-ref>.supabase.co:5432/postgres
+PGSSLMODE=require
+SESSION_SECRET=replace-with-a-long-random-secret
+NODE_ENV=production
+PORT=3100
+COOKIE_SECURE=false
+FRONTEND_ORIGIN=http://localhost:3100
+BACKEND_ORIGIN=http://localhost:3100
+```
+
+Neu dung OAuth local trong Docker, cau hinh redirect trong Google/Facebook console ve:
+
+```bash
+GOOGLE_REDIRECT_URI=http://localhost:3100/api/auth/google/callback
+FACEBOOK_REDIRECT_URI=http://localhost:3100/api/auth/facebook/callback
+```
+
+### Build va chay container
+
+```bash
+docker compose up --build
+```
+
+Sau khi chay:
+- App: `http://localhost:3100`
+- Health check: `http://localhost:3100/api/health`
+
+Tai khoan mac dinh:
+- Admin: `admin` / `admin`
+- User demo: `user` / `user123`
+
+### Chia se cho nguoi khac
+
+Nguoi khac chi can clone repo va tao env rieng:
+
+```bash
+git clone https://github.com/Q-Thanh/Project_Ck_PTUD.git
+cd Project_Ck_PTUD
+cp .env.docker.example .env.docker
+docker compose up --build
+```
+
+Khong commit `.env` hoac `.env.docker`. Chi commit `.env.example` va `.env.docker.example`.
+
 ## Script
 
 - `npm run dev` - chay frontend

@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+    image: project-ck-ptud:local
+    env_file:
+      - .env.docker
+    environment:
+      NODE_ENV: production
+      PORT: 3100
+      COOKIE_SECURE: "false"
+    ports:
+      - "3100:3100"
+    restart: unless-stopped
