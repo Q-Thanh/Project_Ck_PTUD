@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, LogOut, MapPin, Search, ShieldCheck, Sparkles, Star, UserRound } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import { SafeImage } from "../components/SafeImage";
 import { fetchVisibleRestaurants } from "../services/publicRestaurantService";
 
 function PlaceCard({ place }) {
   return (
     <article className="surface-card place-card">
-      <img src={place.image} alt={place.name} className="place-image" />
+      <SafeImage src={place.image} alt={place.name} className="place-image" />
 
       <div className="place-body">
         <div className="place-row">
@@ -278,7 +279,7 @@ export function HomePage() {
 
             <div className="surface-card recommendation-card">
               <div className="recommendation-grid">
-                <img src={recommendedPlace.image} alt={recommendedPlace.name} className="recommendation-image" />
+                <SafeImage src={recommendedPlace.image} alt={recommendedPlace.name} className="recommendation-image" />
                 <div className="recommendation-info">
                   <h3>{recommendedPlace.name}</h3>
                   <p className="muted-text">

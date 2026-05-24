@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MapPinned, MessageSquarePlus, Star } from "lucide-react";
 import { useAuth } from "../context/useAuth";
+import { SafeImage } from "../components/SafeImage";
 import { fetchApprovedPostsForRestaurant, fetchRestaurantReviews, fetchVisibleRestaurantById, submitCommentForApprovedPost } from "../services/publicRestaurantService";
 
 function formatDate(dateValue) {
@@ -90,7 +91,7 @@ export default function RestaurantDetailCommunityPage() {
         <div className="detail-shell">
           <div className="detail-gallery surface-card">
             {(restaurant.images?.length ? restaurant.images : restaurant.image ? [restaurant.image] : []).map((src, index) => (
-              <img key={`${src}-${index}`} src={src} alt={`${restaurant.name} ${index + 1}`} className="detail-image" />
+              <SafeImage key={`${src}-${index}`} src={src} alt={`${restaurant.name} ${index + 1}`} className="detail-image" />
             ))}
           </div>
 
@@ -184,9 +185,13 @@ export default function RestaurantDetailCommunityPage() {
                   )}
                 </div>
 
-                {post.restaurantSnapshot?.image && (
-                  <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />
-                )}
+                <SafeImage
+                  src={post.restaurantSnapshot?.image}
+                  fallbackSrc={restaurant.image}
+                  alt={post.restaurantSnapshot?.name || restaurant.name}
+                  className="detail-post-image"
+                  hideOnError
+                />
 
                 <p>{post.content}</p>
 

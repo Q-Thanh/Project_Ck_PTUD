@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckCircle2, CircleX, RefreshCw, Save, Search, Tags } from "lucide-react";
+import { SafeImage } from "../../components/SafeImage";
 import { approvePost, attachTagsToPost, listPosts, rejectPost, updatePost } from "../../services/adminService";
 
 const STATUS_OPTIONS = [
@@ -149,7 +150,7 @@ export function AdminPostsModerationPage() {
                 </div>
 
                 {post.restaurantSnapshot?.image && (
-                  <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="admin-post-image" />
+                  <SafeImage src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="admin-post-image" hideOnError />
                 )}
               </div>
 

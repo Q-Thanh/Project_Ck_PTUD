@@ -11,7 +11,6 @@ export function LoginPage() {
   const [error, setError] = useState("");
 
   const adminRequired = Boolean(location.state?.adminRequired);
-  const deniedPath = location.state?.deniedPath;
 
   if (isAuthenticated && !adminRequired) {
     return <Navigate to={isAdmin ? "/admin" : "/"} replace />;
@@ -54,7 +53,9 @@ export function LoginPage() {
         <div style={{ marginBottom: "15px" }}>
           <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Tài khoản hoặc Email</label>
           <input
-            type="email"
+            type="text"
+            name="identifier"
+            autoComplete="username"
             placeholder="admin hoặc ban@foodfinder.vn"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -67,6 +68,7 @@ export function LoginPage() {
           <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Mật khẩu</label>
           <input
             type="password"
+            autoComplete="current-password"
             placeholder="Nhập mật khẩu của bạn"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

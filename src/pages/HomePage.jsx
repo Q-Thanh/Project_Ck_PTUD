@@ -3,13 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { UserRound } from "lucide-react";
 import { homePlaces } from "../data/data2Runtime";
 import { useAuth } from "../context/useAuth";
+import { SafeImage } from "../components/SafeImage";
 import { useState } from "react";
 
 function PlaceCard({ place, showTrendingBadge, onImageClick }) {
   return (
     <article className="surface-card place-card">
       <div className="place-image-wrap" onClick={() => onImageClick(place)}>
-        <img src={place.image} alt={place.name} className="place-image" />
+        <SafeImage src={place.image} alt={place.name} className="place-image" />
         {showTrendingBadge && (
           <div className="place-badges">
             <span className="highlight-badge">Trending</span>
@@ -329,7 +330,7 @@ export function HomePage() {
               </div>
               <div className="surface-card recommendation-card">
                 <div className="recommendation-grid">
-                  <img src={recommendedPlace.place.image} alt={recommendedPlace.place.name} className="recommendation-image" />
+                  <SafeImage src={recommendedPlace.place.image} alt={recommendedPlace.place.name} className="recommendation-image" />
                   <div className="recommendation-info">
                     <h3>{recommendedPlace.place.name}</h3>
                     <p className="muted-text">
@@ -408,7 +409,7 @@ export function HomePage() {
               <button className="modal-close" onClick={handleCloseModal} aria-label="Close">
                 <X size={18} />
               </button>
-              <img src={selectedPlace.image} alt={selectedPlace.name} className="modal-image" />
+              <SafeImage src={selectedPlace.image} alt={selectedPlace.name} className="modal-image" />
               <div className="modal-body">
                 <div className="place-row">
                   <h2>{selectedPlace.name}</h2>
@@ -440,5 +441,4 @@ export function HomePage() {
     </div>
   );
 }
-
 

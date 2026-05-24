@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState, useRef, useCallback } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { LocateFixed, Search, Sparkles, Star } from "lucide-react";
 import { AppTopNav } from "../components/AppTopNav";
+import { SafeImage } from "../components/SafeImage";
 import {
   fetchDecisionRestaurant,
   fetchNearbyRestaurants,
@@ -19,7 +20,7 @@ function PlaceCard({ place, currentPageRestaurantCount }) {
   return (
     <article className="surface-card place-card">
       <div className="place-image-wrap">
-        <img src={place.image} alt={place.name} className="place-image" />
+        <SafeImage src={place.image} alt={place.name} className="place-image" />
         {place.isTrending && (
           <div className="place-badges">
             <span className="highlight-badge">Top</span>
@@ -137,7 +138,6 @@ export function HomePage() {
  // Restore infinite scroll state from sessionStorage
   useEffect(() => {
     const savedPage = sessionStorage.getItem("foodFinder_page");
-    const savedScrollPos = sessionStorage.getItem("foodFinder_scrollPos");
 
     if (savedPage && filteredPlaces.length > 0) {
       const page = parseInt(savedPage, 10);
