@@ -6,8 +6,14 @@ import GoogleStrategy from 'passport-google-oauth20';
 import FacebookStrategy from 'passport-facebook';
 import { createStore } from './db.js';
 import dotenv from 'dotenv';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
 
 const app = express();
 const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
@@ -526,6 +532,20 @@ app.patch('/api/admin/notifications/:id/read', asyncRoute(async (req, res) => {
   }
   res.json({ ok: true, item });
 }));
+
+if (process.env.NODE_ENV === 'production') {
+  const distDir = path.join(rootDir, 'dist');
+
+  app.use(express.static(distDir));
+
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      next();
+      return;
+    }
+    res.sendFile(path.join(distDir, 'index.html'));
+  });
+}
 
 app.use((error, _req, res, _next) => {
   console.error(error);
