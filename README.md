@@ -11,6 +11,8 @@ cp .env.docker.example .env.docker
 docker compose up --build
 ```
 
+Sau khi chạy xong vào link : http://localhost:3100/
+
 
 ## Tai khoan mac dinh:
 - Admin: `admin` / `admin`
