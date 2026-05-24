@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { SafeImage } from "../components/SafeImage";
 import { fetchRestaurantById, fetchReviews, fetchRelatedPosts } from "../services/restaurantService";
 
 export default function RestaurantDetailPage() {
@@ -32,7 +33,7 @@ export default function RestaurantDetailPage() {
           <div className="col-span-2">
             <div className="space-y-2">
               {restaurant.images.map((src, i) => (
-                <img key={i} src={src} alt={`${restaurant.name} ${i}`} className="w-full rounded-md" />
+                <SafeImage key={i} src={src} alt={`${restaurant.name} ${i}`} className="w-full rounded-md" />
               ))}
             </div>
           </div>

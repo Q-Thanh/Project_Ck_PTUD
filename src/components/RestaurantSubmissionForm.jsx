@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import { SafeImage } from "./SafeImage";
 import { submitPostForModeration } from "../services/adminService";
 
 const INITIAL_FORM = {
@@ -257,7 +258,7 @@ export default function RestaurantSubmissionForm() {
 
         {(imagePreview || form.imageUrl.trim()) && (
           <div className="submission-preview">
-            <img src={imagePreview || form.imageUrl.trim()} alt={form.restaurantName || "Ảnh quán"} />
+            <SafeImage src={imagePreview || form.imageUrl.trim()} alt={form.restaurantName || "Ảnh quán"} />
           </div>
         )}
 

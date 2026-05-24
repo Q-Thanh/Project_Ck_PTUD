@@ -603,13 +603,32 @@ export async function createStore(options = {}) {
     await queryDb.prepare(upsertRestaurantSql).run(serializeRestaurantForDb(item));
   }
 
-  async function seedInitialData() {
-    const usersCount = Number((await db.prepare(`SELECT COUNT(*) AS count FROM users`).get())?.count || 0);
-    if (usersCount === 0) {
-      const createdAt = nowIso();
-      const adminHash = bcrypt.hashSync("admin", HASH_ROUNDS);
-      const userHash = bcrypt.hashSync("user123", HASH_ROUNDS);
+  async function ensureDefaultAdmin() {
+    const now = nowIso();
+    const adminHash = bcrypt.hashSync("admin", HASH_ROUNDS);
+    const existing =
+      (await db
+        .prepare(
+          `
+        SELECT * FROM users
+        WHERE lower(username) = lower(?) OR lower(email) = lower(?) OR lower(email) = lower(?)
+        ORDER BY CASE WHEN lower(username) = lower(?) THEN 0 ELSE 1 END
+        LIMIT 1
+      `,
+        )
+        .get("admin", "admin@foodfinder.local", "admin", "admin")) || null;
 
+    if (existing) {
+      await db
+        .prepare(
+          `
+        UPDATE users
+        SET username = ?, display_name = ?, email = ?, password_hash = ?, role = 'admin', status = ?, last_active = ?
+        WHERE id = ?
+      `,
+        )
+        .run("admin", "Admin", "admin@foodfinder.local", adminHash, STATUS_ACTIVE, now, Number(existing.id));
+    } else {
       await insertUserStmt.run({
         username: "admin",
         display_name: "Admin",
@@ -617,18 +636,30 @@ export async function createStore(options = {}) {
         password_hash: adminHash,
         role: "admin",
         status: STATUS_ACTIVE,
-        created_at: createdAt,
-        last_active: createdAt,
+        created_at: now,
+        last_active: now,
       });
-      const adminUser = await getUserByEmailStmt.get("admin@foodfinder.local");
-      await insertProfileStmt.run({
-        user_id: adminUser.id,
-        phone: "",
-        address: "",
-        dob: "",
-        bio: "Tai khoan quan tri he thong",
-        avatar_url: "",
-      });
+    }
+
+    const adminUser = await db.prepare(`SELECT * FROM users WHERE lower(username) = lower(?)`).get("admin");
+    await db
+      .prepare(
+        `
+      INSERT INTO user_profiles (user_id, phone, address, dob, bio, avatar_url)
+      VALUES (?, '', '', '', ?, '')
+      ON CONFLICT(user_id) DO UPDATE SET
+        bio = excluded.bio
+    `,
+      )
+      .run(Number(adminUser.id), "Tai khoan quan tri he thong");
+  }
+
+  async function seedInitialData() {
+    const usersCount = Number((await db.prepare(`SELECT COUNT(*) AS count FROM users`).get())?.count || 0);
+    await ensureDefaultAdmin();
+    if (usersCount === 0) {
+      const createdAt = nowIso();
+      const userHash = bcrypt.hashSync("user123", HASH_ROUNDS);
 
       const sampleUsers = [
         { username: "user", displayName: "Demo User", email: "user@foodfinder.local" },
@@ -1239,7 +1270,7 @@ export async function createStore(options = {}) {
   async function submitPostForModeration(payload = {}, user) {
     const now = nowIso();
     const snapshotInput = payload.restaurantSnapshot ?? {};
-    const snapshot = {
+    let snapshot = {
       name: String(snapshotInput.name ?? "").trim(),
       address: String(snapshotInput.address ?? "").trim(),
       area: String(snapshotInput.area ?? pickAreaFromAddress(snapshotInput.address ?? "")).trim() || "Khac",
@@ -1258,6 +1289,23 @@ export async function createStore(options = {}) {
     if (!restaurantId) {
       const matched = await matchRestaurantBySnapshot(snapshot, null);
       restaurantId = matched ? String(matched.id) : null;
+    }
+    if (restaurantId) {
+      const restaurant = await db.prepare(`SELECT * FROM restaurants WHERE id = ?`).get(String(restaurantId));
+      if (restaurant) {
+        snapshot = {
+          name: snapshot.name || String(restaurant.name || ""),
+          address: snapshot.address || String(restaurant.address || ""),
+          area: snapshot.area || String(restaurant.area || pickAreaFromAddress(restaurant.address || "")),
+          category: snapshot.category || String(restaurant.category || ""),
+          priceLevel: snapshot.priceLevel || String(restaurant.price_level || ""),
+          time: snapshot.time || String(restaurant.time_label || restaurant.open_status || ""),
+          image: snapshot.image || String(restaurant.image_url || ""),
+          menuHighlights: snapshot.menuHighlights.length
+            ? snapshot.menuHighlights
+            : parseJsonSafe(restaurant.menu_highlights_json, []),
+        };
+      }
     }
 
     const title = String(payload.title ?? "").trim() || `${snapshot.name || "Quan moi"} - review cong dong`;

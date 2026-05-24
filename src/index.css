@@ -412,6 +412,31 @@ button {
   object-fit: cover;
 }
 
+.image-placeholder {
+  display: flex;
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--color-muted);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(248, 244, 238, 0.92)),
+    repeating-linear-gradient(45deg, rgba(40, 40, 40, 0.04) 0 8px, transparent 8px 16px);
+  border: 1px dashed var(--color-border);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.community-post-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f2f2f0;
+}
+
 .place-badges {
   position: absolute;
   top: 0.75rem;

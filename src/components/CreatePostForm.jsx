@@ -1,7 +1,17 @@
 ﻿import { useEffect, useState } from "react";
 import { useAuth } from "../context/useAuth";
 import { fetchRestaurants } from "../services/restaurantService";
+import { SafeImage } from "./SafeImage";
 import { submitPostForModeration } from "../services/adminService";
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(new Error("Không đọc được ảnh đã chọn."));
+    reader.readAsDataURL(file);
+  });
+}
 
 export default function CreatePostForm() {
   const { session } = useAuth();
@@ -30,6 +40,15 @@ export default function CreatePostForm() {
     }
 
     const selectedRestaurant = restaurants.find((item) => String(item.id) === String(restaurantId));
+    const firstImageFile = files.find((file) => file.type.startsWith("image/"));
+    let uploadedImage = "";
+    if (firstImageFile) {
+      try {
+        uploadedImage = await readFileAsDataUrl(firstImageFile);
+      } catch {
+        uploadedImage = "";
+      }
+    }
 
     const post = await submitPostForModeration({
       restaurantId,
@@ -40,6 +59,20 @@ export default function CreatePostForm() {
       authorId: session?.id || 0,
       tags: selectedRestaurant?.category ? [selectedRestaurant.category] : [],
       mediaNames: files.map((file) => file.name),
+      restaurantSnapshot: selectedRestaurant
+        ? {
+            name: selectedRestaurant.name,
+            address: selectedRestaurant.address,
+            area: selectedRestaurant.area,
+            category: selectedRestaurant.category,
+            priceLevel: selectedRestaurant.priceLevel,
+            time: selectedRestaurant.time || selectedRestaurant.openStatus,
+            image: uploadedImage || selectedRestaurant.image,
+            menuHighlights: selectedRestaurant.menuHighlights || [],
+          }
+        : {
+            image: uploadedImage,
+          },
     });
 
     if (!post) {
@@ -98,7 +131,7 @@ export default function CreatePostForm() {
         {files.map((file, index) => (
           <div key={`${file.name}-${index}`} className="w-24 h-24 overflow-hidden rounded">
             {file.type.startsWith("image/") ? (
-              <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" />
+              <SafeImage src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" />
             ) : (
               <video src={URL.createObjectURL(file)} className="w-full h-full object-cover" />
             )}

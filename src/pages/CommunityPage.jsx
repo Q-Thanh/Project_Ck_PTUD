@@ -2,9 +2,21 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AppTopNav } from "../components/AppTopNav";
+import { SafeImage } from "../components/SafeImage";
 import { fetchCommunityFeed } from "../services/publicRestaurantService";
 
+function resolveCommunityImage(post) {
+  const snapshotImage = String(post.restaurantSnapshot?.image || "").trim();
+  if (snapshotImage) return snapshotImage;
+  return (post.mediaNames || []).find((item) => {
+    const value = String(item || "").trim();
+    return value.startsWith("http://") || value.startsWith("https://") || value.startsWith("data:image/");
+  }) || "";
+}
+
 function CommunityPostCard({ post }) {
+  const imageSrc = resolveCommunityImage(post);
+
   return (
     <article className="surface-card moderation-card">
       <div className="moderation-header">
@@ -20,12 +32,12 @@ function CommunityPostCard({ post }) {
         </span>
       </div>
 
-      {post.restaurantSnapshot?.image && (
-        <img
-          src={post.restaurantSnapshot.image}
+      {imageSrc && (
+        <SafeImage
+          src={imageSrc}
           alt={post.restaurantSnapshot?.name || post.title}
-          className="place-image"
-          style={{ width: "100%", maxHeight: "220px", objectFit: "cover", borderRadius: "12px" }}
+          className="community-post-image"
+          hideOnError
         />
       )}
 

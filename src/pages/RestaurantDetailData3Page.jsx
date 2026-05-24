@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Clock3, Globe, MapPin, MapPinned, MessageSquarePlus, Phone, Star, UtensilsCrossed, Wallet, X } from "lucide-react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import { SafeImage } from "../components/SafeImage";
 import { fetchApprovedPostsForRestaurant, fetchRestaurantReviews, fetchVisibleRestaurantById, submitCommentForApprovedPost } from "../services/publicRestaurantService";
 
 const TAB_ITEMS = [
@@ -219,7 +220,7 @@ export default function RestaurantDetailData3Page() {
 
         <section className="surface-card detail-hero">
           <div className="detail-hero-media">
-            <img src={restaurant.image} alt={restaurant.name} className="detail-hero-image" />
+            <SafeImage src={restaurant.image} alt={restaurant.name} className="detail-hero-image" />
           </div>
           <div className="detail-hero-copy">
             <p className="hero-kicker">Thông tin quán</p>
@@ -350,7 +351,13 @@ export default function RestaurantDetailData3Page() {
                         )}
                       </div>
 
-                      {post.restaurantSnapshot?.image && <img src={post.restaurantSnapshot.image} alt={post.restaurantSnapshot.name} className="detail-post-image" />}
+                      <SafeImage
+                        src={post.restaurantSnapshot?.image}
+                        fallbackSrc={restaurant.image}
+                        alt={post.restaurantSnapshot?.name || restaurant.name}
+                        className="detail-post-image"
+                        hideOnError
+                      />
                       <p>{post.content}</p>
 
                       {(post.comments || []).length > 0 && (

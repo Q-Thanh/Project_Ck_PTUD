@@ -1,5 +1,6 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react";
 import { Eye, EyeOff, Pencil, Plus, RefreshCw, Search, Tags, UploadCloud } from "lucide-react";
+import { SafeImage } from "../../components/SafeImage";
 import {
   attachTagsToRestaurant,
   createRestaurant,
@@ -368,11 +369,12 @@ export function AdminRestaurantsPage() {
               </div>
 
               {restaurant.image && (
-                <img
+                <SafeImage
                   src={restaurant.image}
                   alt={restaurant.name}
                   className="place-image"
                   style={{ width: "100%", maxHeight: "180px", objectFit: "cover", borderRadius: "12px" }}
+                  hideOnError
                 />
               )}
 
