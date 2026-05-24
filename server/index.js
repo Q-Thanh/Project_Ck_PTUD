@@ -20,6 +20,7 @@ const app = express();
 const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
 const backendOrigin = process.env.BACKEND_ORIGIN || `http://localhost:${process.env.BACKEND_PORT || process.env.PORT || 3100}`;
 const isProduction = process.env.NODE_ENV === 'production';
+const cookieSecure = process.env.COOKIE_SECURE ? process.env.COOKIE_SECURE === 'true' : isProduction;
 const PgSessionStore = connectPgSimple(session);
 
 if (isProduction) {
@@ -45,7 +46,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: isProduction,
+    secure: cookieSecure,
     httpOnly: true,
     sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000,
